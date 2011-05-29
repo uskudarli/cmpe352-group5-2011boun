@@ -1,4 +1,4 @@
-1.	I think using Google Code was very helpful for our team work.
+1.  I think using Google Code was very helpful for our team work.
 •	Because every member of the team can see what is going on the  project, what are files created, what are their contents and anyone can make her/his updates easily.
 •	Also anyone can see who and when changed the files.
 •	Issue part was very helpful for our team because we assigned tasks to every team members and trace them by issue tracking system.
