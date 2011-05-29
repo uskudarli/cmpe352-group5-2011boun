@@ -1,0 +1,4 @@
+#summary Project Description
+==Project Description==
+
+Most geographic maps we use are designed to be fairly accurate with respect to distances and line or path orientation; they are drawn ”to scale”, with a uniform scale used throughout. However, there is another important class of (geographic) maps in which uniform scale is sacriﬁced for readability. The most famous of these is the ”tube map” of the London underground rail system, whose “schematic” style was introduced by Harry Beck in 1931. Today the schematic style is widely used, but not well-supported by map-making tools. The purpose of this project is to aid others in producing schematic maps. 

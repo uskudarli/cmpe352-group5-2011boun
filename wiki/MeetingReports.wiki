@@ -1,0 +1,179 @@
+#summary Meeting Reports
+=*Report of Meeting #10*=
+
+*Meeting Date:16.05.2011*
+
+*Meeting Duration:1 hours*
+
+*Meeting Location: Student Lounge & gmail*
+
+*Participants: : Mustafa Genç, Ervin Domazet, Berna Altinel,Seçkin Savaşçı,Umur Türkay,Yekta Said Can*
+
+We have investigated our test project "Universal Subtitles".We found the following bugs/improvements:
+  # There is no a control mechanisim which verifies if I use the correct translation or not in translation part.For instance I traslated "my all" like "gerçekten şahane" and it accepts.
+  # Adding subtitles line by line is time-consuming and boring.Some other mechanisim should required to write the subtitles.
+  # In the help-video it says a subtitle file in xml could be uploaded into the site.I tried it but I did not succedded in.
+  # When enterin very-long length subtitles they boil over the video
+
+=*Report of Meeting #9*=
+
+*Meeting Date:09.05.2011*
+
+*Meeting Duration:1 hours*
+
+*Meeting Location: STUDY & Gmail*
+
+*Participants: : Bahtiyar Kaba, Ervin Domazet, Umur Türkay, Nurettin Yılmaz, Yekta Said Can,Berna Altinel*
+
+We have prepared a skeleton for the class diagrams of the projects. It will be detailed and worked on later, and the last diagrams will be uploaded to the Project google page. 
+
+P.S :We are going to investigate another project’s page, Team 8.
+
+=*Report of Meeting #8*=
+
+*Meeting Date:06.05.2011*
+
+*Meeting Duration:1 hours*
+
+*Meeting Location:ETA 18*
+
+
+*Participants: Suzan Üsküdarlı,Ervin Domazet,Berna Altınel,Seçkin Savaşçı,Bahtiyar Kaba,Mustafa Genç,Nuretttin Yilmaz,Yekta Said Can,Abidin Yiğit,Umur Turkay*
+ # We have reached an agrrement on: home page needs to be improved.(fro the aspects of project description,required links...etc)
+ # We have reached an agrrement on:Docs versioning need to be checked,updated(maybe some of them could be insrted on the same doc)
+ # We have reached an agrrement on:A project incremantal plan sould be created and insterted on the project home page.(this plan shows milestones of the project
+ # We have reached an agrrement on:Meeting reports should be inserted on the same document where the latest on the top.A link for this doc should be cerated on the home page.
+ # We have reached an agrrement on:Reqs need to be written on a more specisific/clearer/concreate way.
+ # We have reached an agrrement on:Desing and reqs need to make equal.
+ # We have reached an agrrement on:Implemeantation envrionment needs to decided.A doc for this needs to created.
+ # We have reached an agrrement on:A req about reonfiguration needs to be added.
+
+
+=*Report of Meeting #7*=
+
+*Meeting Date:11.04.2011*
+
+*Meeting Duration:2 hours*
+
+*Meeting Location:http://flockdraw.com*
+*Important Note:Related screen shots corresponding to this meeting are available in Downloads (Meeting7Report doc)*
+
+*Participants: Berna Altınel,Seçkin Savaşçı,Ervin Domazet,Bahtiyar Kaba,Mustafa Genç*
+ # We have reached an agreement on to use MVC model.
+ # We divided aour arhtitecture properties as:Maintailability,Security,Safety,Performance and availability 
+ # Design diagram is drawned.
+
+
+=*Report of Meeting #6*=
+
+*Meeting Date:04.04.2011*
+
+*Meeting Duration:2 hours*
+
+*Meeting Location:Student Lounge*
+
+*Participants: Berna Altınel,Nurettin Yılmaz,Abidin Yiğit,Umur Turkay,Mustafa Genç,Seçkin Savaşçı*
+ # We have reached an agreement with the customer from the point of the system has a single type of user who can use all the functionality of the system.
+ # Sequence diagram will be updated according to above item(user)
+ # Search opportunity will be added to sequence diagram
+ # DB will be added to sequence diagram
+ # Requirements will be updated according to meeting decisions.
+
+
+=*Report of Meeting #5*=
+
+*Meeting Date:28.03.2011*
+
+*Meeting Duration:1hour 15 min*
+
+*Meeting Location:Student Lounge*
+*Participants: Ervin Domazet, Umur Türkay, Bahtiyar Kaba, Mustafa Genç*
+
+A Sceneraio 2 is discussed and a short summary is written which will be detailed later.
+
+Non-functional requirements are improved. 
+
+Issues for future meetings:
+
+  # What will be the organizational and external requirements?
+  # Do we have any extra or undesired requirements? 
+
+Decisions:
+
+Mockup screens for the Scenario 1 will be prepared as a slide show.
+
+Scenario 2 will be matured.
+
+
+=*Report of Meeting #4 *=
+
+*Meeting Date:25.03.2011*
+
+*Meeting Duration:1 hour* 
+
+*Meeting Location:Student Lounge* 
+
+*Participants:Berna Altınel,Ervin Domazet,Seçkin Savaşçı,Umur Türkay* 
+
+*İssues&Decisions: *
+  # Application's mock up screen will be created. 
+  # Req will be re-edited. 
+  # Scenario will be completed. 
+  # The customer will be informed about the scenario.
+
+
+=*Report of Meeting #3*=
+
+*Meeting Date:23.03.2011*
+
+*Meeting Duration:1 hour*
+
+*Meeting Location:Student Lounge*
+
+*Participants:Berna Altınel,Ervin Domazet,Nurettin Yılmaz,Umur Türkay*
+
+*İssues&Decisions: *
+  # User definition will be added to the description (abstract).
+  # Application's mock up screen will be created.
+  # Numbering and titles will be added to the requirements.
+  # "Issue tracking" will be searched and explored.
+  # Stakeholder of the project will be specified.
+  # Classification of the requirements will be done clearly.
+  # Nonfunctional requirements will be clearly specified. (Efficiency, dependability, security...)
+  # Quality requirement will be specified. (example: IEEE standards)
+  # New task will be searched. (Scenario)
+
+
+=*Report of Meeting #2*=
+Functional and non functional requirements are written with  talking to the customer as the first version of the requirement,they will be detailed.
+
+*Meeting Date:21.03.2011*
+
+*Meeting Duration:1 hour*
+
+*Meeting Location:Student Lounge*
+
+*Participants:Berna Altınel,Ervin Domazet,Nurettin Yılmaz,Seçkin Savaşçı,Mustafa Genç,Umur Turkay,Yekta Said Can,Bahtiyar Kaba*
+
+*İssues&Decisions:*
+  # Input /output file format discussed with the custoer and added as  a funtional requirement.
+  # DBMS will be disucced on another metting
+  # Non funtional requirements will be detailed.
+
+
+=*Report of Meeting #1*=
+
+*Meeting Date:18.03.2011*
+
+*Meeting Duration:1 hour*
+
+*Meeting Location:Student Lounge*
+
+*Participants:Berna Altınel,Ervin Domazet,Nurettin Yılmaz,Seçkin Savaşçı,Mustafa Genç,Umur Turkay,Yekta Said Can,Bahtiyar Kaba*
+
+*İssues&Decisions:*
+  # First Meeting with of the members of the project team
+  # Create a google.code space
+  # Contact with the customer and fix a meeting with the customer
+  # All members of the team need to study on the possible requirements of the project
+  # Another meeting will be fixed in order to write the requirements(21.03.2011 @ 17.00) 

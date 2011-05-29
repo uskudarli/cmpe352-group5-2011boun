@@ -1,0 +1,35 @@
+#summary Detailed Description of Use Cases
+=Detailed Description of Use Cases=
+==Use Case Diagram -1:==
+ * Actors:	User(who wants to create schematized map),The authentication system
+ * Description:	User wants to log in to the system. The system authenticates the users according to the user id/password records in the database. 
+ * Data:	The user id and the password
+ * Response:	If the data that the user entered is correct then the system lets the user enters and the main window of the program is shown, but if the id/password is not correct then the system gives a warning message.
+
+
+
+==Use Case Diagram -2:==
+ * Actors:	User
+ * Description:	In the main window there are following options:
+ # Create a schematic map
+ # Search a map
+ # Edit a map
+ # View a map
+ # Share a map 
+User is supposed to select an option.
+ * Data:	If the user wants to do one of above functions then s/he is supposed to select an input file(from his old records or just browsing from the computer)
+ * Response:	If the gathering of the input file operation is completed successfully then the user is followed by the next configuration page, but if the operation is not completed successfully then a warning message will be shown.
+
+
+==Use Case Diagram -3:==
+ * Actors:	User
+ * Description:	The user can select a configuration file or create a new one.
+ * Data:	If the user wants to use a file which is already exists then data is the configuration file itself,
+If the user wants to create a new configuration file then the data consists of:
+ #	preserve North-South alignment 
+ #	preserve East-West alignment 
+ #	multiple paths input input file 
+ #	use color coding
+ #	parsing method 
+ #	choose angle multiple for branching
+ * Response:	If the schematizing process is completed successfully then the output map will be shown and the user will have the opportunity to save it as an image.

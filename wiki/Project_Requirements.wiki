@@ -1,0 +1,153 @@
+#summary Requirements Version 1.1
+
+===REQUIREMENTS Version 1.1===
+
+*1.FUNCTIONAL REQUIREMENTS:*
+
+*1.1 SCHEMATIZING*
+
+*1.1.1* Scheatizer's input format should be either a KML file, a text file or will be input by the user through a GUI.
+
+*1.1.1.1* Schematizer should  take the input as a KML file
+<path1>(or google maps .kml file) configuration file(including angle)
+
+*1.1.1.2* Schematizer should  take the input as a text file
+
+text file: within each line <geographic location1><geographic location2> 
+
+*1.1.2* Schematizer should give the opportunity to choose the angle multiple.
+
+*1.1.3* Schematizer should be able to save output maps into a DBMS.
+
+*1.1.4* Schematizer should create a drawn background.
+
+*1.2 MAP INTERACTION*
+
+*1.2.1* Schematizer should be able to create a schematized map of a given scale map. 
+
+*1.2.2* Schematizer should retain relative geographical direction between points as in the original input map.
+
+*1.2.2.1* Schematizer should give the opportunity of selecting the "Preservation Criteria" to the user.
+
+*1.2.2.2* Schematizer should preserve general directions between important points.
+
+*1.2.2.3* Schematizer should be able to sacrifice relative positions of some points that are not close or connected to each other.
+
+*1.2.2.4* Schematizer should be able to modify the points that are taken from the user.
+
+*1.3 USER*
+
+*1.3.1* Schematizer should have different USER ROLES such as PROFESSIONAL USER or an AMETOUR.
+
+*1.3.1.1* Schematizer should give the opportunity to the user to select the user role.
+
+*1.3.2* Schematizer should have a creation wizard.
+
+*1.3.3* Schematizer should have a multiple-language support.
+
+*1.3.4* The user will be able to set points on the canvas by drag and drop operations.
+
+*1.4 ERROR HANDLING*
+
+*1.4.1* In any case of an error schematizer will output the error on the screen and will give suggestion(s) to the user to solve the problem.
+
+*1.5 OTHER TOOLS ADAPTATION*
+
+*1.5.1* Schematizer should  give the output as various vectoral image format or a specified input file to another system/program.
+
+*1.5.2* Schematizer should interoperate with other tools for building map.
+
+*1.5.3* Schematizer should be able to import/export between drawing programs.
+
+*1.6 VERSION CHECKING AND UPDATES*
+
+*1.6.1* Schematizer will check for the updates and for the new version of the program and will ask the user to download it when it is possible.
+
+*1.6.2* The user will be able to disable the download property of the schematizer.
+
+
+*2.NONFUNCTIONAL REQUIREMENTS:*
+
+*2.1 Product Requirements*
+
+*2.1.1 Usability*
+
+*2.1.1.1* The Schematizer will have a simplified and easy to use graphical user interface.
+
+*2.1.1.2* There will be a creation wizard for the schematizing process. 
+
+*2.1.2 Efficiency Requirements*
+
+*2.1.2.1*  Schematizer should not use excessive amount of memory.
+
+*2.1.2.2*  Schematizing should be done reasonably fast.
+
+*2.1.2.3*  The database system should be recovered quickly from a breakdown. 
+	
+
+*2.1.3 Dependability *
+
+*2.1.3.1*  Schematizer will be implemented to be compatible with any platform. 
+
+*2.1.4 Security/Privacy*
+
+*2.1.4.1*  Schematizer will a have user system such that every user has a login information and the schematic outputs of users will be stored in the database depending on their choice.
+
+*2.1.4.2*  Maps should be maintained securely in the database.
+
+
+*2.1.5 Safety* 
+
+In any crash, database will be able to rollback to its savepoint.
+
+*2.1.6 Performance*
+
+Real-time parsing for any changes done by user
+
+
+*2.1.7 Availability*
+
+Schematizer will be accessed from the desktop easily.
+
+*2.2 Organizational Requirements*
+
+*2.3External*
+
+regularity,ethical
+ 
+
+===REQUIREMENTS Version 1.0===
+===User requirements===
+Software X aims to customers with any experience level. 
+
+-easy-of-use -GUI -cmd interface 
+
+===System requirements===
+
+====Functional requirements====
+The following statements of services which our software provides, are defined to be reactions/behaviour of the program (ie. outputs, states) based on some specific (or probable) inputs; in our case those are mostly data calculation, processing and technical design. 
+
+-can take input as 
+
+text file: within each line 
+<geographic location1><geographic location2>
+<path1>(or google maps .kml file) configuration file(including angle) 
+
+-gives output as various vectoral image format 
+
+(additional exporting plugins) 
+
+-real-time parsing for any changes done by user 
+
+-@TODO background mode 
+
+-updater 
+
+-DBMS 
+
+-creation wizard 
+
+-reference helper 
+
+====Non-functional requirements====
+That kind of requirements unlike the functional requirements, will be applied on the whole system, not branches of the software. Non-functional requirements are crucial because of the fact that if any of those does not work in the way it supposed to, entire system may face a complete break-down. Hence they do not apply specific services/functions/behaviours listed above. 
