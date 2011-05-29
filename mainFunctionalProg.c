@@ -1,0 +1,1 @@
+//functional programming approach using c/c++
