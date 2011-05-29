@@ -27,7 +27,7 @@ float division(float dividend, float denominator)
 
 	if(denominator == 0)
 	{
-		cout<<"Division by 0!";
+		cout<<"Division by 0!"<<endl;
 		return numeric_limits<float>::max();
 	}
 
