@@ -1,5 +1,11 @@
 //functional programming approach using c/c++
 
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+
 float addition(float number_1, float number_2)
 {
   float result;
@@ -22,7 +28,7 @@ float division(float dividend, float denominator)
 	if(denominator == 0)
 	{
 		cout<<"Division by 0!";
-		return -1;
+		return numeric_limits<int>::max();
 	}
 
 	
