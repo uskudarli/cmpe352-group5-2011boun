@@ -35,7 +35,9 @@ float division(float dividend, float denominator)
 
 float mult(float num_1,float num_2)
 {
-  return num_1*num_2;
+  float return_value;
+  return_value = num_1*num_2;
+  return return_value;
 }
 
 
