@@ -1,0 +1,11 @@
+1. I think googlecode is very helpful when we create this project.We use wiki and we all can update this pages.
+In issue part we assign ourself some tasks and see their progress.So, when developing open source project googlecode should be used.
+
+2.Our project requires very detailed work in requirements and design.In the second term(Cmpe 451) especially algorithmic aspects will be hard. In addition to that,
+I found our project very practical in real life.  
+
+3.Yes,I want.
+
+4.In this course we learned about practical life software engineering.We learned that requirements and testing are very important in real life.When they are not
+properly they cause important problems. Also working with people is a real practice. In Real life project groups this experience will help us.I learned how to use 
+GoogleCode.   
