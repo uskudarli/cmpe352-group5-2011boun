@@ -19,6 +19,14 @@ float subtraction(float number_1, float number_2)
   result=number_1 - number_2;   
   return result;
 }
+long int factorial(int n)
+ {
+  if (n<=1)
+	return(1);
+  else
+	n=n*factorial(n-1);
+	return(n);
+ }
 
 
 float division(float dividend, float denominator)
@@ -90,6 +98,7 @@ int main()
   division_=division(182,31);
   power_=power(12,5);
   sqroot=square_root(3);
+  factorialResult=factorial(5);
   cout<<"CMPE 352 GROUP 5"<<endl;
   cout<<"result of addition: "<<addition_<<endl;
   cout<<"result of subtraction: "<<subtraction_<<endl; 
@@ -97,5 +106,6 @@ int main()
   cout<<"result of multiplication: "<<multiplication_<<endl; 
   cout<<"result of power:"<<power_<<endl;
   cout<<"result of square_root:"<<sqroot<<endl;
+  cout<<"result of factorial:"<<factorialRes<<endl;
   return 0;
 }
