@@ -22,10 +22,10 @@ float subtraction(float number_1, float number_2)
 long int factorial(int n)
  {
   if (n<=1)
-	return(1);
+	return 1;
   else
 	n=n*factorial(n-1);
-	return(n);
+	return n;
  }
 
 
