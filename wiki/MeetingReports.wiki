@@ -10,14 +10,12 @@
 *Participants: : Eylul Tasyurek, Ervin Domazet, Ozgur Akcali, Bahtiyar Kaba, Mert Terzihan*
 
 *İssues&Decisions:*
-   #Old group members introduced the project to the new commers
-   #We split into 2 groups to present the functional and nonfunctional requirements
-   #We will be having regular meetings to discuss the current situation of the project and to assign new tasks to group members
-   #We will be having a regular meeting on fridays and an online meeting on tuesdays to review what we have done during the week 
+   # Old group members introduced the project to the new commers
+   # We split into 2 groups to present the functional and nonfunctional requirements
+   # We will be having regular meetings to discuss the current situation of the project and to assign new tasks to group members
+   # We will be having a regular meeting on fridays and an online meeting on tuesdays to review what we have done during the week 
    
 
-
-#summary Meeting Reports
 =*Report of Meeting #10*=
 
 *Meeting Date:16.05.2011*
