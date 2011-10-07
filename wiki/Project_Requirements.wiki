@@ -16,9 +16,15 @@ text file: within each line <geographic location1><geographic location2>
 
 *1.1.2* Schematizer should give the opportunity to choose the angle multiple among these values: 22,5 - 45 - 90 - 180.
 
-*1.1.3* Schematizer should be able to save output maps into a DBMS via save button.
+*1.1.3* Schematizer should provide these functionalities:
 
-*1.1.4* Schematizer should create a drawn background.
+*1.1.3.1* To save output maps to the DBMS via the save button.
+
+*1.1.3.2* To revert to the last saved state of the map.
+
+*1.1.3.3* To edit the previously saved maps of the user.
+
+*1.1.4* Schematizer should enable the user to use the background of her/his choice.
 
 *1.2 MAP INTERACTION*
 
@@ -27,10 +33,11 @@ text file: within each line <geographic location1><geographic location2>
 *1.2.2* Schematizer should retain relative geographical direction between points as in the original input map.
 
 *1.2.2.1* Schematizer should give the opportunity of selecting the "Preservation Criteria" to the user.
+Preservation Criteria : Schematizer should be able to preserve the positions and distances of user determined points. 
 
 *1.2.2.2* Schematizer should preserve general directions between important points.
 
-*1.2.2.3* Schematizer should be able to sacrifice relative positions of some points that are not close or connected to each other.
+*1.2.2.3*  Schematizer may sacrifice relative positions of some points that are not close or connected to each other.
 
 *1.2.2.4* Schematizer should be able to modify the points that are taken from the user.
 
