@@ -1,4 +1,19 @@
 #summary Meeting Reports
+
+=*Report of Meeting #14*=
+
+*Meeting Date:12.10.2011*
+
+*Meeting Duration:1.5 hours*
+
+*Meeting Location: gtalk*
+
+*Participants: : Eylul Tasyurek, Mert Terzihan, Ervin Domazet, Ozgur Akcali*
+
+*İssues&Decisions:*
+   # We went over our presentations for tomorrow's lecture and modified some points in mock-up scenarios.
+   # We decided to provide social web activity, for instance to share the schematized map in facebook.
+
 =*Report of Meeting #13*=
 
 *Meeting Date:11.10.2011*
