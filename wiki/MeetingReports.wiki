@@ -10,7 +10,7 @@
 
 *Participants: : Eylul Tasyurek, Mert Terzihan, Ervin Domazet, Ozgur Akcali*
 
-*İssues&Decisions:*
+*Issues&Decisions:*
    # We went over our presentations for tomorrow's lecture and modified some points in mock-up scenarios.
    # We decided to provide social web activity, for instance to share the schematized map in facebook.
 
@@ -24,7 +24,7 @@
 
 *Participants: : Eylul Tasyurek, Ervin Domazet, Ozgur Akcali,Bahtiyar Kaba(half an hour), Mert Terzihan*
 
-*İssues&Decisions:*
+*Issues&Decisions:*
    # We prepared 2 mock-up scenario presentations for our project.
    # We summerized and went over the design issues that we talked on friday.
 
@@ -38,7 +38,7 @@
 
 *Participants: : Eylul Tasyurek, Ervin Domazet, Ozgur Akcali, Bahtiyar Kaba, Mert Terzihan, Yekta Said Can*
 
-*İssues&Decisions:*
+*Issues&Decisions:*
    # We went over the requirements and revised some points.
    # We had a small meeting with the course assistant and discussed some controversial points.
    # We discussed about our methodology, strategy and the tools that we will be using during the development process.
@@ -56,7 +56,7 @@
 
 *Participants: : Eylul Tasyurek, Ervin Domazet, Ozgur Akcali, Bahtiyar Kaba, Mert Terzihan*
 
-*İssues&Decisions:*
+*Issues&Decisions:*
    # Old group members introduced the project to the new commers
    # We split into 2 groups to present the functional and nonfunctional requirements
    # We will be having regular meetings to discuss the current situation of the project and to assign new tasks to group members
