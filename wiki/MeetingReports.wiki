@@ -10,8 +10,8 @@
 *Participants: : Eylul Tasyurek, Ervin Domazet, Ozgur Akcali,Bahtiyar Kaba(half an hour), Mert Terzihan*
 
 *İssues&Decisions:*
-   # We made 2 mock-up scenario presentations for your project
-   # We summerized and went over the design issues that we talked on friday
+   # We prepared 2 mock-up scenario presentations for our project.
+   # We summerized and went over the design issues that we talked on friday.
 
 =*Report of Meeting #12*=
 
