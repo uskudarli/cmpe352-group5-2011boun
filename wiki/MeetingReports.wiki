@@ -1,5 +1,19 @@
 #summary Meeting Reports
 
+=*Report of Meeting #15*=
+
+*Meeting Date:14.10.2011*
+
+*Meeting Duration:2 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: : Eylul Tasyurek, Mert Terzihan, Ozgur Akcali, Bahtiyar Kaba, Yekta Said Can*
+
+*Issues&Decisions:*
+   # We discussed technical part of the architecture of our project.
+   # We drew use case diagrams for two types of users: simple and advanced.
+
 =*Report of Meeting #14*=
 
 *Meeting Date:12.10.2011*
