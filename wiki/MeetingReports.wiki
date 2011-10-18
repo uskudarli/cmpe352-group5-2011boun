@@ -1,5 +1,20 @@
 #summary Meeting Reports
 
+=*Report of Meeting #16*=
+
+*Meeting Date:18.10.2011*
+
+*Meeting Duration:1.5 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Nurettin Yılmaz*
+
+*Issues&Decisions:*
+   # We have divided the work of this week over the team members.
+   # We have started doing Activity Diagrams, Component Diagrams and so.
+   # We discussed the work done in Cmpe 352, and updated the necessary parts.
+
 =*Report of Meeting #15*=
 
 *Meeting Date:14.10.2011*
