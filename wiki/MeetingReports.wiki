@@ -37,7 +37,7 @@
 
 *Meeting Location: gtalk*
 
-*Participants: : Eylul Tasyurek, Mert Terzihan, Ervin Domazet, Ozgur Akcali*
+*Participants: : Eylul Tasyurek, Mert Terzihan, Ervin Domazet, Ozgur Akcali,Yekta Said Can(half an hour)*
 
 *Issues&Decisions:*
    # We went over our presentations for tomorrow's lecture and modified some points in mock-up scenarios.
