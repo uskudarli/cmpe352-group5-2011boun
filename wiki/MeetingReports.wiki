@@ -1,5 +1,19 @@
 #summary Meeting Reports
 
+=*Report of Meeting #17*=
+
+*Meeting Date:21.10.2011*
+
+*Meeting Duration:1.5 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Eylul Tasyurek, Ozgur Akcali*
+
+*Issues&Decisions:*
+   # We revised the test scenarios according to Acceptance Tests.
+   # We dicussed the database implementation and schematizer algorithm.
+
 =*Report of Meeting #16*=
 
 *Meeting Date:18.10.2011*
