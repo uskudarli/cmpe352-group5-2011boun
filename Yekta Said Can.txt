@@ -4,8 +4,9 @@ In issue part we assign ourself some tasks and see their progress.So, when devel
 2.Our project requires very detailed work in requirements and design.In the second term(Cmpe 451) especially algorithmic aspects will be hard. In addition to that,
 I found our project very practical in real life.  
 
-3.Yes,I want.
+3. // i changed this 25/10/2011
 
 4.nurettin yilmaz  
 
 sdfjshfsjkdjfklsdf
+
