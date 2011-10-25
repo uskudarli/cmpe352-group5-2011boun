@@ -1,5 +1,20 @@
 #summary Meeting Reports
 
+=*Report of Meeting #18*=
+
+*Meeting Date:25.10.2011*
+
+*Meeting Duration:1.5 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Nurettin Yilmaz, Yekta Said Can*
+
+*Issues&Decisions:*
+   # We continued revising test scenarios.
+   # We examined jgraph and discussed on how we can implement and use it in edit mode.
+   # We  created a java project with essential libraries and plug-ins. We shared it via TortoiseSVN.
+
 =*Report of Meeting #17*=
 
 *Meeting Date:21.10.2011*
