@@ -1,4 +1,4 @@
-1. I think googlecode is very helpful when we create this project.We use wiki and we all can update this pages.
+1.ERVIN.... I think googlecode is very helpful when we create this project.We use wiki and we all can update this pages.
 In issue part we assign ourself some tasks and see their progress.So, when developing open source project googlecode should be used.
 
 2.Our project requires very detailed work in requirements and design.In the second term(Cmpe 451) especially algorithmic aspects will be hard. In addition to that,
