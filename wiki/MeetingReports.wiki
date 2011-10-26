@@ -2,6 +2,23 @@
 
 =*Report of Meeting #18*=
 
+*Meeting Date:26.10.2011*
+
+*Meeting Duration:1 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Nurettin Yilmaz, Yekta Said Can, Bahtiyar Kaba, Eylul Tasyurek*
+
+*Issues&Decisions:*
+   # We prepared our presentation
+   # One of our team members implemented the database of the project, and commited it to the repository
+   # We have created the project folder, and uploaded it to the repository
+   # We divided the project into three main sub tasks
+   # We divided our group to 3 subgroups, and assigned one task to every group
+
+=*Report of Meeting #18*=
+
 *Meeting Date:25.10.2011*
 
 *Meeting Duration:1.5 hours*
