@@ -12,8 +12,8 @@
 
 *Issues&Decisions:*
    # We prepared our presentation
-   # One of our team members implemented the database of the project, and commited it to the repository
-   # We have created the project folder, and uploaded it to the repository
+   # One of our team members implemented the database of the project, and committed it to the repository
+   # We have created the project folder(and related stuff), and uploaded it to the repository
    # We divided the project into three main sub tasks
    # We divided our group to 3 subgroups, and assigned one task to every group
 
