@@ -1,0 +1,13 @@
+1. Google Code is a well designed project management environment that covers up 
+all aspects of our project in cmpe352. It's very simple to learn & use.
+
+2. Our project is a well-built project, covers most of the issues up to implementation.
+We have a good project topic and our efforts to build is satisfactory, in my opinion.
+
+3. Absolutely yes.
+
+4. I guess I do. Until taking this course, my project management approach was  
+to maintain source code and documentation. This course taught me other aspects
+of project management, such as design documents, issue tracking etc. I gained 
+experience using tools such as GoogleCode and MsVisio in such new(for me) project
+management aspects. 
