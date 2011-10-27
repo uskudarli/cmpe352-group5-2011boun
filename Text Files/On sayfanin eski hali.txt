@@ -1,0 +1,31 @@
+http://cmpe352-group5-2011boun.googlecode.com/files/intro.PNG
+
+In some situations like subway systems etc. we are not interested in geographical distributions of our travel locations( I don't mind the subway making a huge zig-zag, if it goes where I want, do you?). Here we are gathered to create a solution to make creation of schematized maps possible with no effort at all. We are a bunch of solution-oriented crazy people, who try to make some business simpler( And to do that we use SWE paradigms naturally, as we are all computer engineering students).
+
+=Meetings=
+==Forthcoming Meetings==
+ * Currently there is no scheduled meeting. 
+==Former Meetings==
+  * 16 May 2011 Monday, between 17:00-19:00 PM : We have investigated our test project "Universal Subtitles".We found some bugs/improvements and reported them.
+  * 9 May 2011 Monday, between 17:00-19:00 PM : We have prepared a skeleton for the class diagrams of the projects. It will be detailed and worked on later, and the last diagrams will be uploaded to the Project google page.
+  * 6 May 2011 Monday, between 13:00-14:00 PM : We had a meeting with Dr. Suzan Üsküdarli and took notes about her improvements and reviews on our project.
+  * 11 April 2011 Monday, between :22:00-24:00 PM : We studied on the system architecture of the project.
+  * 4 April 2011 Monday, between :17:00-19:00 PM : We studied on some important points of the system(user types, their roles…etc) with the customer and took some decisions which were be reported on the corresponding meeting report.
+  * 28 March 2011 Monday, between :17:00-18:15 PM : We studied on the scenario and non functional requirements of the project.
+  * 25 March 2011 Monday, between :17:00-19:99 PM : Scenario and the requirements were rewived and some decisions were taken which were be reported on the corresponding meeting report.
+  * 23 March 2011 Monday, between :17:00-19:00 PM : Scenario and the requirements were rewived and some decisions were taken which were be reported on the corresponding meeting report.
+  * 21 March 2011 Monday, between :17:00-19:00 PM :A study is done on the reuirements.
+  * 18 March 2011 Monday, between :17:00-19:00 PM :First meeting with the team members!
+
+
+
+
+
+
+ 
+Google Code helps us to manage this project right now!
+
+Do you want to contribute? 
+
+http://cmpe352-group5-2011boun.googlecode.com/files/mailus.PNG   
+                                          
