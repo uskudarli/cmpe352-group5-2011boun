@@ -122,8 +122,4 @@ public class Map {
     void adjustDistance(Point oneBefore, Point p, double distance){
         
     }
-    
-    public static void main(String[] args){
-
-    }
 }
