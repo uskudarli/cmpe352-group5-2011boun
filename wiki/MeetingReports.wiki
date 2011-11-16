@@ -8,7 +8,7 @@
 
 *Meeting Location: GTalk*
 
-*Participants: :  Mert Terzihan, Ervin Domazet, Bahtiyar Kaba, Nurettin Yilmaz*
+*Participants: :  Mert Terzihan, Ervin Domazet, Bahtiyar Kaba, Nurettin Yilmaz, Ozgur Akcali*
 
 *Issues&Decisions:*
    # We prepared the responsibility assignment matrix.
