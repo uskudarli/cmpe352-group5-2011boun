@@ -77,6 +77,12 @@ public class Applet_1 extends javax.swing.JApplet {
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+
         jPanel2.setBackground(new java.awt.Color(255, 153, 0));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -85,10 +91,15 @@ public class Applet_1 extends javax.swing.JApplet {
 
         jLabel2.setText("Password : ");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel4.setText("LOGIN");
 
         jButton1.setText("GO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Amateur User");
@@ -140,7 +151,7 @@ public class Applet_1 extends javax.swing.JApplet {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 18));
         jLabel3.setText("Welcome to Schematizing Maps");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -184,6 +195,16 @@ public class Applet_1 extends javax.swing.JApplet {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+// TODO add your handling code here:
+    
+}//GEN-LAST:event_formComponentShown
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
