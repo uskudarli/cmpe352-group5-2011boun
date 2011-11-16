@@ -20,90 +20,105 @@ public class Map {
     Vector<Edge> edges;
     String keywords;
     int userID;
-    private Properties configuration;
-    private String preservationCriteria;
-    private double[] angles;
+    double mean_distance=0.0;
+    boolean preserveEast_West;
+    boolean preserveNorth_South;
+    boolean preserve_distance;
+    private double angleMultiple;
     
-    Map(){
+    Map()throws FileNotFoundException,IOException{
+        //Default values
+        
         points = null;
         edges = null;
         keywords = "";
         userID = 0;
-        configuration = null;
-        preservationCriteria = "";
-        angles = null;
+        defaultConfiguration();
+        
     }
     
-    Map(Vector<Point> p, Vector<Edge> e, String k, int ID, Properties c){
+    Map(Vector<Point> p, Vector<Edge> e, String k, int ID, Properties c, String ConfFile) throws FileNotFoundException,IOException{
         points = p;
         edges = e;
         keywords = k;
         userID = ID;
-        configuration = c;
-        preservationCriteria = "";
-        angles = null;
+        parseConfigurationFromFile(ConfFile);
+    }
+
+ 
+    double getAngleMultiple(){
+        return angleMultiple;
+    }
+    void setAngleMultiple(double a){
+        angleMultiple = a;
     }
     
-    Properties getConfiguration(){
-        return configuration;
+    boolean get_preserveEast_West(){
+        return preserveEast_West;
     }
-    void setConfiguration(Properties c){
-        configuration = c;
+    boolean set_preserveEast_West(){
+        return preserveEast_West;
     }
-    
-    String getPreservationCriteria(){
-        return preservationCriteria;
+    boolean get_preserveNorth_South(){
+        return preserveNorth_South;
     }
-    void setPreservationCriteria(String p){
-        preservationCriteria = p;
+    boolean set_preserveNorth_South(){
+        return preserveNorth_South;
     }
-    
-    double[] getAngles(){
-        return angles;
+     boolean get_preserve_distance(){
+        return preserve_distance;
     }
-    void setAngles(double[] a){
-        angles = a;
+    boolean set_preserve_distance(){
+        return preserve_distance;
     }
-    
     void parseConfigurationFromFile(String path) throws FileNotFoundException, IOException{
+               /*preserveEast_West=false;
+        preserveNorth_South=false;
+        distance=false;*/
+        Properties configuration;
         if(path != null){
             configuration = new Properties();
             FileInputStream InputStream = new FileInputStream(path);
             configuration.load(InputStream);
-            InputStream.close(); 
+            InputStream.close();
+            angleMultiple =Double.parseDouble(configuration.getProperty("angleMultiple"));
+            preserveEast_West=Boolean.parseBoolean(configuration.getProperty("preserveEast_West"));
+            preserveNorth_South=Boolean.parseBoolean(configuration.getProperty("preserveNorth_South"));
+            preserve_distance=Boolean.parseBoolean(configuration.getProperty("preserve_distance"));
         }
-        String a = configuration.getProperty("angles");
-        String[] aString = a.split(",");
-        for(int i=0; i<aString.length; i++){
-            angles[i] = new Double(aString[i]);
-        }
-        preservationCriteria = configuration.getProperty("preservationCriteria");
+        
+       
     }
-    
+    void defaultConfiguration()throws FileNotFoundException,IOException{
+        preserveEast_West=false;
+        preserveNorth_South=false;
+        preserve_distance=false;
+        angleMultiple = 22.5;
+    }
     void Schematize(){
         Iterator<Point> oldPoints = points.iterator();
         Point twoBefore = oldPoints.next();
         Point oneBefore = oldPoints.next();
-        double dist1 = Math.sqrt(Math.pow((twoBefore.getX()-oneBefore.getX()), 2) + Math.pow((twoBefore.getY()-oneBefore.getY()), 2)); // distance between twoBefore and oneBefore
-        double dist2 = Math.abs(twoBefore.getY() - oneBefore.getY());
-        double angle = Math.asin(dist2/dist1);
-        if(angle > (Math.PI/4)){
-            oneBefore.setX(twoBefore.getX());
-        }
-        else{
-            oneBefore.setY(twoBefore.getY());
-        }
+        double angle;
+        double remainder;
         while(oldPoints.hasNext()){
             Point p = oldPoints.next();
-            adjustDistance(oneBefore, p, dist1);
             angle = calculateAngle(twoBefore, oneBefore, p);
-            for(int i=0; i<angles.length; i++){
-                if(angle < angles[i]){
-                    movePoint(oneBefore, p, angle);
-                }
+            remainder=angle % angleMultiple;
+            if (remainder > (angleMultiple/2)){
+                angle=(angle-remainder)+angleMultiple;//aciyi ekleyerek tamamla
+                movePoint(oneBefore, p, angle);
+            }
+            else
+            {
+                angle=angle-remainder;
+                movePoint(oneBefore, p, angle);
             }
             twoBefore = oneBefore;
             oneBefore = p;
+        }
+        if(this.preserve_distance){
+            this.adjustDistance();
         }
     }
     
@@ -115,11 +130,31 @@ public class Map {
         return angle;
     }
     
-    void movePoint(Point oneBefore, Point p, double angle){
-        
+    void movePoint(Point p1, Point p2, double angle){
+        double a = Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
+        double _angle=180-angle;
+        double temp_x=a * Math.cos(_angle);
+        double temp_y=a * Math.sin(_angle);
+        p2.setX(p1.getX()+temp_x);
+        p2.setY(p1.getY()+temp_y);
     }
     
-    void adjustDistance(Point oneBefore, Point p, double distance){
+    void adjustDistance(){
+        int N=0;
+        double distance=0.0;
+        double currentDistance;
+        Iterator<Point> Points = points.iterator();
+        Point p1 = Points.next();
+        while(Points.hasNext()){
+            Point p2 = Points.next();
+            distance=distance+distance(p1,p2);
+            N++;
+            p1=p2;
+        }
+        mean_distance=distance/N;
         
+    }
+    double distance(Point p1, Point p2){
+        return Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
     }
 }
