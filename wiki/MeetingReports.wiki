@@ -1,5 +1,66 @@
 #summary Meeting Reports
 
+=*Report of Meeting #22*=
+
+*Meeting Date:16.11.2011*
+
+*Meeting Duration:2 hour*
+
+*Meeting Location: GTalk*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Bahtiyar Kaba*
+
+*Issues&Decisions:*
+   # We prepared the responsibility assignment matrix.
+   # We discussed the main page appearance.
+   # We upload the example main page to the server.
+
+=*Report of Meeting #21*=
+
+*Meeting Date:04.11.2011*
+
+*Meeting Duration:2 hour*
+
+*Meeting Location: ETA Building*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Yekta Said Can, Eylul Tasyurek, Ozgur Akcali*
+
+*Issues&Decisions:*
+   # We prepared the project plan.
+   # We prepared some jsp screens and servlets.
+   # We tried to upload them to the server.
+
+=*Report of Meeting #20*=
+
+*Meeting Date:02.11.2011*
+
+*Meeting Duration:1.5 hour*
+
+*Meeting Location: GTalk*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Nurettin Yilmaz, Yekta Said Can, Bahtiyar Kaba, Eylul Tasyurek, Ozgur Akcali*
+
+*Issues&Decisions:*
+   # We exchanged information about web-based programs and their implementation.
+   # Each of us presented graph libraries.
+   # We prepared the presentation.
+
+=*Report of Meeting #19*=
+
+*Meeting Date:28.10.2011*
+
+*Meeting Duration:2 hour*
+
+*Meeting Location: ETA Building*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Nurettin Yilmaz, Yekta Said Can, Bahtiyar Kaba, Eylul Tasyurek, Ozgur Akcali*
+
+*Issues&Decisions:*
+   # We discussed main issues like the algorithm and configuration file.
+   # We changed our project plans. We started to implement a web-based project.
+   # We discussed about main details of our web-based project.
+   # We assigned everyone to search for graph libraries that can be used with JQuery.
+
 =*Report of Meeting #18*=
 
 *Meeting Date:26.10.2011*
