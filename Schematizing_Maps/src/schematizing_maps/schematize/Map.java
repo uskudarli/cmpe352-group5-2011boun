@@ -152,7 +152,8 @@ public class Map {
             p1=p2;
         }
         mean_distance=distance/N;
-        
+        /*Note: When drawing the output, the distances between 
+         * points will be set as "main_distance" */
     }
     double distance(Point p1, Point p2){
         return Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
