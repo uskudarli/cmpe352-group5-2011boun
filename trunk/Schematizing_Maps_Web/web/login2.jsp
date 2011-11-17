@@ -1,7 +1,17 @@
-<head>
-</head>
+<%-- 
+    Document   : login2
+    Created on : Nov 17, 2011, 10:28:24 AM
+    Author     : px5x2
+--%>
 
-<body>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
 
   <form method="post" name="login" action="">
       <br>
@@ -14,7 +24,7 @@
           <tr>
               <td>
           <h>
-              WELCOME TO SCHEMATIZER
+              REGISTER TO SCHEMATIZER
               <br></br>
               </h>
               </td>
@@ -35,37 +45,26 @@
               <td>
          <input type="password" name="password" id="passwd" /><br />     
               </td>
+              
+          </tr>
+          <tr>
               <td>
-                  <form> 
-             <INPUT TYPE="radio" NAME="radios" VALUE="radio1" CHECKED>
-            Advanced
-            <BR>
-            <INPUT TYPE="radio" NAME="radios" VALUE="radio2">
-            Simple
-            </form>
+      Password Confirmation :         
+              </td>
+              <td>
+         <input type="password" name="password" id="passwd" /><br />     
               </td>
           </tr>
           <tr>
               <td>
    
-	<input type="submit" value="Login" />    
+	<input type="submit" value="Register" />    
           <br> </br>
           <br></br>
               </td>
         
           </tr>
-          <tr>
-              <td>
-                  
-              </td>
-              <td>
-              </td>
-              <td>
-                  <a href="login2.jsp"><input type="button" value="New User" name="New User"/></a>
-                   
-              </td>
-          </tr>
-          
+        
       </table>
 	
 	
@@ -74,3 +73,4 @@
 
 
 </body>
+</html>
