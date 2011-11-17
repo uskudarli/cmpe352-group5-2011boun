@@ -44,6 +44,8 @@ public class SM_Servlet extends HttpServlet {
             }else{
                 HttpSession session = request.getSession();
                 session.setAttribute("logon.successful", out);
+                response.sendRedirect("login2.jsp");
+                
             }
             /* TODO output your page here
             out.println("<html>");
