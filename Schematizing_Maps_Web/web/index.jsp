@@ -74,7 +74,7 @@
 	    <input type="radio"	id="smpl" name="userType" value="Simple" style="margin-left: 15px;" checked />Simple User		
 	</div>		
 
-	<input type="button" value="Register Now!" style="margin-top: 10px; display: block; float: left; width: 150px;" onclick="window.location.href="(LINK_TO_THE_REGISTER_PAGE)"/>
+	<input type="button" value="Register Now!" style="margin-top: 10px; display: block; float: left; width: 150px;" onclick="window.location.href='register.jsp';"/>
 	<input type="button" value="Enter" id="lg" style="margin-left: 50px; margin-top: 10px; width: 100px;" />
 
     </div>	
