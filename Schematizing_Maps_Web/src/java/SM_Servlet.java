@@ -18,8 +18,11 @@ import schematizing_maps.server_side.mysql_UTIL;
  */
 public class SM_Servlet extends HttpServlet {
     
-    
-    private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "project5", "s8u4p", "project5");
+    //
+    // DB Initialization
+    //
+    // host, port, DB User Name, DB Pass, DB Schema 
+    private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "root", "xxxx", "project_451");
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,26 +40,14 @@ public class SM_Servlet extends HttpServlet {
             String password = request.getParameter("password");
             
             if(!mysql_UTIL.checkUser(user_name, password)){
-                out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
-                out.println("<BODY>Your login and password are invalid.<BR>");
-                out.println("You may want to <A HREF=\"/login.html\">try again</A>");
-                out.println("</BODY></HTML>");
+                response.sendRedirect("login_error.jsp");
             }else{
                 HttpSession session = request.getSession();
                 session.setAttribute("logon.successful", out);
                 response.sendRedirect("login2.jsp");
                 
             }
-            /* TODO output your page here
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SM_Servlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SM_Servlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-             */
+            
         } finally {            
             out.close();
         }
