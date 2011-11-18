@@ -1,5 +1,23 @@
 #summary Meeting Reports
 
+=*Report of Meeting #23*=
+
+*Meeting Date:18.11.2011*
+
+*Meeting Duration:2,5 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: : Eylül Taşyürek,Ervin Domazet, Bahtiyar Kaba, Yekta Said Can, Ozgur Akcali*
+
+*Issues&Decisions:*
+   # We understand the details of server client communication.
+   # Database is deployed to the server. 
+   # Login and register pages interface designs are improved. 
+   # We have worked on connecting the login and register interfaces to the database deployed on the server. 
+   # Decisions are made about adding the drag drop applet to the project.
+
+
 =*Report of Meeting #22*=
 
 *Meeting Date:16.11.2011*
