@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package schematizing_maps.server_side;
 
 import java.sql.Statement;
@@ -11,7 +7,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author px5x2
+ * @author Nurettin Yılmaz
  */
 public class mysql_UTIL {
 
@@ -32,6 +28,17 @@ public class mysql_UTIL {
         
     }
     
+    public static boolean addUser(String user, String pass){
+        try{
+            mysqlAddUser a = new mysqlAddUser(user, pass);
+            a.run();
+            if(a.getResult())
+                return true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static boolean checkUser(String user, String pass){
         
         try {
@@ -58,7 +65,42 @@ public class mysql_UTIL {
         return false;
     }
     
-    
+    //
+    // Runnable derived functions, to do db operations in a seperate thread.
+    //
+    private static class mysqlAddUser implements Runnable{
+
+        String query;
+        boolean result;
+
+        public mysqlAddUser(String user, String pass) {
+            query = "insert into USER_LOGIN (name, password) values ('"+user+"','"+pass+"');";
+            result = false;
+        }
+        
+        
+        @Override
+        public void run() {
+            try {
+               connection = (Connection)DriverManager.getConnection(connectionURL);
+               Statement stmt = connection.createStatement();
+               stmt.executeUpdate(query);
+               result = true;
+               connection.close();
+               
+               
+            } catch (Exception e) {
+                e.printStackTrace();
+                result = false;
+            }
+            connection = null;
+        }
+        public boolean getResult(){
+            return result;
+        }
+        
+        
+    }
     private static class mysqlCheckUser implements Runnable{
 
         private String query;
@@ -81,13 +123,13 @@ public class mysql_UTIL {
                     isSuccessful = true;
                 }
                 connection.close();
-                connection = null;
-                return;
   
             }catch(Exception e){
                 e.printStackTrace();
             }
             
+            connection = null;
+            return;
             
         }
         public boolean getResult(){
