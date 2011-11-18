@@ -4,9 +4,17 @@
         <servlet-name>SM_Servlet</servlet-name>
         <servlet-class>SM_Servlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SM_Servlet_Temp</servlet-name>
+        <servlet-class>Servlet_Temp.SM_Servlet_Temp</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SM_Servlet</servlet-name>
         <url-pattern>/SM_Servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SM_Servlet_Temp</servlet-name>
+        <url-pattern>/SM_Servlet_Temp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

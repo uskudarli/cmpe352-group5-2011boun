@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import schematizing_maps.server_side.mysql_UTIL;
 
 /**
@@ -31,8 +32,28 @@ public class SM_Servlet_Temp extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String user_name = request.getParameter("username");
-            String password = request.getParameter("password");
+            
+            String user_name = request.getParameter("username").toString();
+            String password = request.getParameter("password").toString();
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SM_Servlet_Temp</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SM_Servlet_Temp at " + request.getContextPath () + "</h1>");
+            out.println("<p>UserName: "+user_name+"Password: "+password+"</p>");
+            out.println("</body>");
+            out.println("</html>");
+            //TODO Go over the code with Nurettin, and see why it cannot find user: Ozgur pass:12345
+            
+           /* if(!mysql_UTIL.checkUser(user_name, password)){
+                response.sendRedirect("login_error.jsp");
+            }else{
+                HttpSession session = request.getSession();
+                session.setAttribute("logon.successful", out);
+                response.sendRedirect("login2.jsp");
+                
+            }*/
             /*out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet SM_Servlet_Temp</title>");  
@@ -42,7 +63,7 @@ public class SM_Servlet_Temp extends HttpServlet {
             out.println("<p>UserName: "+user_name+"Password: "+password+"</p>");
             out.println("</body>");
             out.println("</html>");*/
-            response.sendRedirect("login_error.jsp");
+            
              
         } finally {            
             out.close();
