@@ -18,8 +18,8 @@ import schematizing_maps.server_side.mysql_UTIL;
  * @author Patron
  */
 public class SM_Servlet_Temp extends HttpServlet {
-
-    private static mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "8084", "project5", "s8u4p", "project5");
+//private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "root", "xxxx", "project_451");
+    private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "project5", "s8u4p", "project5");
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,6 +35,7 @@ public class SM_Servlet_Temp extends HttpServlet {
             
             String user_name = request.getParameter("username").toString();
             String password = request.getParameter("password").toString();
+            /*
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet SM_Servlet_Temp</title>");  
@@ -45,15 +46,15 @@ public class SM_Servlet_Temp extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             //TODO Go over the code with Nurettin, and see why it cannot find user: Ozgur pass:12345
-            
-           /* if(!mysql_UTIL.checkUser(user_name, password)){
+            */
+            if(!mysql_UTIL.checkUser(user_name, password)){
                 response.sendRedirect("login_error.jsp");
             }else{
                 HttpSession session = request.getSession();
                 session.setAttribute("logon.successful", out);
                 response.sendRedirect("login2.jsp");
                 
-            }*/
+            }
             /*out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet SM_Servlet_Temp</title>");  
