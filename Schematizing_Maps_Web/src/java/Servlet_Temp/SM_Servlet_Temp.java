@@ -19,7 +19,7 @@ import schematizing_maps.server_side.mysql_UTIL;
  */
 public class SM_Servlet_Temp extends HttpServlet {
 //private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "root", "xxxx", "project_451");
-    private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "project5", "s8u4p", "project5");
+    private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "patron", "s8u4p", "database5");
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request

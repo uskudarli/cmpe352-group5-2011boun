@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <script language = "JavaScript" src = "jquery-1.6.2.min.js"></script>
  
  <script language="JavaScript">
@@ -52,9 +52,9 @@
 
 <body background="paisley_background_soft-630x390.jpg">
 
-  <img src="407_Welcome_4_plain.png" style="position: absolute; left: 40%; top: 5%; width="300" height="100">
+  <img src="407_Welcome_4_plain.png" style="position: absolute; left: 40%; top: 5%;" width="300" height="100"/>
   	
-  <form method="post" name="login" id="login" action="">
+  <form method="post" name="login" id="login" action="SM_Servlet_Temp">
 	
     <div class="box">		
 	<div id="alertBox" style="margin-bottom: 10px;">	
@@ -62,6 +62,7 @@
 	<div class="labelBox">
 	 <label>User Name:</label><br />
 	 <label style="margin-top: 10px; display: block;">Password:</label>
+
 	</div>
 
 	<div class="inputBox">	
@@ -71,10 +72,10 @@
 	
 	<div id="userType" style="margin-top: 20px;">
 	    <input type="radio"	id="adv" name="userType" value="Advanced"/>Advanced User
-	    <input type="radio"	id="smpl" name="userType" value="Simple" style="margin-left: 15px;" checked />Simple User		
+	    <input type="radio"	id="smpl" name="userType" value="Simple" style="margin-left: 15px;" checked="checked" />Simple User		
 	</div>		
 
-	<input type="button" value="Register Now!" style="margin-top: 10px; display: block; float: left; width: 150px;" onclick="window.location.href='register.jsp';"/>
+	<input type="button" value="Register Now!" style="margin-top: 10px; display: block; float: left; width: 150px;" onclick="window.location.href='register.jsp'"/>
 	<input type="button" value="Enter" id="lg" style="margin-left: 50px; margin-top: 10px; width: 100px;" />
 
     </div>	
