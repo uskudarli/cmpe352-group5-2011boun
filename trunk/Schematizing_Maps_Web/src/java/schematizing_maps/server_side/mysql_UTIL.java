@@ -13,7 +13,10 @@ public class mysql_UTIL {
 
     private static String connectionURL;
     private static Connection connection;
-    
+    private static String _url ;
+    private static String _dbName;
+    private static String _userName; 
+    private static String _password;
     
     
     
@@ -21,7 +24,11 @@ public class mysql_UTIL {
     public mysql_UTIL(String host, String port, String user, String password, String schema) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
+            //connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
+            _url = "jdbc:mysql://"+host+":"+port+"/";
+            _dbName = schema;
+            _userName = user; 
+            _password = password;
         } catch (Exception e) {
             System.out.println(e.toString());
         }
@@ -82,7 +89,7 @@ public class mysql_UTIL {
         @Override
         public void run() {
             try {
-               connection = (Connection)DriverManager.getConnection(connectionURL);
+               connection = (Connection)DriverManager.getConnection(_url+_dbName,_userName,_password);          
                Statement stmt = connection.createStatement();
                stmt.executeUpdate(query);
                result = true;
@@ -115,7 +122,7 @@ public class mysql_UTIL {
         public void run(){
             try{
                 
-                connection = (Connection)DriverManager.getConnection(connectionURL);
+                connection = (Connection)DriverManager.getConnection(_url+_dbName,_userName,_password);
                 Statement stmt = connection.createStatement();
                 ResultSet result = stmt.executeQuery(query);
                 
