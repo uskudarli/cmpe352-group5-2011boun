@@ -2,7 +2,6 @@
 </head>
 
 <body>
-
   <form method="post" name="login" action="">
       <br>
       
@@ -47,7 +46,6 @@
           </tr>
           <tr>
               <td>
-   
 	<input type="submit" value="Login" />    
           <br> </br>
           <br></br>
