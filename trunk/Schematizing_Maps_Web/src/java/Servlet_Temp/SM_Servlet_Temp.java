@@ -4,8 +4,13 @@
  */
 package Servlet_Temp;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +24,7 @@ import schematizing_maps.server_side.mysql_UTIL;
  */
 public class SM_Servlet_Temp extends HttpServlet {
 //private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "root", "xxxx", "project_451");
-    private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "patron", "s8u4p", "database5");
+    private static mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -36,15 +41,6 @@ public class SM_Servlet_Temp extends HttpServlet {
             String user_name = request.getParameter("username").toString();
             String password = request.getParameter("password").toString();
             /*
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SM_Servlet_Temp</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SM_Servlet_Temp at " + request.getContextPath () + "</h1>");
-            out.println("<p>UserName: "+user_name+"Password: "+password+"</p>");
-            out.println("</body>");
-            out.println("</html>");
             //TODO Go over the code with Nurettin, and see why it cannot find user: Ozgur pass:12345
             */
             if(!mysql_UTIL.checkUser(user_name, password)){
@@ -55,13 +51,19 @@ public class SM_Servlet_Temp extends HttpServlet {
                 response.sendRedirect("login2.jsp");
                 
             }
+            
+            
+            /*String str = "";
+            for(int i =0;i<s.length;i++)
+                str = str.concat(s[i].toString()+"\n");*/
             /*out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet SM_Servlet_Temp</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SM_Servlet_Temp at " + request.getContextPath () + "</h1>");
-            out.println("<p>UserName: "+user_name+"Password: "+password+"</p>");
+            //out.println("<h3>" + str + "</h3>");
+            //out.println("<h1>" + str2 + "</h1>");
+            //out.println("<p>UserName: "+user_name+"Password: "+password+"</p>");
             out.println("</body>");
             out.println("</html>");*/
             
