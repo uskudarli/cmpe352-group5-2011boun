@@ -10,13 +10,20 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Vector;
+import java.io.File;
+import org.w3c.dom.Document;
+import org.w3c.dom.*;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException; 
 
 /**
  *
  * @author Mert Terzihan
  */
-public class Map {
-    Vector<Point> points;
+public class Maps {
+    static Vector<Point> points;
     Vector<Edge> edges;
     String keywords;
     int userID;
@@ -26,10 +33,10 @@ public class Map {
     boolean preserve_distance;
     private double angleMultiple;
     
-    Map()throws FileNotFoundException,IOException{
+    Maps()throws FileNotFoundException,IOException{
         //Default values
         
-        points = null;
+        points = new Vector<Point>();
         edges = null;
         keywords = "";
         userID = 0;
@@ -37,7 +44,7 @@ public class Map {
         
     }
     
-    Map(Vector<Point> p, Vector<Edge> e, String k, int ID, Properties c, String ConfFile) throws FileNotFoundException,IOException{
+    Maps(Vector<Point> p, Vector<Edge> e, String k, int ID, Properties c, String ConfFile) throws FileNotFoundException,IOException{
         points = p;
         edges = e;
         keywords = k;
@@ -157,5 +164,62 @@ public class Map {
     }
     double distance(Point p1, Point p2){
         return Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
+    }
+    
+
+    private static void ReadAndStorePointsKMLFile(String KML_File){
+           try{
+            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse (new File(KML_File));
+            NodeList listOfPlacemarks = doc.getElementsByTagName("Placemark");
+            int totalPlacemarks = listOfPlacemarks.getLength();
+            System.out.println("Total no of Placemark : " + totalPlacemarks);
+            for(int s=0; s<listOfPlacemarks.getLength() ; s++){
+                Node firstPlacemarkNode = listOfPlacemarks.item(s);               
+                if(firstPlacemarkNode.getNodeType() == Node.ELEMENT_NODE){
+                    Element element = (Element)firstPlacemarkNode;
+                    NodeList nameList = element.getElementsByTagName("name");
+                    Element nameElement = (Element)nameList.item(0);
+                    NodeList textFNList = nameElement.getChildNodes();
+                    String name_ = ((Node)textFNList.item(0)).getNodeValue().trim();
+                    //-------
+                    NodeList descList = element.getElementsByTagName("description");
+                    Element descElement = (Element)descList.item(0);
+                    NodeList textLNList = descElement.getChildNodes();
+                    String description_=((Node)textLNList.item(0)).getNodeValue().trim();
+                    //----
+                    NodeList pointList = element.getElementsByTagName("coordinates");
+                    Element pointElement = (Element)pointList.item(0);
+                    NodeList textPointList = pointElement.getChildNodes();
+                    String [] points_=((Node)textPointList.item(0)).getNodeValue().trim().split(",");                   
+                    Point p1=new Point(Double.parseDouble(points_[0]),Double.parseDouble(points_[1]),description_);
+                    System.out.println("X:"+p1.getX()+"  Y:"+p1.getY()+"  D:"+p1.getDescription());
+                    //points.add(p1); MERT buna bir bakabilir misin? atamiyorum icine de
+                }
+              
+            }
+
+            
+        }catch (SAXParseException err) {
+        System.out.println ("** Parsing error" + ", line " 
+             + err.getLineNumber () + ", uri " + err.getSystemId ());
+        System.out.println(" " + err.getMessage ());
+
+        }catch (SAXException e) {
+        Exception x = e.getException ();
+        ((x == null) ? e : x).printStackTrace ();
+
+        }catch (Throwable t) {
+        t.printStackTrace ();
+        }
+        //System.exit (0);
+    }
+    public static void main(String args[]) throws Exception{
+        //
+        // for testing purposes
+        ReadAndStorePointsKMLFile("kml_example.xml");
+        
+       //return 0;
     }
 }
