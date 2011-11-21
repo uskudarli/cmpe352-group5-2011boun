@@ -194,8 +194,7 @@ public class Maps {
                     NodeList textPointList = pointElement.getChildNodes();
                     String [] points_=((Node)textPointList.item(0)).getNodeValue().trim().split(",");                   
                     Point p1=new Point(Double.parseDouble(points_[0]),Double.parseDouble(points_[1]),description_);
-                    System.out.println("X:"+p1.getX()+"  Y:"+p1.getY()+"  D:"+p1.getDescription());
-                    //points.add(p1); MERT buna bir bakabilir misin? atamiyorum icine de
+                    points.add(p1);
                 }
               
             }
@@ -214,12 +213,5 @@ public class Maps {
         t.printStackTrace ();
         }
         //System.exit (0);
-    }
-    public static void main(String args[]) throws Exception{
-        //
-        // for testing purposes
-        ReadAndStorePointsKMLFile("kml_example.xml");
-        
-       //return 0;
     }
 }
