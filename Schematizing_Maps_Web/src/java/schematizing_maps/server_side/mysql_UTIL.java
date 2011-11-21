@@ -4,6 +4,7 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -24,11 +25,12 @@ public class mysql_UTIL {
     public mysql_UTIL(String host, String port, String user, String password, String schema) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            //connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
-            _url = "jdbc:mysql://"+host+":"+port+"/";
+            connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
+            connection = (Connection)DriverManager.getConnection(connectionURL);
+            /*_url = "jdbc:mysql://"+host+":"+port+"/";
             _dbName = schema;
             _userName = user; 
-            _password = password;
+            _password = password;*/
         } catch (Exception e) {
             System.out.println(e.toString());
         }
@@ -48,14 +50,18 @@ public class mysql_UTIL {
     }
     public static boolean checkUser(String user, String pass){
         
+        
         try {
             mysqlCheckUser c = new mysqlCheckUser(user, pass);
             c.run();
+            
             if(c.getResult()){
                 return true;
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
+            
         }
         return false;
     }
@@ -112,35 +118,50 @@ public class mysql_UTIL {
 
         private String query;
         private boolean isSuccessful;
+        private Exception error;
 
         public mysqlCheckUser(String user, String pass) {
             query = "select * from USER_LOGIN where (name='"+user+"') and (password='"+pass+"');";
             isSuccessful = false;
+            error = null;
         }
         
         @Override
         public void run(){
             try{
                 
-                connection = (Connection)DriverManager.getConnection(_url+_dbName,_userName,_password);
+                
                 Statement stmt = connection.createStatement();
                 ResultSet result = stmt.executeQuery(query);
                 
                 if(result.first()){
                     isSuccessful = true;
                 }
+                
+                result.close();
+                stmt.close();
                 connection.close();
-  
+                result = null;
+                stmt = null;
             }catch(Exception e){
-                e.printStackTrace();
+                error = e;
+            
+            }finally{
+                
+                connection = null;
+                
+                
             }
             
-            connection = null;
-            return;
+            
+            
             
         }
         public boolean getResult(){
             return isSuccessful;
+        }
+        public Exception getError(){
+            return error;
         }
     }
     private static class mysqlLoadConfig implements Runnable{
