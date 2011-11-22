@@ -57,13 +57,12 @@ body {
     font-weight: bold;
     font-style: italic;
 }
-
 #indexRightColumn{
     background: #bbb;
+    font-family: 'palatino linotype', palatino, serif;
     width: 25%;
     float: left;
 }
-
 #footer{
     background: #ddd;
     clear: left;
