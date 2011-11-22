@@ -17,6 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException; 
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -164,54 +165,83 @@ public class Maps {
     }
     double distance(Point p1, Point p2){
         return Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
+    }  
+    private void ParseAndStorePoints_from_KMLFile(String KML_File){
+           try{
+                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                Document doc = docBuilder.parse (new File(KML_File));
+                NodeList listOfPlacemarks = doc.getElementsByTagName("Placemark");
+                int totalPlacemarks = listOfPlacemarks.getLength();
+                System.out.println("Total no of Placemark : " + totalPlacemarks);
+                for(int s=0; s<listOfPlacemarks.getLength() ; s++){
+                    Node firstPlacemarkNode = listOfPlacemarks.item(s);               
+                    if(firstPlacemarkNode.getNodeType() == Node.ELEMENT_NODE){
+                        Element element = (Element)firstPlacemarkNode;
+                        String name_ = getTagValue("name", element);
+                        String description_ = getTagValue("description", element);
+                        String [] points_= getTagValue("coordinates", element).split(",");
+                        Point p1=new Point(Double.parseDouble(points_[0]),Double.parseDouble(points_[1]),description_);
+                        this.points.add(p1);               
+                    }
+
+                }      
+            }catch (SAXParseException err) {
+            System.out.println ("** Parsing error" + ", line " 
+                 + err.getLineNumber () + ", uri " + err.getSystemId ());
+            System.out.println(" " + err.getMessage ());
+
+            }catch (SAXException e) {
+            Exception x = e.getException ();
+            ((x == null) ? e : x).printStackTrace ();
+
+            }catch (Throwable t) {
+            t.printStackTrace ();
+            }
+    }
+    private void parseTextFile(String path) throws ParserConfigurationException, IOException, SAXException{
+        File XmlFile = new File(path);
+	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	Document doc = dBuilder.parse(XmlFile);
+	doc.getDocumentElement().normalize();
+ 
+	NodeList nList = doc.getElementsByTagName("point");
+ 
+	for (int i = 0; i<nList.getLength(); i++) {
+ 
+            Node nNode = nList.item(i);
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+ 
+                Element element = (Element) nNode;
+                double x_coor = Double.parseDouble(getTagValue("x_coordinate", element));
+                double y_coor = Double.parseDouble(getTagValue("y_coordinate", element));
+                String description = getTagValue("description", element);
+                Point p = new Point(x_coor, y_coor, description);
+                this.points.add(p);
+            }
+        }
+                
+        nList = doc.getElementsByTagName("keyword");
+        for (int i = 0; i<nList.getLength(); i++) {
+ 
+            Node nNode = nList.item(i);
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+ 
+                Node nValue = (Node) nList.item(0);
+                if(this.keywords.length() != 0){
+                    this.keywords += "," + nValue.getNodeValue();
+                }
+                else{
+                    this.keywords = nValue.getNodeValue();  
+                }
+            }
+        }
     }
     
-
-    private static void ReadAndStorePointsKMLFile(String KML_File){
-           try{
-            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse (new File(KML_File));
-            NodeList listOfPlacemarks = doc.getElementsByTagName("Placemark");
-            int totalPlacemarks = listOfPlacemarks.getLength();
-            System.out.println("Total no of Placemark : " + totalPlacemarks);
-            for(int s=0; s<listOfPlacemarks.getLength() ; s++){
-                Node firstPlacemarkNode = listOfPlacemarks.item(s);               
-                if(firstPlacemarkNode.getNodeType() == Node.ELEMENT_NODE){
-                    Element element = (Element)firstPlacemarkNode;
-                    NodeList nameList = element.getElementsByTagName("name");
-                    Element nameElement = (Element)nameList.item(0);
-                    NodeList textFNList = nameElement.getChildNodes();
-                    String name_ = ((Node)textFNList.item(0)).getNodeValue().trim();
-                    //-------
-                    NodeList descList = element.getElementsByTagName("description");
-                    Element descElement = (Element)descList.item(0);
-                    NodeList textLNList = descElement.getChildNodes();
-                    String description_=((Node)textLNList.item(0)).getNodeValue().trim();
-                    //----
-                    NodeList pointList = element.getElementsByTagName("coordinates");
-                    Element pointElement = (Element)pointList.item(0);
-                    NodeList textPointList = pointElement.getChildNodes();
-                    String [] points_=((Node)textPointList.item(0)).getNodeValue().trim().split(",");                   
-                    Point p1=new Point(Double.parseDouble(points_[0]),Double.parseDouble(points_[1]),description_);
-                    points.add(p1);
-                }
-              
-            }
-
-            
-        }catch (SAXParseException err) {
-        System.out.println ("** Parsing error" + ", line " 
-             + err.getLineNumber () + ", uri " + err.getSystemId ());
-        System.out.println(" " + err.getMessage ());
-
-        }catch (SAXException e) {
-        Exception x = e.getException ();
-        ((x == null) ? e : x).printStackTrace ();
-
-        }catch (Throwable t) {
-        t.printStackTrace ();
-        }
-        //System.exit (0);
+    private static String getTagValue(String sTag, Element eElement) {
+	NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
+        Node nValue = (Node) nlList.item(0);
+	return nValue.getNodeValue();
     }
 }
