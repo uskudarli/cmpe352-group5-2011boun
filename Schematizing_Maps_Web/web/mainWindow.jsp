@@ -29,7 +29,7 @@
             <div id="indexLeftColumn">
                 <div id="messageArea"> Left click to start a route, right click to finish, right click again to start another ruoute. You can edit the route after you finish drawing.</div>
                 <div id ="canvasArea">
-                    <applet code="schematizing_maps.CanvasApplet" archive="EditorApplet.jar" width="500" height="500"/>
+                    <applet height="500" width="700"  code="schematizing_maps.CanvasApplet" archive="EditorApplet.jar"/>
                 </div>
             </div>
 
