@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Patron
- */
+*/
 @WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
+
 public class NewServlet extends HttpServlet {
 
     /** 
