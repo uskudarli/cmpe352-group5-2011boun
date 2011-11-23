@@ -5,9 +5,9 @@
 
 package Servlets;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +19,7 @@ import schematizing_maps.server_side.mysql_UTIL;
  *
  * @author Patron
  */
+@WebServlet(name = "Servlet_Login", urlPatterns = {"/Servlet_Login"})
 public class Servlet_Login extends HttpServlet {
 //private static mysql_UTIL db = new mysql_UTIL("localhost", "3306", "root", "xxxx", "project_451");
     private static mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
