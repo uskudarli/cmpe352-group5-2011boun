@@ -24,7 +24,9 @@
     </head>
     <body>
         <div id="main">
-            <div id="header">Welcome to Schematizer         [username]          [logout]
+            <% String xxx=(String)request.getParameter("name");%>
+            <form method="post" name="login" id="login" action="Servlet_Logout"> <input type="submit" value="Logout" id="lg" /></form>
+        <div id="header">Welcome to Schematizer      User Logged-in: <%= xxx%>      
             </div>
             <div id="indexLeftColumn">
                 <div id="messageArea"> Left click to start a route, right click to finish, right click again to start another ruoute. You can edit the route after you finish drawing.</div>
