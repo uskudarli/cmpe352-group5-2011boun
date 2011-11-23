@@ -1,6 +1,34 @@
 #summary Meeting Reports
 
 
+=*Report of Meeting #25*=
+
+*Meeting Date:24.11.2011*
+
+*Meeting Duration:3 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: : Eylül Taşyürek, Ozgur Akcali*
+
+*Issues:*
+   # User interface implementation.
+
+=*Report of Meeting #24*=
+
+*Meeting Date:20.11.2011*
+
+*Meeting Duration:3 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: : Eylül Taşyürek, Ozgur Akcali*
+
+*Issues:*
+   # We have designed the user interface and started to implement it.
+
+
+
 =*Report of Meeting #23*=
 
 *Meeting Date:18.11.2011*
