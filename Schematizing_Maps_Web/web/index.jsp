@@ -9,6 +9,7 @@
  	$(document).ready(function() {
 		$("#lg").click(function() {
 				
+				
 			$("#alertBox").html("");	
 			var ch = false;
 			if ($("#username").val() == "" || $("#passwd").val() == "")
