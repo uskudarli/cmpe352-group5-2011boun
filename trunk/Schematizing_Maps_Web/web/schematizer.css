@@ -24,8 +24,45 @@ body {
 #main {
     margin: auto auto;
     width:1000px;
-    background-color: #E6E3E3;
 }
+
+#imageLefty{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 13%;
+    background: url('solframe.png');
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;					
+}
+
+#imageRighty{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 13%;
+    background: url('sagframe.png');
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;					
+}
+
+#logoutBox{
+    position: absolute;
+    right: 14%;
+    top: 20px;
+    width: 20%;
+    font-family: 'palatino linotype', palatino, serif;				   	
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 #header{
 
     height: 30px;
@@ -39,20 +76,22 @@ body {
 }
 
 #indexLeftColumn{
-    background: #ccc;
-    width: 75%;
-    float: left;
-    height: 600px;
+    padding-top: 30px;
+    padding-bottom: 20px;	
+    padding-left: 10px;
+    padding-right: 10px;			
+    
+    
 }
 #canvasArea{
-    float: left;
-    margin-left: 30px;
-    margin-top: 20px;
+    
 }
 #messageArea{
     float: left;
     font-family: 'palatino linotype', palatino, serif;
-    color: #9C2F2F;
+    width: 70%;
+    margin-left:15%;
+    margin-bottom: 10px;		
     font-size: 16px;
     font-weight: bold;
     font-style: italic;
@@ -67,3 +106,18 @@ body {
     background: #ddd;
     clear: left;
 }
+
+span.topButton 	{
+	cursor: pointer;
+   	margin: 5px;
+	padding: 5px;	
+	line-height: 20px;
+	text-align: center;
+	font-style: italic;	
+	font-weight: bold;
+	background: url('Resim5.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;   
+   }
