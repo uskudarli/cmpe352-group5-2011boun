@@ -75,7 +75,7 @@
 	</div>	
 
 	<input type="button" value="Register" id="rg" style="margin-top: 10px; display: block; float: left; width: 150px;" />
-
+        <h2>The user already exists... Try again!</h2>>
     </div>	
   </form>		
 

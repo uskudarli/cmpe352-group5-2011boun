@@ -26,7 +26,7 @@ public class mysql_UTIL {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
-            connection = (Connection)DriverManager.getConnection(connectionURL);
+           // connection = (Connection)DriverManager.getConnection(connectionURL);
             /*_url = "jdbc:mysql://"+host+":"+port+"/";
             _dbName = schema;
             _userName = user; 
@@ -95,7 +95,7 @@ public class mysql_UTIL {
         @Override
         public void run() {
             try {
-               connection = (Connection)DriverManager.getConnection(_url+_dbName,_userName,_password);          
+               connection = (Connection)DriverManager.getConnection(connectionURL);          
                Statement stmt = connection.createStatement();
                stmt.executeUpdate(query);
                result = true;
@@ -130,7 +130,7 @@ public class mysql_UTIL {
         public void run(){
             try{
                 
-                
+                connection = (Connection)DriverManager.getConnection(connectionURL); 
                 Statement stmt = connection.createStatement();
                 ResultSet result = stmt.executeQuery(query);
                 
