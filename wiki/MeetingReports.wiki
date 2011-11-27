@@ -1,6 +1,24 @@
 #summary Meeting Reports
 
 
+=*Report of Meeting #26*=
+
+*Meeting Date:25.11.2011*
+
+*Meeting Duration:1.5 hours*
+
+*Meeting Location: ETA Building*
+
+*Participants: : Ervin Domazet,Bahtiyar Kaba, Mert Terzihan
+
+*Issues:*
+   # We discussed about the schematizing algorithm in a deeper sense
+   # We have reached an agreement on multiple branching,as a result it will be included in the algorithm
+   # The class structure that is needed for that is designed
+   # We concluded that Bahtiyar will reflect these changes in the applet that he has wrote
+   # Also Ervin and Mert started to discuss the pseudo code of the algorithm that will have the ability to schematize multiple branchs
+
+
 =*Report of Meeting #25*=
 
 *Meeting Date:24.11.2011*
