@@ -6,7 +6,7 @@
 <h3>File Upload:</h3>
 Select a file to upload: <br />
 You can choose an Image(Jpg,Png,Jpeg),Kml file(.kml) or a text file(.txt)  <br />
-    <form enctype="multipart/form-data" action="newjsp.jsp" method="post" >
+    <form enctype="multipart/form-data" action="upload2.jsp" method="post" >
       <input NAME="fileToUpload1" id="fileToUpload1" TYPE="file" onchange="check_file()" /> <br/>  
 <input type="submit" value="Upload File"  />
 </form>
