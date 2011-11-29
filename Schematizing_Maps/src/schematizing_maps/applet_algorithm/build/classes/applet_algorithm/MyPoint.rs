@@ -1,0 +1,1 @@
+editorapplet2.MyPoint
