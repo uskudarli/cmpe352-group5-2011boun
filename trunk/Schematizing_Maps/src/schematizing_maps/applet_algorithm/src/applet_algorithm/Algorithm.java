@@ -23,7 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;
 /**
  *
- * @author Mert Terzihan
+ * @author Mert Terzihan & Ervin Domazet
  */
 public class Algorithm {
     MyPoint rootPoint;
