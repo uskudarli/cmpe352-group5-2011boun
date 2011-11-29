@@ -79,7 +79,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         MyPoint p = new MyPoint(0,0);
         p.outgoingPoints.add(CanvasApplet.canvasPanel.returnSmallesPoint());
         try{
-        Algorithm deneme= new Algorithm(p, "",1,"");
+        Algorithm deneme= new Algorithm(p, "",1);
         p = deneme.Schematize();
         Vector<MyPoint> temp = new Vector<MyPoint>();
         CanvasApplet.canvasPanel.points=p.returnaccesiblepoints();

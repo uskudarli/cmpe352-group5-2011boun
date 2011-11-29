@@ -23,7 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;
 /**
  *
- * @author Mert Terzihan
+ * @author Ervin Domazet & Mert Terzihan
  */
 public class Algorithm {
     MyPoint rootPoint;
@@ -36,18 +36,27 @@ public class Algorithm {
     private double angleMultiple;
     double totalDistance=0;
     int totalEdges=0;
-      
-    Algorithm(MyPoint p, String k, int ID, String ConfFile) throws FileNotFoundException,IOException{
+    
+    Algorithm(MyPoint p, String k, int ID, Double _angleMultiple,boolean E_W,boolean N_S,boolean _distance) throws FileNotFoundException,IOException{
+        rootPoint = p;
+        keywords = k;
+        userID = ID;
+        preserveEast_West=E_W;
+        preserveNorth_South=N_S;
+        preserve_distance=_distance;
+        angleMultiple = _angleMultiple;
+        //parseConfigurationFromFile(ConfFile);
+    }
+    Algorithm(MyPoint p, String k, int ID) throws FileNotFoundException,IOException{
         rootPoint = p;
         keywords = k;
         userID = ID;
         preserveEast_West=false;
         preserveNorth_South=false;
         preserve_distance=false;
-        angleMultiple = 22.5;
+        angleMultiple =45.00;
         //parseConfigurationFromFile(ConfFile);
     }
-
  
     double getAngleMultiple(){
         return angleMultiple;
@@ -93,16 +102,18 @@ public class Algorithm {
         preserveEast_West=false;
         preserveNorth_South=false;
         preserve_distance=false;
-        angleMultiple = 22.5;
+        angleMultiple =45.00;
     }
     MyPoint Schematize(){
         
         MyPoint startPoint=this.rootPoint.outgoingPoints.get(0);
-        if(this.preserve_distance){
+        /*if(this.preserve_distance){
                this.totalDistance=totalDistance+distance(rootPoint,startPoint);
                this.totalEdges++;
+        }*/
+        for(int i=0;i<startPoint.outgoingPoints.size();i++){
+            recursively_schematize(startPoint, startPoint.outgoingPoints.get(i));
         }
-        recursively_schematize(rootPoint, startPoint);
         return rootPoint;
         
     }
@@ -111,17 +122,23 @@ public class Algorithm {
             for(int i=0;i<p2.outgoingPoints.size();i++){
                 MyPoint p3=p2.outgoingPoints.get(i);
                 double angle=calculateAngle(p1,p2,p3);
+                double actual_angle=angle;
                 double remainder;
                 remainder=angle % angleMultiple;
-                if(remainder > (angleMultiple/2)){
-                    angle=(angle-remainder)+angleMultiple;//aciyi ekleyerek tamamla
-                    movePoint(p2, p3, angle);
+                if(remainder!=0.0){
+                    if(remainder > (angleMultiple/2)){
+                        //asagi dogru!
+                        //angle=(int)((angle/angleMultiple) * angleMultiple )-remainder;
+                        angle=angleMultiple-remainder;//aciyi ekleyerek tamamla
+                        movePoint(p1,p2, p3, angle,actual_angle);
+                    }
+                    else{
+                        //angle yukari dogru gidecek
+                        angle=-remainder;
+                        //angle=(int)(((angle/angleMultiple)-1) * angleMultiple )-remainder;
+                        movePoint(p1,p2, p3,angle,actual_angle);
+                    }
                 }
-                else{
-                    angle=angle-remainder;
-                    movePoint(p2, p3, angle);
-                }
-                
                 if(this.preserve_distance){
                     this.totalDistance=totalDistance+distance(p2,p3);
                     this.totalEdges++;
@@ -132,23 +149,135 @@ public class Algorithm {
         
     }
     double calculateAngle(MyPoint p1, MyPoint p2, MyPoint p3){ // cosine law
-        double a = Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
-        double b = Math.pow((p3.getX()-p2.getX()), 2) + Math.pow((p3.getY()-p2.getY()), 2);
-        double c = Math.pow((p3.getX()-p1.getX()), 2) + Math.pow((p3.getY()-p1.getY()), 2);
-        double angle = Math.acos((a+b-c)/(2*a*b));
+        double a = Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2));
+        double b = Math.sqrt(Math.pow((p3.getX()-p2.getX()), 2) + Math.pow((p3.getY()-p2.getY()), 2));
+        double c = Math.sqrt(Math.pow((p3.getX()-p1.getX()), 2) + Math.pow((p3.getY()-p1.getY()), 2));
+        double angle = Math.toDegrees(Math.acos((Math.pow(a,2)+Math.pow(b,2)- Math.pow(c,2))/(2.0*a*b)));
         return angle;
     }
     
-    void movePoint(MyPoint p1, MyPoint p2, double angle){
-        double a = Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
-        double _angle=180-angle;
-        double temp_x=a * Math.cos(_angle);
-        double temp_y=a * Math.sin(_angle);
-        p2.setX(p1.getX()+((int)temp_x));
-        p2.setY(p1.getY()+((int)temp_y));
+    void movePoint(MyPoint p1,MyPoint p2, MyPoint p3, double _angle,double actual_angle){
+        double y3_prime=p2.getY() + (int)( ((p3.getX()-p2.getX())*(p2.getY()-p1.getY()))/ (p2.getX()-p1.getX())   );
+        boolean y3_yukarda_kalir;
+        if (y3_prime >= p3.getY()){
+            y3_yukarda_kalir=true;
+        }
+        else
+            y3_yukarda_kalir=false;
+        double dist_p2_p3 = Math.sqrt(Math.pow((p2.getX()-p3.getX()), 2) + Math.pow((p2.getY()-p3.getY()), 2));
+       
+        if(y3_yukarda_kalir && actual_angle >=90){
+            MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
+            double angle=calculateAngle(pnew,p2,p3);
+            double new_angle;
+            if( pnew.getY()>p3.getY()){
+                new_angle=angle-_angle;
+            }
+            else
+                new_angle=_angle+angle;
+            
+            int tmp1=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+            int tmp2=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+            
+            p3.setX(p2.getX()+ tmp1 );
+            if( pnew.getY()> p3.getY() && new_angle > 0.0){
+                p3.setY(p2.getY()- tmp2 );
+            }
+            else if ( pnew.getY()> p3.getY() && new_angle < 0.0){
+                p3.setY(p2.getY()+ tmp2 );
+            }
+            else if( pnew.getY()< p3.getY() && new_angle > 0.0){
+                p3.setY(p2.getY()+ tmp2 );
+            }
+            else
+                p3.setY(p2.getY()- tmp2 );
+        }
+        else if((y3_yukarda_kalir) && actual_angle <90){
+            MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
+            double angle=calculateAngle(pnew,p2,p3);
+            double new_angle;
+            if(pnew.getX()>p3.getX()){
+                new_angle=angle-_angle;
+            }
+            else
+                new_angle=angle+_angle;
+            
+            int tmp1=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+            int tmp2=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+            p3.setY(p2.getY()- tmp2 );
+            if(pnew.getX()>p3.getX() && new_angle >0.0){
+                p3.setX(p2.getX()- tmp1 );
+            }
+            else if(pnew.getX()>p3.getX() && new_angle <0.0){
+                p3.setX(p2.getX()+ tmp1 );
+            }
+            else if(pnew.getX()<p3.getX() && new_angle >0.0){
+                    p3.setX(p2.getX()+ tmp1 );
+            }
+            else 
+            {
+                p3.setX(p2.getX()- tmp1 );
+            }
+        }
+        else if(!(y3_yukarda_kalir) && actual_angle <90){
+            MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
+            double angle=calculateAngle(pnew,p2,p3);
+            double new_angle;
+            if( pnew.getX()<p3.getX()){
+                new_angle=angle+_angle;
+            }
+            else
+                new_angle=angle-_angle;
+            int tmp1=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+            int tmp2=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+            if(new_angle<=90.0){
+                p3.setY(p2.getY()+ tmp2 );
+            }
+            else
+                p3.setY(p2.getY()- tmp2 );
+            
+            if(pnew.getX()>p3.getX() && new_angle >0.0){
+                p3.setX(p2.getX()- tmp1 );
+            }
+            else if(pnew.getX()>p3.getX() && new_angle <0.0){
+                p3.setX(p2.getX()+ tmp1 );
+            }
+            else if(pnew.getX()<p3.getX() && new_angle >0.0){
+                    p3.setX(p2.getX()+ tmp1 );
+            }
+            else 
+            {
+                p3.setX(p2.getX()- tmp1 );
+            }       
+        }
+        else if(!(y3_yukarda_kalir) && actual_angle >=90)
+        {
+            MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
+            double angle=calculateAngle(pnew,p2,p3);
+            double new_angle;
+            if( pnew.getY()>p3.getY()){
+                new_angle=angle+_angle;
+            }
+            else
+                new_angle=angle-_angle;
+            int tmp1=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+            int tmp2=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+            p3.setX(p2.getX()+ tmp1 );
+            if( pnew.getY()> p3.getY() && new_angle > 0.0){
+                p3.setY(p2.getY()- tmp2 );
+            }
+            else if ( pnew.getY()> p3.getY() && new_angle < 0.0){
+                p3.setY(p2.getY()+ tmp2 );
+            }
+            else if( pnew.getY()< p3.getY() && new_angle > 0.0){
+                p3.setY(p2.getY()+ tmp2 );
+            }
+            else
+                p3.setY(p2.getY()- tmp2 );
+        }
     }
     double distance(MyPoint p1, MyPoint p2){
-        return Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2);
+        return Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2));
     }  
     private void ParseAndStorePoints_from_KMLFile(String KML_File){
            try{
