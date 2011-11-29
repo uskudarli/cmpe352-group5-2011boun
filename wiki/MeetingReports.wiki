@@ -1,5 +1,18 @@
 #summary Meeting Reports
 
+=*Report of Meeting #27*=
+
+*Meeting Date:29.11.2011*
+
+*Meeting Duration:5 hours*
+
+*Meeting Location: Online, Gtalk*
+
+*Participants: : Ervin Domazet,Bahtiyar Kaba
+
+*Issues:*
+   # We integrated the first version of the schematization algorithm with the applet
+
 
 =*Report of Meeting #26*=
 
