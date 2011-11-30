@@ -13,7 +13,7 @@
             </web-module-libraries>
             <web-module-additional-libraries>
                 <library dirs="200">
-                    <file>${file.reference.EditorApplet.jar}</file>
+                    <file>${file.reference.EditorApplet2.jar}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>

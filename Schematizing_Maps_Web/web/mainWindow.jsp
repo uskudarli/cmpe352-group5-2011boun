@@ -30,7 +30,7 @@
         <div id="logoutBox">
             <form method="post" name="logout" id="logout" action="Servlet_Logout"> 
 		<% String xxx=(String)request.getParameter("name");%>
-            Welcome, User Logged-in: <%= xxx%>		
+            Welcome  <%= xxx%>		
 		<span id="lg" class="topButton">Logout</span>
 	    </form>	
 	    		
@@ -39,9 +39,9 @@
         <div id="header">      
             </div>
             <div id="indexLeftColumn">
-                <div id="messageArea"> Left click to start a route, right click to finish, right click again to start another route. You can edit the route after you finish drawing.</div>
+                <div id="messageArea"> Left click to add points. Select a source then a destination point to make a connection </div>
                 <div id ="canvasArea">
-                    <applet height="500" width="700"  code="schematizing_maps.CanvasApplet" archive="EditorApplet.jar"/>
+                    <applet height="525" width="800"  code="applet_algorithm.CanvasApplet" archive="EditorApplet2.jar"/>
                 </div>
             </div>
 
