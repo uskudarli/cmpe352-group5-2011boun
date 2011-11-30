@@ -12,13 +12,13 @@
  	$(document).ready(function() {
 		
 		    $('#left').animate({
-    			left: '-=20%',
+    			left: '-=20%'
   			}, 3000, 'easeOutQuad', function() {
     			// Animation complete.
   		    });
 		
 		    $('#right').animate({
-    			left: '+=20%',
+    			left: '+=20%'
   			}, 3000, 'easeOutQuad', function() {
     			// Animation complete.
   		    });
@@ -68,12 +68,12 @@
 			{
 				$(".middleBlock").css({'display': 'none'});
 				$('#left').animate({
-    					left: '-=30%',
+    					left: '-=30%'
   					}, 3000, 'easeOutQuad', function() {
     						$("#login").submit();
   		   		});
 				$('#right').animate({
-    					left: '+=30%',
+    					left: '+=30%'
   					}, 3000, 'easeOutQuad', function() {
     					// Animation complete.
   		    		});
@@ -98,12 +98,12 @@
 			{
 				$(".middleBlock").css({'display': 'none'});
 				$('#left').animate({
-    					left: '-=30%',
+    					left: '-=30%'
   					}, 3000, 'easeOutQuad', function() {
     						$("#register").submit();
   		   		});
 				$('#right').animate({
-    					left: '+=30%',
+    					left: '+=30%'
   					}, 3000, 'easeOutQuad', function() {
     					// Animation complete.
   		    		});
@@ -279,7 +279,7 @@
 		    <h1 style="font-style: italic; font-weight: bold; position: absolute; top: 15%; left: 33%; font-size: 50px;">Schematizer</h1>	
 		    <div class="innerBox">
 		     <div id="loginForm" class="form">		
-		      <form method="post" name="login" id="login" action="">
+		      <form method="post" name="login" id="login" action="Servlet_Login">
 			
 			<div id="loginAlert" style="margin-bottom: 10px;">	
 		  	</div>	
@@ -291,7 +291,7 @@
 	
 			<div id="userType" style="margin-top: 20px;">
 			    <input type="radio"	id="adv" name="userType" value="Advanced"/>Advanced User
-			    <input type="radio"	id="smpl" name="userType" value="Simple" style="margin-left: 15px;" checked />Simple User		
+			    <input type="radio"	id="smpl" name="userType" value="Simple" style="margin-left: 15px;" checked="CHECKED" />Simple User		
 			</div>
 
 			<input type="button" value="Login" id="lg" style="margin-top: 10px; width: 100px;" />
@@ -299,7 +299,7 @@
 		     </div>
 
 		     <div id="registerForm" class="form">
-			  <form method="post" name="register" id="register" action="">
+			  <form method="post" name="register" id="register" action="Servlet_Register">
 				
 				<div id="registerAlert" style="margin-bottom: 10px;">	
 		  		</div>				

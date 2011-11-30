@@ -31,9 +31,9 @@ public class Servlet_Register extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String user_name = request.getParameter("username").toString();
-        String password = request.getParameter("password").toString();
-        String password2 = request.getParameter("password2").toString();
+        String user_name = request.getParameter("rg_username").toString();
+        String password = request.getParameter("rg_password").toString();
+        String password2 = request.getParameter("rg_password2").toString();
         
         PrintWriter out = response.getWriter();
         try {

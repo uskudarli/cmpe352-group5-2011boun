@@ -38,9 +38,9 @@ public class Servlet_Login extends HttpServlet {
         //SESSION supportu baska zamana ekleriz
         /* Nurettin 2ci kez login olmaya calistigimda sorun cikiyor,  bi bak istersen*/
         //The requested resource (/Schematizing_Maps_Web/Servlet_Login) is not available. diyo ikinci kezde!!
-        String user_name = request.getParameter("username").toString();
+        String user_name = request.getParameter("lgn_username").toString();
         
-        String password = request.getParameter("password").toString();
+        String password = request.getParameter("lgn_password").toString();
         
                 try {
                     //Nurettin : simdi ilk kez girdigimde OK, ama
