@@ -116,7 +116,7 @@ public class Algorithm {
         return rootPoint;    
     }
     void recursively_schematize(MyPoint p1,MyPoint p2){
-        if(! p2.outgoingPoints.isEmpty()){
+        //if(! p2.outgoingPoints.isEmpty()){
             for(int i=0;i<p2.outgoingPoints.size();i++){
                 MyPoint p3=p2.outgoingPoints.get(i);
                 if(p3.point_id!=p1.point_id){
@@ -138,14 +138,20 @@ public class Algorithm {
                             movePoint(p1,p2, p3,angle,actual_angle);
                         }
                     }
+                    
                     if(this.preserve_distance){
                         this.totalDistance=totalDistance+distance(p2,p3);
                         this.totalEdges++;
                     }
                     recursively_schematize(p2,p3);
                 }
+                else
+                    {
+                        p2.outgoingPoints.remove(i);
+                        i--;
+                    }
             }
-        }
+       // }
         
     }
     double calculateAngle(MyPoint p1, MyPoint p2, MyPoint p3){ // cosine law

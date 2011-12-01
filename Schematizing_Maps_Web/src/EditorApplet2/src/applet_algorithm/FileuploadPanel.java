@@ -145,7 +145,7 @@ public class FileuploadPanel extends javax.swing.JPanel {
     byte [] b=new byte[in.available()];
     in.read(b);
     in.close();
-    CanvasApplet.canvasPanel.backgroundImage=Toolkit.getDefaultToolkit().createImage(b);
+    CanvasApplet.canvasPanel.backgroundImage=Toolkit.getDefaultToolkit().createImage(b).getScaledInstance(610,480,0);
     MediaTracker mt=new MediaTracker(this);
     mt.addImage(CanvasApplet.canvasPanel.backgroundImage,0);
     mt.waitForAll();
