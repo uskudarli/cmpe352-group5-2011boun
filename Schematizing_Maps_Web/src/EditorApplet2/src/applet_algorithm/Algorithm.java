@@ -105,15 +105,60 @@ public class Algorithm {
         angleMultiple =45.00;
     }
     MyPoint Schematize(){
+        
         MyPoint startPoint=rootPoint.outgoingPoints.get(0);
         /*if(this.preserve_distance){
                this.totalDistance=totalDistance+distance(rootPoint,startPoint);
                this.totalEdges++;
         }*/
-        for(int i=0;i<startPoint.outgoingPoints.size();i++){
-            recursively_schematize(startPoint, startPoint.outgoingPoints.get(i));
-        }
+        //for(int i=0;i<startPoint.outgoingPoints.size();i++){
+        //if (angleMultiple!=180.0){
+                
+            rootPoint.setY(rootPoint.outgoingPoints.get(0).getY());
+            recursively_schematize(rootPoint, rootPoint.outgoingPoints.get(0));
+            rootPoint.setY(0);
+        //}
+        //else
+       // {
+       // prepare_schematization(rootPoint,startPoint);
+       // schematize_180(rootPoint.outgoingPoints.get(0));
+       // }
+        
         return rootPoint;    
+    }
+    void prepare_schematization(MyPoint p1,MyPoint p2){
+        //if(! p1.outgoingPoints.isEmpty()){
+         for(int i=0;i<p2.outgoingPoints.size();i++){
+                MyPoint p3=p2.outgoingPoints.get(i);
+                if(p3.point_id==p1.point_id){   
+                    p2.outgoingPoints.remove(i);
+                        i--; 
+                }
+                else{
+                    prepare_schematization(p2,p3);
+                }
+       }
+        
+        
+        
+    }
+    void schematize_180(MyPoint p1){
+        if(!p1.outgoingPoints.isEmpty()){
+            for(int i=0;i<p1.outgoingPoints.size();i++){
+                    MyPoint p2=p1.outgoingPoints.get(i);
+                    if(p2.point_id!=p1.point_id){
+                        double distance_p1_p2=this.distance(p1, p2);
+                        append_to_first(p1,p2,distance_p1_p2);
+                        schematize_180(p2);
+                    }
+                    
+           }
+        }
+    }
+    void append_to_first(MyPoint p1,MyPoint p2,double distance)
+    {
+        p2.setY(p1.getY());
+        p2.setX(p1.getX()+(int)distance);
     }
     void recursively_schematize(MyPoint p1,MyPoint p2){
         //if(! p2.outgoingPoints.isEmpty()){
@@ -163,123 +208,141 @@ public class Algorithm {
     }
     
     void movePoint(MyPoint p1,MyPoint p2, MyPoint p3, double _angle,double actual_angle){
-        double y3_prime=p2.getY() + (int)( ((p3.getX()-p2.getX())*(p2.getY()-p1.getY()))/ (p2.getX()-p1.getX())   );
-        boolean y3_yukarda_kalir;
-        if (y3_prime >= p3.getY()){
-            y3_yukarda_kalir=true;
+        if(angleMultiple==(double)180){
+            double distance_p2_p3=this.distance(p2, p3);
+            append_to_first(p2,p3,distance_p2_p3);
         }
-        else
-            y3_yukarda_kalir=false;
-        double dist_p2_p3 = Math.sqrt(Math.pow((p2.getX()-p3.getX()), 2) + Math.pow((p2.getY()-p3.getY()), 2));
-       
-        if(y3_yukarda_kalir && actual_angle >=90){
-            MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
-            double angle=calculateAngle(pnew,p2,p3);
-            double new_angle;
-            if( pnew.getY()>p3.getY()){
-                new_angle=angle-_angle;
+        else{
+            double y3_prime;
+            boolean y3_yukarda_kalir;
+            if((p2.getX()-p1.getX())!=0){
+                y3_prime=p2.getY() + (int)( ((p3.getX()-p2.getX())*(p2.getY()-p1.getY()))/ (p2.getX()-p1.getX())   );
             }
             else
-                new_angle=_angle+angle;
-            
-            int tmp1=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
-            int tmp2=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
-            
-            p3.setX(p2.getX()+ tmp1 );
-            if( pnew.getY()> p3.getY() && new_angle > 0.0){
-                p3.setY(p2.getY()- tmp2 );
-            }
-            else if ( pnew.getY()> p3.getY() && new_angle < 0.0){
-                p3.setY(p2.getY()+ tmp2 );
-            }
-            else if( pnew.getY()< p3.getY() && new_angle > 0.0){
-                p3.setY(p2.getY()+ tmp2 );
-            }
-            else
-                p3.setY(p2.getY()- tmp2 );
-        }
-        else if((y3_yukarda_kalir) && actual_angle <90){
-            MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
-            double angle=calculateAngle(pnew,p2,p3);
-            double new_angle;
-            if(pnew.getX()>p3.getX()){
-                new_angle=angle-_angle;
-            }
-            else
-                new_angle=angle+_angle;
-            
-            int tmp1=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
-            int tmp2=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
-            p3.setY(p2.getY()- tmp2 );
-            if(pnew.getX()>p3.getX() && new_angle >0.0){
-                p3.setX(p2.getX()- tmp1 );
-            }
-            else if(pnew.getX()>p3.getX() && new_angle <0.0){
-                p3.setX(p2.getX()+ tmp1 );
-            }
-            else if(pnew.getX()<p3.getX() && new_angle >0.0){
-                    p3.setX(p2.getX()+ tmp1 );
-            }
-            else 
             {
-                p3.setX(p2.getX()- tmp1 );
+                if(p3.getX()>p2.getX()){
+                    y3_prime=p3.getY()+1;
+                }
+                else
+                    y3_prime=p3.getY()-1;
             }
-        }
-        else if(!(y3_yukarda_kalir) && actual_angle <90){
-            MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
-            double angle=calculateAngle(pnew,p2,p3);
-            double new_angle;
-            if( pnew.getX()<p3.getX()){
-                new_angle=angle+_angle;
-            }
-            else
-                new_angle=angle-_angle;
-            int tmp1=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
-            int tmp2=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
-            if(new_angle<=90.0){
-                p3.setY(p2.getY()+ tmp2 );
+
+            if (y3_prime >= p3.getY()){
+                y3_yukarda_kalir=true;
             }
             else
-                p3.setY(p2.getY()- tmp2 );
-            
-            if(pnew.getX()>p3.getX() && new_angle >0.0){
-                p3.setX(p2.getX()- tmp1 );
-            }
-            else if(pnew.getX()>p3.getX() && new_angle <0.0){
+                y3_yukarda_kalir=false;
+            double dist_p2_p3 = Math.sqrt(Math.pow((p2.getX()-p3.getX()), 2) + Math.pow((p2.getY()-p3.getY()), 2));
+
+            if(y3_yukarda_kalir && actual_angle >=90){
+                MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
+                double angle=calculateAngle(pnew,p2,p3);
+                double new_angle;
+                if( pnew.getY()>p3.getY()){
+                    new_angle=angle-_angle;
+                }
+                else
+                    new_angle=_angle+angle;
+
+                int tmp1=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+                int tmp2=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+
                 p3.setX(p2.getX()+ tmp1 );
+                if( pnew.getY()> p3.getY() && new_angle > 0.0){
+                    p3.setY(p2.getY()- tmp2 );
+                }
+                else if ( pnew.getY()> p3.getY() && new_angle < 0.0){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else if( pnew.getY()< p3.getY() && new_angle > 0.0){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else
+                    p3.setY(p2.getY()- tmp2 );
             }
-            else if(pnew.getX()<p3.getX() && new_angle >0.0){
+            else if((y3_yukarda_kalir) && actual_angle <90){
+                MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
+                double angle=calculateAngle(pnew,p2,p3);
+                double new_angle;
+                if(pnew.getX()>p3.getX()){
+                    new_angle=angle-_angle;
+                }
+                else
+                    new_angle=angle+_angle;
+
+                int tmp1=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+                int tmp2=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+                p3.setY(p2.getY()- tmp2 );
+                if(pnew.getX()>p3.getX() && new_angle >0.0){
+                    p3.setX(p2.getX()- tmp1 );
+                }
+                else if(pnew.getX()>p3.getX() && new_angle <0.0){
                     p3.setX(p2.getX()+ tmp1 );
+                }
+                else if(pnew.getX()<p3.getX() && new_angle >0.0){
+                        p3.setX(p2.getX()+ tmp1 );
+                }
+                else 
+                {
+                    p3.setX(p2.getX()- tmp1 );
+                }
             }
-            else 
+            else if(!(y3_yukarda_kalir) && actual_angle <90){
+                MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
+                double angle=calculateAngle(pnew,p2,p3);
+                double new_angle;
+                if( pnew.getX()<p3.getX()){
+                    new_angle=angle+_angle;
+                }
+                else
+                    new_angle=angle-_angle;
+                int tmp1=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+                int tmp2=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+                if(new_angle<=90.0){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else
+                    p3.setY(p2.getY()- tmp2 );
+
+                if(pnew.getX()>p3.getX() && new_angle >0.0){
+                    p3.setX(p2.getX()- tmp1 );
+                }
+                else if(pnew.getX()>p3.getX() && new_angle <0.0){
+                    p3.setX(p2.getX()+ tmp1 );
+                }
+                else if(pnew.getX()<p3.getX() && new_angle >0.0){
+                        p3.setX(p2.getX()+ tmp1 );
+                }
+                else 
+                {
+                    p3.setX(p2.getX()- tmp1 );
+                }       
+            }
+            else if(!(y3_yukarda_kalir) && actual_angle >=90)
             {
-                p3.setX(p2.getX()- tmp1 );
-            }       
-        }
-        else if(!(y3_yukarda_kalir) && actual_angle >=90)
-        {
-            MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
-            double angle=calculateAngle(pnew,p2,p3);
-            double new_angle;
-            if( pnew.getY()>p3.getY()){
-                new_angle=angle+_angle;
+                MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
+                double angle=calculateAngle(pnew,p2,p3);
+                double new_angle;
+                if( pnew.getY()>p3.getY()){
+                    new_angle=angle+_angle;
+                }
+                else
+                    new_angle=angle-_angle;
+                int tmp1=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
+                int tmp2=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
+                p3.setX(p2.getX()+ tmp1 );
+                if( pnew.getY()> p3.getY() && new_angle > 0.0){
+                    p3.setY(p2.getY()- tmp2 );
+                }
+                else if ( pnew.getY()> p3.getY() && new_angle < 0.0){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else if( pnew.getY()< p3.getY() && new_angle > 0.0){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else
+                    p3.setY(p2.getY()- tmp2 );
             }
-            else
-                new_angle=angle-_angle;
-            int tmp1=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));
-            int tmp2=Math.abs((int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle))));
-            p3.setX(p2.getX()+ tmp1 );
-            if( pnew.getY()> p3.getY() && new_angle > 0.0){
-                p3.setY(p2.getY()- tmp2 );
-            }
-            else if ( pnew.getY()> p3.getY() && new_angle < 0.0){
-                p3.setY(p2.getY()+ tmp2 );
-            }
-            else if( pnew.getY()< p3.getY() && new_angle > 0.0){
-                p3.setY(p2.getY()+ tmp2 );
-            }
-            else
-                p3.setY(p2.getY()- tmp2 );
         }
     }
     double distance(MyPoint p1, MyPoint p2){
