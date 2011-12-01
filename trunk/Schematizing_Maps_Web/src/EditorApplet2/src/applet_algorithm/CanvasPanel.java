@@ -88,7 +88,7 @@ public class CanvasPanel extends JPanel{
                                 if(j == selectedPoint1.outgoingPoints.size()){
                                     //selectedpoint1 does not have seleceted point 2 as the outgoing point
                                     selectedPoint1.outgoingPoints.add(selectedPoint2);
-                                   // selectedPoint2.outgoingPoints.add(selectedPoint1);
+                                   selectedPoint2.outgoingPoints.add(selectedPoint1); //bu eklendi! deneme:Ervin
                                 }
 //                                MyPoint bigger = selectedPoint1;
 //                                MyPoint smaller = selectedPoint2;
