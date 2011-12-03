@@ -169,7 +169,8 @@ public class Algorithm {
                     double actual_angle=angle;
                     double remainder;
                     remainder=angle % angleMultiple;
-                    if(remainder!=0.0){
+                    int division = (int)(angle / angleMultiple);
+                    if((remainder!=0.0) || (division != 0.0)){
                         if(remainder > (angleMultiple/2)){
                             //asagi dogru!
                             //angle=(int)((angle/angleMultiple) * angleMultiple )-remainder;
