@@ -184,6 +184,10 @@ public class Algorithm {
                             movePoint(p1,p2, p3,angle,actual_angle);
                         }
                     }
+                    else if((remainder!= 0.0) && (division == 0.0)){
+                        angle = angleMultiple-remainder;
+                        movePoint(p1, p2, p3, angle, actual_angle);
+                    }
                     
                     if(this.preserve_distance){
                         this.totalDistance=totalDistance+distance(p2,p3);
