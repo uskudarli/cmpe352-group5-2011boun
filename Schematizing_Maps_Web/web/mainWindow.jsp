@@ -13,6 +13,16 @@
     }
 </script>
 
+<% 
+    String xxx=(String)request.getParameter("name");
+    String advanced_simple=(String) session.getAttribute("userType");
+    String username=(String) session.getAttribute("username");
+    if(username==null || xxx==null || (xxx.compareTo(username)!=0)  ){
+        session.setAttribute("loginRequired", "1");
+        response.sendRedirect("index.jsp");
+    }
+    
+%>
 
 <html>
     <div id="imageLefty">
@@ -29,8 +39,8 @@
 
         <div id="logoutBox">
             <form method="post" name="logout" id="logout" action="Servlet_Logout"> 
-		<% String xxx=(String)request.getParameter("name");%>
-            Welcome  <%= xxx%>		
+		
+            Welcome  <%= xxx%>	, simple.. <%= advanced_simple%>
 		<span id="lg" class="topButton">Logout</span>
 	    </form>	
 	    		
