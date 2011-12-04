@@ -256,7 +256,19 @@ public class Algorithm {
                 int tmp2=(int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle)));
 
                 //p3.setX(p2.getX()+ tmp1 );
-                if( pnew.getX()> p2.getX() && new_angle > 0.0){
+                if( pnew.getX()> p2.getX()){
+                    p3.setX(p2.getX()+ tmp1 );
+                }
+                else{
+                    p3.setX(p2.getX()- tmp1 );
+                }
+                if( pnew.getY()> p3.getY()){
+                    p3.setY(p2.getY()- tmp2 );
+                }
+                else{
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                /*if( pnew.getX()> p2.getX() && new_angle > 0.0){
                     p3.setX(p2.getX()+ tmp1 );
                 }
                 else if ( pnew.getX()> p2.getX() && new_angle < 0.0){
@@ -278,7 +290,7 @@ public class Algorithm {
                     p3.setY(p2.getY()+ tmp2 );
                 }
                 else
-                    p3.setY(p2.getY()- tmp2 );
+                    p3.setY(p2.getY()- tmp2 );*/
             }
             else if((y3_yukarda_kalir) && actual_angle <90){
                 MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
@@ -296,7 +308,13 @@ public class Algorithm {
                 int tmp1=(int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle)));
                 int tmp2=(int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle)));
                 //p3.setY(p2.getY()- tmp2 );
-                if( pnew.getY()> p2.getY() && new_angle > 0.0){
+                if( pnew.getY()> p2.getY()){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else{
+                    p3.setY(p2.getY()- tmp2 );
+                }
+                /*if( pnew.getY()> p2.getY() && new_angle > 0.0){
                     p3.setY(p2.getY()+ tmp2 );
                 }
                 else if ( pnew.getY()> p2.getY() && new_angle < 0.0){
@@ -306,9 +324,15 @@ public class Algorithm {
                     p3.setY(p2.getY()- tmp2 );
                 }
                 else
-                    p3.setY(p2.getY()+ tmp2 );
+                    p3.setY(p2.getY()+ tmp2 );*/
                 
-                if(pnew.getX()>p3.getX() && new_angle >0.0){
+                if(pnew.getX()>p3.getX()){
+                    p3.setX(p2.getX()- tmp1 );
+                }
+                else {
+                    p3.setX(p2.getX()+ tmp1 );
+                }
+                /*if(pnew.getX()>p3.getX() && new_angle >0.0){
                     p3.setX(p2.getX()- tmp1 );
                 }
                 else if(pnew.getX()>p3.getX() && new_angle <0.0){
@@ -320,7 +344,7 @@ public class Algorithm {
                 else 
                 {
                     p3.setX(p2.getX()- tmp1 );
-                }
+                }*/
             }
             else if(!(y3_yukarda_kalir) && actual_angle <90){
                 MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
@@ -341,7 +365,20 @@ public class Algorithm {
                 else
                     p3.setY(p2.getY()- tmp2 );
                 */
-                if( pnew.getY()> p2.getY() && new_angle > 0.0){
+                if( pnew.getY()> p2.getY()){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else{
+                    p3.setY(p2.getY()- tmp2 );
+                }
+                if(pnew.getX()>p3.getX()){
+                    p3.setX(p2.getX()- tmp1 );
+                }
+                else if(pnew.getX()>p3.getX()){
+                    p3.setX(p2.getX()+ tmp1 );
+                }
+                
+                /*if( pnew.getY()> p2.getY() && new_angle > 0.0){
                     p3.setY(p2.getY()+ tmp2 );
                 }
                 else if ( pnew.getY()> p2.getY() && new_angle < 0.0){
@@ -365,7 +402,7 @@ public class Algorithm {
                 else 
                 {
                     p3.setX(p2.getX()- tmp1 );
-                }       
+                }*/       
             }
             else if(!(y3_yukarda_kalir) && actual_angle >=90)
             {
@@ -382,6 +419,19 @@ public class Algorithm {
                 int tmp1=(int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle)));
                 int tmp2=(int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle)));
                 //p3.setX(p2.getX()+ tmp1 );
+                if( pnew.getX()> p2.getX()){
+                    p3.setX(p2.getX()+ tmp1 );
+                }
+                else {
+                    p3.setX(p2.getX()- tmp1 );
+                }
+                if( pnew.getY()> p3.getY()){
+                    p3.setY(p2.getY()- tmp2 );
+                }
+                else {
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                /*
                 if( pnew.getX()> p2.getX() && new_angle > 0.0){
                     p3.setX(p2.getX()+ tmp1 );
                 }
@@ -404,7 +454,7 @@ public class Algorithm {
                     p3.setY(p2.getY()+ tmp2 );
                 }
                 else
-                    p3.setY(p2.getY()- tmp2 );
+                    p3.setY(p2.getY()- tmp2 );*/
             }
         }
     }
