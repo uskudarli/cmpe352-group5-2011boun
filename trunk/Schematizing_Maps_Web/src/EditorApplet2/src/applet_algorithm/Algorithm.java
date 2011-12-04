@@ -284,6 +284,7 @@ public class Algorithm {
                 int tmp1=(int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle)));
                 int tmp2=(int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle)));
                 p3.setY(p2.getY()- tmp2 );
+                
                 if(pnew.getX()>p3.getX() && new_angle >0.0){
                     p3.setX(p2.getX()- tmp1 );
                 }
@@ -291,7 +292,7 @@ public class Algorithm {
                     p3.setX(p2.getX()+ tmp1 );
                 }
                 else if(pnew.getX()<p3.getX() && new_angle >0.0){
-                        p3.setX(p2.getX()+ tmp1 );
+                    p3.setX(p2.getX()+ tmp1 );
                 }
                 else 
                 {
@@ -311,11 +312,23 @@ public class Algorithm {
                 int tmp2=Math.abs((int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle))));*/
                 int tmp1=(int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle)));
                 int tmp2=(int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle)));
-                if(new_angle<=90.0){
+                /*if(new_angle<=90.0){
                     p3.setY(p2.getY()+ tmp2 );
                 }
                 else
+                    p3.setY(p2.getY()- tmp2 );*/
+                
+                if( pnew.getX()> p2.getX() && new_angle > 0.0){
+                    p3.setY(p2.getY()+ tmp2 );
+                }
+                else if ( pnew.getX()> p2.getX() && new_angle < 0.0){
                     p3.setY(p2.getY()- tmp2 );
+                }
+                else if( pnew.getX()< p2.getX() && new_angle > 0.0){
+                    p3.setY(p2.getY()- tmp2 );
+                }
+                else
+                    p3.setY(p2.getY()+ tmp2 );
 
                 if(pnew.getX()>p3.getX() && new_angle >0.0){
                     p3.setX(p2.getX()- tmp1 );
