@@ -34,9 +34,9 @@ public class Servlet_Logout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         //String user_name = request.getParameter("name").toString();
-        //HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         try {
-          //      session.invalidate();
+                session.invalidate();
                 response.sendRedirect("index.jsp");             
         }
         finally {            
