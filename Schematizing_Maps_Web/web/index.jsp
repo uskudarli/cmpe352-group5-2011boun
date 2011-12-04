@@ -255,6 +255,10 @@
 	</div>
 	<div class="middleBlock">
 	    <div class="loginBox">
+                <%String login_req=(String) session.getAttribute("loginRequired");
+                    if(login_req!=null){
+                        System.out.print("<p>Login Required</p>");
+                    }%>
 	        <span class="topButton" id="loginButton">
 		    Login
 		</span>
