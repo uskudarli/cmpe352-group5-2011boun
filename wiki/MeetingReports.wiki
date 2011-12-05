@@ -1,4 +1,22 @@
+
 #summary Meeting Reports
+
+=*Report of Meeting #28*=
+
+*Meeting Date:04.12.2011*
+
+*Meeting Duration:2 hours*
+
+*Meeting Location: Online*
+
+*Participants: : Ervin Domazet,Bahtiyar Kaba, Eylül Taşyürek, Mert Terzihan
+
+*Issues:*
+   # We have decided on the differences between simple user and advanced user.
+   # We have decided on using the google maps link feature in our schematizer.
+   # Decisions about the simple user and advanced user are implemented.
+
+
 
 =*Report of Meeting #27*=
 
