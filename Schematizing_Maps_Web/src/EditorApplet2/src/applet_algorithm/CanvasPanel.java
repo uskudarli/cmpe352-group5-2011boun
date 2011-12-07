@@ -47,7 +47,8 @@ public class CanvasPanel extends JPanel{
         connections =new Vector<Connection>();
         popMenu = new JPopupMenu();
         deleteItem = new JMenuItem("Delete");
-        addDescription = new JTextField("Station:");
+        addDescription = new JTextField("");
+        addDescription.setToolTipText("Add a description");
         deleteItem.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent e) {
