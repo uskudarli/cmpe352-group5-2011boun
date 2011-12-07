@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 import schematizing_maps.server_side.mysql_UTIL;
 
 /**
@@ -35,13 +36,10 @@ public class Servlet_Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        //SESSION supportu baska zamana ekleriz
-        /* Nurettin 2ci kez login olmaya calistigimda sorun cikiyor,  bi bak istersen*/
-        //The requested resource (/Schematizing_Maps_Web/Servlet_Login) is not available. diyo ikinci kezde!!
         String user_name = request.getParameter("lgn_username").toString();
-        
         String password = request.getParameter("lgn_password").toString();
         String adv=request.getParameter("userType");
+        
         
                 try {
                     //Nurettin : simdi ilk kez girdigimde OK, ama
@@ -50,7 +48,10 @@ public class Servlet_Login extends HttpServlet {
                     if(!mysql_UTIL.checkUser(user_name, password)){
                         response.sendRedirect("login_error.jsp");
                     }else{
-                        session.setAttribute("username",user_name);
+                        Cookie cookie = new Cookie(user_name,"LOGGED_IN");
+                        cookie.setMaxAge(60*60);
+                        response.addCookie(cookie);
+                         session.setAttribute("username",user_name);
                         session.setAttribute("userType", adv);
                         response.sendRedirect("mainWindow.jsp?name="+user_name);
                     }

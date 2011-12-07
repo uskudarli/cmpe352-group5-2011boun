@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import schematizing_maps.server_side.mysql_UTIL;
-
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 /**
  *
  * @author Patron
@@ -34,7 +35,8 @@ public class Servlet_Register extends HttpServlet {
         String user_name = request.getParameter("rg_username").toString();
         String password = request.getParameter("rg_password").toString();
         String password2 = request.getParameter("rg_password2").toString();
-        
+        HttpSession session = request.getSession();
+        String adv=request.getParameter("userType");
         PrintWriter out = response.getWriter();
         try {
                  
@@ -42,6 +44,11 @@ public class Servlet_Register extends HttpServlet {
                             response.sendRedirect("registration_error.jsp");
                         }else{
                             //session.setAttribute(user_name,out);
+                            Cookie cookie = new Cookie(user_name,"LOGGED_IN");
+                            cookie.setMaxAge(60*60);
+                            response.addCookie(cookie);
+                            session.setAttribute("username",user_name);
+                            session.setAttribute("userType", adv);
                             response.sendRedirect("mainWindow.jsp?name="+user_name);
                         }
                     

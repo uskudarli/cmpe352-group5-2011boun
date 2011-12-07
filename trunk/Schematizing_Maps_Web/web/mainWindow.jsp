@@ -13,7 +13,7 @@
     }
 </script>
 
-<<<<<<< .mine
+
 <%
     String xxx=(String)request.getParameter("name");
     String advanced_simple=(String) session.getAttribute("userType");
@@ -22,18 +22,6 @@
         session.setAttribute("loginRequired", "1");
         response.sendRedirect("index.jsp");
     }
-=======
-<% 
-    String xxx=(String)request.getParameter("name");
-    String advanced_simple=(String) session.getAttribute("userType");
-    String username=(String) session.getAttribute("username");
-    if(username==null || xxx==null || (xxx.compareTo(username)!=0)  ){
-        session.setAttribute("loginRequired", "1");
-        response.sendRedirect("index.jsp");
-    }
-    
-%>
->>>>>>> .r157
 
 %>
 
@@ -51,16 +39,8 @@
         <div id="main">
 
         <div id="logoutBox">
-<<<<<<< .mine
-            <form method="post" name="logout" id="logout" action="Servlet_Logout">
-
-            Welcome  <%= xxx%>	, simple.. <%= advanced_simple%>
-            </form>
-=======
-            <form method="post" name="logout" id="logout" action="Servlet_Logout"> 
-		
-            Welcome  <%= xxx%>	, simple.. <%= advanced_simple%>
->>>>>>> .r157
+            <form method="post" name="logout" id="logout" action="Servlet_Logout"> 		
+            Welcome  <%= xxx%>
 		<span id="lg" class="topButton">Logout</span>
 	    </form>
 
@@ -71,20 +51,15 @@
             <div id="indexLeftColumn">
                 <div id="messageArea"> Left click to add points. Select a source then a destination point to make a connection </div>
                 <div id ="canvasArea">
-<<<<<<< .mine
                     <applet height="525" width="800"  code="applet_algorithm.CanvasApplet" archive="EditorApplet2.jar">
                     <param name="usertype" value="<%= advanced_simple%>">
                     </applet>
-=======
-                    <applet height="525" width="800"  code="applet_algorithm.CanvasApplet" archive="EditorApplet2.jar"/>
->>>>>>> .r157
                 </div>
             </div>
 
 
 
             <div id="footer">
-                footer
             </div>
         </div>
     </body>
