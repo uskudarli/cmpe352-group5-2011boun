@@ -4,15 +4,25 @@
 <script language = "JavaScript" src = "jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-		$("#lg").click(function() { 
-			$("#logout").submit();		
+		$("#lg").click(function() {
+			$("#logout").submit();
 		});
-    });	
+    });
     function toggleButtonEvent(){
         alert("Change view/edit mode toggle:\n@TODO: Write the proper event handling code")
     }
 </script>
 
+<<<<<<< .mine
+<%
+    String xxx=(String)request.getParameter("name");
+    String advanced_simple=(String) session.getAttribute("userType");
+    String username=(String) session.getAttribute("username");
+    if(username==null || xxx==null || (xxx.compareTo(username)!=0)  ){
+        session.setAttribute("loginRequired", "1");
+        response.sendRedirect("index.jsp");
+    }
+=======
 <% 
     String xxx=(String)request.getParameter("name");
     String advanced_simple=(String) session.getAttribute("userType");
@@ -23,39 +33,55 @@
     }
     
 %>
+>>>>>>> .r157
+
+%>
 
 <html>
     <div id="imageLefty">
     </div>
     <div id="imageRighty">
-    </div>		
+    </div>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="schematizer.css">
         <title>Schematizer Main Page</title>
     </head>
-    <body background="Resim3.jpg">	
+    <body background="Resim3.jpg">
         <div id="main">
 
         <div id="logoutBox">
+<<<<<<< .mine
+            <form method="post" name="logout" id="logout" action="Servlet_Logout">
+
+            Welcome  <%= xxx%>	, simple.. <%= advanced_simple%>
+            </form>
+=======
             <form method="post" name="logout" id="logout" action="Servlet_Logout"> 
 		
             Welcome  <%= xxx%>	, simple.. <%= advanced_simple%>
+>>>>>>> .r157
 		<span id="lg" class="topButton">Logout</span>
-	    </form>	
-	    		
+	    </form>
+
 	</div>
-    
-        <div id="header">      
+
+        <div id="header">
             </div>
             <div id="indexLeftColumn">
                 <div id="messageArea"> Left click to add points. Select a source then a destination point to make a connection </div>
                 <div id ="canvasArea">
+<<<<<<< .mine
+                    <applet height="525" width="800"  code="applet_algorithm.CanvasApplet" archive="EditorApplet2.jar">
+                    <param name="usertype" value="<%= advanced_simple%>">
+                    </applet>
+=======
                     <applet height="525" width="800"  code="applet_algorithm.CanvasApplet" archive="EditorApplet2.jar"/>
+>>>>>>> .r157
                 </div>
             </div>
 
-            
+
 
             <div id="footer">
                 footer
