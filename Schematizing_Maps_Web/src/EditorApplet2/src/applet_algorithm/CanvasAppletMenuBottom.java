@@ -15,6 +15,7 @@ package applet_algorithm;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 
@@ -72,17 +73,37 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(ActionEvent e){
         MyPoint p = new MyPoint(0,0);
-        p.outgoingPoints.add(CanvasApplet.canvasPanel.returnSmallesPoint());
-        try{
-            if(CanvasApplet.isDefault){
-                Algorithm deneme= new Algorithm(p, "",1);
-                p = deneme.Schematize();
-            } else{
-                Algorithm deneme = new Algorithm(p,"",1,CanvasApplet.angleMultiple,CanvasApplet.ew,CanvasApplet.ns,CanvasApplet.dist);
-                p = deneme.Schematize();
-            }
         Vector<MyPoint> temp = new Vector<MyPoint>();
-        CanvasApplet.canvasPanel.points=p.returnaccesiblepoints();
+        Vector<MyPoint> accs = new Vector<MyPoint>();
+        //p.outgoingPoints.add(CanvasApplet.canvasPanel.returnSmallesPoint());
+        try{
+
+            if(CanvasApplet.isDefault){
+                ArrayList<Connection> strpoints = CanvasApplet.canvasPanel.connections.get(0).findStartingPoints();
+                for(int i=0;i<strpoints.size();i++){
+                    p.outgoingPoints.add(strpoints.get(i).p1);
+                    Algorithm alg = new Algorithm(p,"",1);
+                    p = alg.Schematize();
+                    accs = p.returnaccesiblepoints();
+                    for(int j=0;j<accs.size();j++){
+                        temp.add(accs.get(j));
+                    }
+                    p= new MyPoint(0,0);
+                }
+            } else{
+                ArrayList<Connection> strpoints = CanvasApplet.canvasPanel.connections.get(0).findStartingPoints();
+                for(int i=0;i<strpoints.size();i++){
+                    p.outgoingPoints.add(strpoints.get(i).p1);
+                    Algorithm deneme = new Algorithm(p,"",1,CanvasApplet.angleMultiple,CanvasApplet.ew,CanvasApplet.ns,CanvasApplet.dist);
+                    p = deneme.Schematize();
+                    accs = p.returnaccesiblepoints();
+                    for(int j=0;j<accs.size();j++){
+                        temp.add(accs.get(j));
+                    }
+                    p= new MyPoint(0,0);
+                }
+            }
+        CanvasApplet.canvasPanel.points=temp;
         CanvasApplet.canvasPanel.repaint();
         }catch(IOException f){}
     }
