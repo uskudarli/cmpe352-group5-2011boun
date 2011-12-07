@@ -40,16 +40,23 @@ public class Servlet_Logout extends HttpServlet {
         String cookieName=(String)session.getAttribute("username");      
         Cookie cookies [] = request.getCookies ();
         Cookie myCokie=null;
-        for (int i = 0; i < cookies.length; i++) 
+        boolean flag=false;
+        if (cookies != null)
         {
-            if (cookies [i].getName().equals (cookieName))
+            for (int i = 0; i < cookies.length; i++) 
             {
-                myCokie=cookies[i];
-                break;
+                if (cookies [i].getName().equals (cookieName))
+                {
+                    myCokie=cookies[i];
+                    flag=true;
+                    break;
+                }
+            }
+            if(flag){
+                myCokie.setValue("LOGGED_OUT");
+                 response.addCookie(myCokie);
             }
         }
-        myCokie.setValue("LOGGED_OUT");
-        response.addCookie(myCokie);
         try {
                 session.invalidate();
                 response.sendRedirect("index.jsp");             
