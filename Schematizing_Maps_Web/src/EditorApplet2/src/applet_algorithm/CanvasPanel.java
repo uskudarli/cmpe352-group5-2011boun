@@ -22,6 +22,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
 
 /**
  *
@@ -39,14 +40,14 @@ public class CanvasPanel extends JPanel{
 
     private static JPopupMenu popMenu;
     private static JMenuItem deleteItem;
-    private static JMenuItem addDescription;
+    private static JTextField addDescription;
     //
     public CanvasPanel(){
         points = new Vector<MyPoint>();
         connections =new Vector<Connection>();
         popMenu = new JPopupMenu();
         deleteItem = new JMenuItem("Delete");
-        addDescription = new JMenuItem("Add description");
+        addDescription = new JTextField("Station:");
         deleteItem.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent e) {
@@ -66,7 +67,17 @@ public class CanvasPanel extends JPanel{
             }
 
         });
+        addDescription.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e) {
+                     if(deleteIndex !=-1){
+                         points.get(deleteIndex).description=CanvasPanel.addDescription.getText();
+                     }
+                     repaint();
+            }
+        });
         popMenu.add(deleteItem);
+        popMenu.add(addDescription);
         deleteIndex = -1;
         dragIndex = -1;
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
