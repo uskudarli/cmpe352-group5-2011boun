@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 import javax.servlet.annotation.WebServlet;
+
 
 
 /**
@@ -35,6 +37,19 @@ public class Servlet_Logout extends HttpServlet {
         PrintWriter out = response.getWriter();
         //String user_name = request.getParameter("name").toString();
         HttpSession session = request.getSession();
+        String cookieName=(String)session.getAttribute("username");      
+        Cookie cookies [] = request.getCookies ();
+        Cookie myCokie=null;
+        for (int i = 0; i < cookies.length; i++) 
+        {
+            if (cookies [i].getName().equals (cookieName))
+            {
+                myCokie=cookies[i];
+                break;
+            }
+        }
+        myCokie.setValue("LOGGED_OUT");
+        response.addCookie(myCokie);
         try {
                 session.invalidate();
                 response.sendRedirect("index.jsp");             

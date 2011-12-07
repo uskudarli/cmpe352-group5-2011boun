@@ -247,6 +247,25 @@
  </style>
 
 
+<% 
+    Cookie[] cookies = request.getCookies();
+    Cookie myCookie = null;
+    boolean flag=false;
+    if (cookies != null)
+        {
+            for (int i = 0; i < cookies.length; i += 1) {
+              if (cookies[i].getValue().equals("LOGGED_IN")) {
+                myCookie = cookies[i];
+                flag=true;
+                break;
+              }
+            }
+            if(flag){
+                String name=myCookie.getName();
+                response.sendRedirect("mainWindow.jsp?name="+name);
+            }
+       }
+%>
 </head>
 
 <body background="Resim3.jpg">
@@ -314,7 +333,11 @@
 				 <input type="password" name="rg_password" id="rg_passwd" /><br />
 				 <label>Password (Again):</label>
 				 <input type="password" name="rg_password2" id="rg_passwd2" /><br />
-
+                                 <div id="userType" style="margin-top: 20px;">
+                                    <label>Login As:</label>
+                                    <input type="radio"	id="adv" name="userType" value="Advanced"/>Advanced User
+                                    <input type="radio"	id="smpl" name="userType" value="Simple" style="margin-left: 15px;" checked="CHECKED" />Simple User		
+                                 </div>
 				<input type="button" value="Register" id="rg" style="margin-top: 10px; display: block; float: left; width: 150px;" />
 	
 			  </form>

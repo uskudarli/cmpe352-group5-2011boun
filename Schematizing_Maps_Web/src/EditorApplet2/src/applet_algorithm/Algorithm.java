@@ -496,14 +496,14 @@ public class Algorithm {
     }
     private void parseTextFile(String path) throws ParserConfigurationException, IOException, SAXException{
         File XmlFile = new File(path);
-	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-	Document doc = dBuilder.parse(XmlFile);
-	doc.getDocumentElement().normalize();
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(XmlFile);
+        doc.getDocumentElement().normalize();
  
-	NodeList nList = doc.getElementsByTagName("point");
+        NodeList nList = doc.getElementsByTagName("point");
  
-	for (int i = 0; i<nList.getLength(); i++) {
+        for (int i = 0; i<nList.getLength(); i++) {
  
             Node nNode = nList.item(i);
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -535,9 +535,8 @@ public class Algorithm {
     }
     
     private static String getTagValue(String sTag, Element eElement) {
-	NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
+        NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
         Node nValue = (Node) nlList.item(0);
-	return nValue.getNodeValue();
+        return nValue.getNodeValue();
     }
 }
-
