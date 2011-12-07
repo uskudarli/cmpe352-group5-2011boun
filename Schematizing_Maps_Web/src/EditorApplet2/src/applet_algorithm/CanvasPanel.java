@@ -35,6 +35,7 @@ public class CanvasPanel extends JPanel{
     public static Vector<Connection> connections;
     public static MyPoint selectedPoint1;
     public static MyPoint selectedPoint2;
+    public static String mapDescription;
     public static int dragIndex;
     public static int deleteIndex;
 
@@ -45,6 +46,7 @@ public class CanvasPanel extends JPanel{
     public CanvasPanel(){
         points = new Vector<MyPoint>();
         connections =new Vector<Connection>();
+        mapDescription = "";
         popMenu = new JPopupMenu();
         deleteItem = new JMenuItem("Delete");
         addDescription = new JTextField("");
