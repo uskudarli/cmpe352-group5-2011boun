@@ -49,7 +49,7 @@
         <div id="header">
             </div>
             <div id="indexLeftColumn">
-                <div id="messageArea"> Left click to add points. Select a source then a destination point to make a connection </div>
+                <div id="messageArea"> Left click to add points. Select a source, then a destination point to make a connection. </div>
                 <div id ="canvasArea">
                     <applet height="525" width="800"  code="applet_algorithm.CanvasApplet" archive="EditorApplet2.jar">
                     <param name="usertype" value="<%= advanced_simple%>">
