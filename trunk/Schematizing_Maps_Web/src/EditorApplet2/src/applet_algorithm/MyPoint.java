@@ -30,7 +30,7 @@ public class MyPoint {
         point_id = MyPoint.lastPoint;
         lastPoint++;
         outgoingPoints = new ArrayList<MyPoint>();
-        description = "hello world";
+        description = "No description";
     }
 
     public Vector<MyPoint> returnaccesiblepoints(){
