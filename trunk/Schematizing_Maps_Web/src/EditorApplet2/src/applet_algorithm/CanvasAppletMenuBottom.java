@@ -14,6 +14,7 @@
 package applet_algorithm;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -33,6 +34,13 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+        searchButton.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e) {
+                searchButtonActionPerformed();
+            }
+
+        });
     }
 
     /** This method is called from within the constructor to
@@ -45,6 +53,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -52,6 +61,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
 
         jButton1.setText("Start Schematizing");
         jButton1.setName("jButton1"); // NOI18N
+        searchButton.setText("Search Maps");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,13 +70,17 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jButton1)
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addComponent(searchButton)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(searchButton))
                 .addContainerGap())
         );
     }// </editor-fold>
@@ -107,9 +121,14 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         CanvasApplet.canvasPanel.repaint();
         }catch(IOException f){}
     }
+    private void searchButtonActionPerformed(){
+        //SEARCH OLAYI BURADA OLACAK!!! @EYLUL,YEKTA,OZGUR
+        JOptionPane.showMessageDialog(null, "Search results.");
+    }
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton searchButton;
     // End of variables declaration
 
 }

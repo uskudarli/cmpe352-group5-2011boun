@@ -40,6 +40,7 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         colorButton = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -53,6 +54,14 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
             }
         });
 
+        jTextField1.setText("jTextField1");
+        jTextField1.setName("jTextField1"); // NOI18N
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,13 +69,17 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(colorButton)
-                .addContainerGap(403, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(colorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(colorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -74,9 +87,14 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
         ColorDialog c = new ColorDialog();
     }//GEN-LAST:event_colorButtonActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        CanvasApplet.canvasPanel.mapDescription = jTextField1.getText();
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
 }
