@@ -1,7 +1,7 @@
 /*
     Document   : schematizer
     Created on : 09.Kas.2011, 15:25:16
-    Author     : Bahtiyar Kaba
+    Author     : Özgür Akçalý, Eylül Taþyürek
     Description:
         Purpose of the stylesheet follows.
 */
@@ -106,6 +106,25 @@ body {
     background: #ddd;
     clear: left;
 }
+
+
+span.topleftButton 	{
+	 position: absolute;
+    left: 200px;
+    top: 10px;
+	cursor: pointer;
+   	margin: 5px;
+	padding: 5px;	
+	line-height: 20px;
+	text-align: center;
+	font-style: italic;	
+	font-weight: bold;
+	background: url('Resim5.jpg') no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;   
+   }
 
 span.topButton 	{
 	cursor: pointer;
