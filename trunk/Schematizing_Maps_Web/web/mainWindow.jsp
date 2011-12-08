@@ -7,6 +7,9 @@
 		$("#lg").click(function() {
 			$("#logout").submit();
 		});
+		$("#ht").click(function() {
+			alert("how to?");
+		});
     });
     function toggleButtonEvent(){
         alert("Change view/edit mode toggle:\n@TODO: Write the proper event handling code")
@@ -37,7 +40,10 @@
     </head>
     <body background="Resim3.jpg">
         <div id="main">
-
+		
+		<span id="ht" class="topleftButton">How to?</span>
+	 
+		
         <div id="logoutBox">
             <form method="post" name="logout" id="logout" action="Servlet_Logout"> 		
             Welcome  <%= xxx%>
