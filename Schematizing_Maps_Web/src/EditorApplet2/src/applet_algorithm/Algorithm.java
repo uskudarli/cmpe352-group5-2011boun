@@ -197,8 +197,8 @@ public class Algorithm {
                 }
                 else
                     {
-                        p2.outgoingPoints.remove(i);
-                        i--;
+                       p2.outgoingPoints.remove(i);
+                       i--;
                     }
             }
        // }
@@ -501,7 +501,7 @@ public class Algorithm {
         Document doc = dBuilder.parse(XmlFile);
         doc.getDocumentElement().normalize();
  
-        NodeList nList = doc.getElementsByTagName("point");
+        NodeList nList = doc.getElementsByTagName("Edge");
  
         for (int i = 0; i<nList.getLength(); i++) {
  
@@ -509,27 +509,35 @@ public class Algorithm {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
  
                 Element element = (Element) nNode;
-                double x_coor = Double.parseDouble(getTagValue("x_coordinate", element));
-                double y_coor = Double.parseDouble(getTagValue("y_coordinate", element));
-                String description = getTagValue("description", element);
-               // Point p = new Point(x_coor, y_coor, description);
-                //this.points.add(p);
+                int p1X = Integer.parseInt(getTagValue("Point1_X", element));
+                int p1Y = Integer.parseInt(getTagValue("Point1_Y", element));
+                int p2X = Integer.parseInt(getTagValue("Point2_X", element));
+                int p2Y = Integer.parseInt(getTagValue("Point2_Y", element));
+                String color = getTagValue("Color", element);
             }
         }
                 
-        nList = doc.getElementsByTagName("keyword");
+        nList = doc.getElementsByTagName("Point");
         for (int i = 0; i<nList.getLength(); i++) {
  
             Node nNode = nList.item(i);
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
  
-                Node nValue = (Node) nList.item(0);
-                if(this.keywords.length() != 0){
-                    this.keywords += "," + nValue.getNodeValue();
-                }
-                else{
-                    this.keywords = nValue.getNodeValue();  
-                }
+                Element element = (Element) nNode;
+                int xCoor = Integer.parseInt(getTagValue("Point_X", element));
+                int yCoor = Integer.parseInt(getTagValue("Point_Y", element));
+                String desc = getTagValue("Description", element);
+            }
+        }
+        
+        nList = doc.getElementsByTagName("Map");
+        for (int i = 0; i<nList.getLength(); i++) {
+ 
+            Node nNode = nList.item(i);
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+ 
+                Element element = (Element) nNode;
+                String mapDesc = getTagValue("Map_Description", element);
             }
         }
     }
@@ -538,5 +546,5 @@ public class Algorithm {
         NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
         Node nValue = (Node) nlList.item(0);
         return nValue.getNodeValue();
-    }
+    }   
 }
