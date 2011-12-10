@@ -96,7 +96,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
             }
         });
 
-        northSouth.setText("North- West preservation");
+        northSouth.setText("North-South preservation");
         northSouth.setName("northSouth"); // NOI18N
         northSouth.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
