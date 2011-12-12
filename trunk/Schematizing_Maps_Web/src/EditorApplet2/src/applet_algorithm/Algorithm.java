@@ -161,7 +161,7 @@ public class Algorithm {
         p2.setX(p1.getX()+(int)distance);
     }
     void recursively_schematize(MyPoint p1,MyPoint p2){
-        //if(! p2.outgoingPoints.isEmpty()){
+        //if(!preserveEast_West & !preserveNorth_South){
             for(int i=0;i<p2.outgoingPoints.size();i++){
                 MyPoint p3=p2.outgoingPoints.get(i);
                 if(p3.point_id!=p1.point_id){
@@ -201,7 +201,8 @@ public class Algorithm {
                        i--;
                     }
             }
-       // }
+        //}
+        
         
     }
     double calculateAngle(MyPoint p1, MyPoint p2, MyPoint p3){ // cosine law
@@ -213,6 +214,9 @@ public class Algorithm {
     }
     
     void movePoint(MyPoint p1,MyPoint p2, MyPoint p3, double _angle,double actual_angle){
+        int oldP3X = p3.getX();
+        int oldP3Y = p3.getY();
+        int newP3X=0, newP3Y=0;
         if(angleMultiple==(double)180){
             double distance_p2_p3=this.distance(p2, p3);
             append_to_first(p2,p3,distance_p2_p3);
@@ -257,16 +261,55 @@ public class Algorithm {
 
                 //p3.setX(p2.getX()+ tmp1 );
                 if( pnew.getX()> p2.getX()){
-                    p3.setX(p2.getX()+ tmp1 );
+                    newP3X = p2.getX() + tmp1;
+                    //p3.setX(p2.getX()+ tmp1 );
                 }
                 else{
-                    p3.setX(p2.getX()- tmp1 );
+                    newP3X = p2.getX() - tmp1;
+                    //p3.setX(p2.getX()- tmp1 );
                 }
                 if( pnew.getY()> p3.getY()){
-                    p3.setY(p2.getY()- tmp2 );
+                    newP3Y = p2.getY() - tmp2;
+                    //p3.setY(p2.getY()- tmp2 );
                 }
                 else{
-                    p3.setY(p2.getY()+ tmp2 );
+                    newP3Y = p2.getY() + tmp2;
+                    //p3.setY(p2.getY()+ tmp2 );
+                }
+                
+                if(!preserveEast_West & !preserveNorth_South){
+                    p3.setY(newP3Y);
+                    p3.setX(newP3X);
+                }
+                /*else if(preserveEast_West){
+                    p3.setX(oldP3X);
+                    int above = p3.getX()-newP3X;
+                    int below = p3.getX()-p2.getX();
+                    p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
+                }
+                else if(preserveNorth_South){
+                    p3.setY(oldP3Y);
+                    int above = p3.getY()-newP3Y;
+                    int below = p3.getY()-p2.getY();
+                    p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
+                }*/
+                else if(preserveEast_West){
+                    p3.setX(oldP3X);
+                    int above = p2.getX()-newP3X;
+                    int below = p2.getX()-p3.getX();
+                    if(above!=0){
+                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    }
+                    else p3.setY(oldP3Y);
+                }
+                else if(preserveNorth_South){
+                    p3.setY(oldP3Y);
+                    int above = p2.getY()-newP3Y;
+                    int below = p2.getY()-p3.getY();
+                    if(above!=0){
+                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    }
+                    else p3.setX(oldP3X);
                 }
                 /*if( pnew.getX()> p2.getX() && new_angle > 0.0){
                     p3.setX(p2.getX()+ tmp1 );
@@ -309,10 +352,12 @@ public class Algorithm {
                 int tmp2=(int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle)));
                 //p3.setY(p2.getY()- tmp2 );
                 if( pnew.getY()> p2.getY()){
-                    p3.setY(p2.getY()+ tmp2 );
+                    newP3Y = p2.getY() + tmp2;
+                    //p3.setY(p2.getY()+ tmp2 );
                 }
                 else{
-                    p3.setY(p2.getY()- tmp2 );
+                    newP3Y = p2.getY() - tmp2;
+                    //p3.setY(p2.getY()- tmp2 );
                 }
                 /*if( pnew.getY()> p2.getY() && new_angle > 0.0){
                     p3.setY(p2.getY()+ tmp2 );
@@ -327,10 +372,12 @@ public class Algorithm {
                     p3.setY(p2.getY()+ tmp2 );*/
                 
                 if(pnew.getX()>p3.getX()){
-                    p3.setX(p2.getX()- tmp1 );
+                    newP3X = p2.getX() - tmp1;
+                    //p3.setX(p2.getX()- tmp1 );
                 }
                 else {
-                    p3.setX(p2.getX()+ tmp1 );
+                    newP3X = p2.getX() + tmp1;
+                    //p3.setX(p2.getX()+ tmp1 );
                 }
                 /*if(pnew.getX()>p3.getX() && new_angle >0.0){
                     p3.setX(p2.getX()- tmp1 );
@@ -345,6 +392,29 @@ public class Algorithm {
                 {
                     p3.setX(p2.getX()- tmp1 );
                 }*/
+                
+                if(!preserveEast_West & !preserveNorth_South){
+                    p3.setY(newP3Y);
+                    p3.setX(newP3X);
+                }
+                else if(preserveEast_West){
+                    p3.setX(oldP3X);
+                    int above = p2.getX()-newP3X;
+                    int below = p2.getX()-p3.getX();
+                    if(above!=0){
+                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    }
+                    else p3.setY(oldP3Y);
+                }
+                else if(preserveNorth_South){
+                    p3.setY(oldP3Y);
+                    int above = p2.getY()-newP3Y;
+                    int below = p2.getY()-p3.getY();
+                    if(above!=0){
+                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    }
+                    else p3.setX(oldP3X);
+                }
             }
             else if(!(y3_yukarda_kalir) && actual_angle <90){
                 MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
@@ -366,16 +436,20 @@ public class Algorithm {
                     p3.setY(p2.getY()- tmp2 );
                 */
                 if( pnew.getY()> p2.getY()){
-                    p3.setY(p2.getY()+ tmp2 );
+                    newP3Y = p2.getY() + tmp2;
+                    //p3.setY(p2.getY()+ tmp2 );
                 }
                 else{
-                    p3.setY(p2.getY()- tmp2 );
+                    newP3Y = p2.getY() - tmp2;
+                    //p3.setY(p2.getY()- tmp2 );
                 }
                 if(pnew.getX()>p3.getX()){
-                    p3.setX(p2.getX()- tmp1 );
+                    newP3X = p2.getX() - tmp1;
+                    //p3.setX(p2.getX()- tmp1 );
                 }
                 else if(pnew.getX()>p3.getX()){
-                    p3.setX(p2.getX()+ tmp1 );
+                    newP3X = p2.getX() + tmp1;
+                    //p3.setX(p2.getX()+ tmp1 );
                 }
                 
                 /*if( pnew.getY()> p2.getY() && new_angle > 0.0){
@@ -402,7 +476,30 @@ public class Algorithm {
                 else 
                 {
                     p3.setX(p2.getX()- tmp1 );
-                }*/       
+                }*/ 
+                
+                if(!preserveEast_West & !preserveNorth_South){
+                    p3.setY(newP3Y);
+                    p3.setX(newP3X);
+                }
+                else if(preserveEast_West){
+                    p3.setX(oldP3X);
+                    int above = p2.getX()-newP3X;
+                    int below = p2.getX()-p3.getX();
+                    if(above!=0){
+                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    }
+                    else p3.setY(oldP3Y);
+                }
+                else if(preserveNorth_South){
+                    p3.setY(oldP3Y);
+                    int above = p2.getY()-newP3Y;
+                    int below = p2.getY()-p3.getY();
+                    if(above!=0){
+                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    }
+                    else p3.setX(oldP3X);
+                }
             }
             else if(!(y3_yukarda_kalir) && actual_angle >=90)
             {
@@ -420,16 +517,20 @@ public class Algorithm {
                 int tmp2=(int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle)));
                 //p3.setX(p2.getX()+ tmp1 );
                 if( pnew.getX()> p2.getX()){
-                    p3.setX(p2.getX()+ tmp1 );
+                    newP3X = p2.getX() + tmp1;
+                    //p3.setX(p2.getX()+ tmp1 );
                 }
                 else {
-                    p3.setX(p2.getX()- tmp1 );
+                    newP3X = p2.getX() - tmp1;
+                    //p3.setX(p2.getX()- tmp1 );
                 }
                 if( pnew.getY()> p3.getY()){
-                    p3.setY(p2.getY()- tmp2 );
+                    newP3Y = p2.getY() - tmp2;
+                    //p3.setY(p2.getY()- tmp2 );
                 }
                 else {
-                    p3.setY(p2.getY()+ tmp2 );
+                    newP3Y = p2.getY() + tmp2;
+                    //p3.setY(p2.getY()+ tmp2 );
                 }
                 /*
                 if( pnew.getX()> p2.getX() && new_angle > 0.0){
@@ -455,6 +556,29 @@ public class Algorithm {
                 }
                 else
                     p3.setY(p2.getY()- tmp2 );*/
+                
+                if(!preserveEast_West & !preserveNorth_South){
+                    p3.setY(newP3Y);
+                    p3.setX(newP3X);
+                }
+                else if(preserveEast_West){
+                    p3.setX(oldP3X);
+                    int above = p2.getX()-newP3X;
+                    int below = p2.getX()-p3.getX();
+                    if(above!=0){
+                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    }
+                    else p3.setY(oldP3Y);
+                }
+                else if(preserveNorth_South){
+                    p3.setY(oldP3Y);
+                    int above = p2.getY()-newP3Y;
+                    int below = p2.getY()-p3.getY();
+                    if(above!=0){
+                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    }
+                    else p3.setX(oldP3X);
+                }
             }
         }
     }
