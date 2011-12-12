@@ -116,6 +116,9 @@ public class Algorithm {
                 
             rootPoint.setY(rootPoint.outgoingPoints.get(0).getY());
             recursively_schematize(rootPoint, rootPoint.outgoingPoints.get(0));
+            /*for(int i=0; i<rootPoint.outgoingPoints.size(); i++){
+                recursively_schematize(rootPoint.outgoingPoints.get(i), rootPoint.outgoingPoints.get(i).outgoingPoints.get(0));
+            }*/
             rootPoint.setY(0);
         //}
         //else
@@ -295,19 +298,19 @@ public class Algorithm {
                 }*/
                 else if(preserveEast_West){
                     p3.setX(oldP3X);
-                    int above = p2.getX()-newP3X;
-                    int below = p2.getX()-p3.getX();
-                    if(above!=0){
-                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    int above = p3.getX()-newP3X;
+                    int below = p3.getX()-p2.getX();
+                    if(below-above!=0){
+                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
                     }
                     else p3.setY(oldP3Y);
                 }
                 else if(preserveNorth_South){
                     p3.setY(oldP3Y);
-                    int above = p2.getY()-newP3Y;
-                    int below = p2.getY()-p3.getY();
-                    if(above!=0){
-                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    int above = p3.getY()-newP3Y;
+                    int below = p3.getY()-p2.getY();
+                    if(below-above!=0){
+                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
                     }
                     else p3.setX(oldP3X);
                 }
@@ -399,19 +402,19 @@ public class Algorithm {
                 }
                 else if(preserveEast_West){
                     p3.setX(oldP3X);
-                    int above = p2.getX()-newP3X;
-                    int below = p2.getX()-p3.getX();
-                    if(above!=0){
-                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    int above = p3.getX()-newP3X;
+                    int below = p3.getX()-p2.getX();
+                    if(below-above!=0){
+                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
                     }
                     else p3.setY(oldP3Y);
                 }
                 else if(preserveNorth_South){
                     p3.setY(oldP3Y);
-                    int above = p2.getY()-newP3Y;
-                    int below = p2.getY()-p3.getY();
-                    if(above!=0){
-                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    int above = p3.getY()-newP3Y;
+                    int below = p3.getY()-p2.getY();
+                    if(below-above!=0){
+                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
                     }
                     else p3.setX(oldP3X);
                 }
@@ -484,19 +487,19 @@ public class Algorithm {
                 }
                 else if(preserveEast_West){
                     p3.setX(oldP3X);
-                    int above = p2.getX()-newP3X;
-                    int below = p2.getX()-p3.getX();
-                    if(above!=0){
-                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    int above = p3.getX()-newP3X;
+                    int below = p3.getX()-p2.getX();
+                    if(below-above!=0){
+                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
                     }
                     else p3.setY(oldP3Y);
                 }
                 else if(preserveNorth_South){
                     p3.setY(oldP3Y);
-                    int above = p2.getY()-newP3Y;
-                    int below = p2.getY()-p3.getY();
-                    if(above!=0){
-                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    int above = p3.getY()-newP3Y;
+                    int below = p3.getY()-p2.getY();
+                    if(below-above!=0){
+                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
                     }
                     else p3.setX(oldP3X);
                 }
@@ -563,19 +566,19 @@ public class Algorithm {
                 }
                 else if(preserveEast_West){
                     p3.setX(oldP3X);
-                    int above = p2.getX()-newP3X;
-                    int below = p2.getX()-p3.getX();
-                    if(above!=0){
-                        p3.setY(((below*(newP3Y-p2.getY()))-(above*p2.getY()))/(above));
+                    int above = p3.getX()-newP3X;
+                    int below = p3.getX()-p2.getX();
+                    if(below-above!=0){
+                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
                     }
                     else p3.setY(oldP3Y);
                 }
                 else if(preserveNorth_South){
                     p3.setY(oldP3Y);
-                    int above = p2.getY()-newP3Y;
-                    int below = p2.getY()-p3.getY();
-                    if(above!=0){
-                        p3.setX(((below*(newP3X-p2.getX()))-(above*p2.getX()))/(above));
+                    int above = p3.getY()-newP3Y;
+                    int below = p3.getY()-p2.getY();
+                    if(below-above!=0){
+                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
                     }
                     else p3.setX(oldP3X);
                 }
