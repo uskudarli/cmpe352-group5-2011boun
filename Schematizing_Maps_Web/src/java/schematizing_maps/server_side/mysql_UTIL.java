@@ -4,7 +4,9 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import applet_algorithm.Map;
+
+
 
 /**
  *
@@ -14,10 +16,7 @@ public class mysql_UTIL {
 
     private static String connectionURL;
     private static Connection connection;
-    private static String _url ;
-    private static String _dbName;
-    private static String _userName; 
-    private static String _password;
+    
     
     
     
@@ -71,8 +70,10 @@ public class mysql_UTIL {
     public static boolean updateConfig(){
         return false;
     }
-    public static boolean saveMap(){
-        return false;
+    public static boolean saveMap(Map map){
+        mysqlSaveMap save = new mysqlSaveMap(map);
+        save.run();
+        return save.isSuccessful();
     }
     public static boolean retrieveMaps(){
         return false;
@@ -181,10 +182,53 @@ public class mysql_UTIL {
         
     }
     private static class mysqlSaveMap implements Runnable{
+        
+        String query_to_map;
+        boolean isSuccessful;
+        
 
+        public mysqlSaveMap(Map map) {
+            int isVisible = map.getVisible() ? 1 : 0;
+            String keywords = "";
+            String[] _keywords = map.getKeywords();
+            for(int i=0 ; i < _keywords.length-1 ; i++){
+                keywords = keywords.concat(_keywords[i]+",");
+            }
+            keywords = keywords.concat(_keywords[_keywords.length-1]);
+            
+            
+            query_to_map = "insert into MAPS (User_ID,Visible,Map_Name,MapXMLData,keywords) values ((select from USER_LOGIN where name='"
+                    + map.getMapOwner() +"' ),'" 
+                    + isVisible + "','" 
+                    + map.getMapName() +"','"
+                    + map.getXMLFormat() +"','"
+                    + keywords + "');";
+            isSuccessful = false;
+            
+        }
+        
         @Override
         public void run() {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try {
+                connection = (Connection)DriverManager.getConnection(connectionURL);
+                Statement stmt = connection.createStatement();
+                stmt.executeUpdate(query_to_map);
+                connection.close();
+                
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                connection = null;
+                return;
+                
+            }
+            isSuccessful = true;
+            connection = null;
+            
+            
+        }
+        public boolean isSuccessful(){
+            return isSuccessful;
         }
         
     }
