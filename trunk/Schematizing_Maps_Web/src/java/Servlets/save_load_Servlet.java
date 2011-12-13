@@ -2,28 +2,30 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlets;
 
+import applet_algorithm.Map;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Cookie;
 import schematizing_maps.server_side.mysql_UTIL;
 
 /**
  *
- * @author Patron
+ * @author px5x2
  */
-@WebServlet(name = "Servlet_Login", urlPatterns = {"/Servlet_Login"})
-public class Servlet_Login extends HttpServlet {
-
+@WebServlet(name = "save_load_Servlet", urlPatterns = {"/save_load_Servlet"})
+public class save_load_Servlet extends HttpServlet {
+    
     private static mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -35,30 +37,50 @@ public class Servlet_Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        String user_name = request.getParameter("lgn_username").toString();
-        String password = request.getParameter("lgn_password").toString();
-        String adv=request.getParameter("userType");
         
+        ObjectOutputStream outputToApplet = null;       // for writing output to the applet
+        ObjectInputStream inputFromApplet = null;       // for reading input coming from applet
+        Map map = null;
         
-                try {
-                    //Nurettin : simdi ilk kez girdigimde OK, ama
-                    //logout edip tekrar girdigimde user:Ozgur pass:12345 diye
-                    //bu kez girmiyor, dbde yok diyor, neden acaba?
-                    if(!mysql_UTIL.checkUser(user_name, password)){
-                        response.sendRedirect("login_error.jsp");
-                    }else{
-                        Cookie cookie = new Cookie(user_name,"LOGGED_IN");
-                        cookie.setMaxAge(60*60);
-                        response.addCookie(cookie);
-                         session.setAttribute("username",user_name);
-                        session.setAttribute("userType", adv);
-                        response.sendRedirect("mainWindow.jsp?name="+user_name);
-                    }
-                } finally {            
-                    out.close();
+        try {
+            InputStream is = request.getInputStream();
+            inputFromApplet = new ObjectInputStream(is);
+            map = (Map) inputFromApplet.readObject();
+            
+            // we check the user name for integrity
+            //
+            String user = map.getMapOwner();
+            
+            if(mysql_UTIL.userExists(user)){
+                //
+                // save map
+                //
+                if(mysql_UTIL.saveMap(map)){
+                    
+                    // save successful
+                    // TODO : inform user! btw use the "outputToApplet" stream
+                }else{
+                    // save unsuccessful
+                    // TODO : inform user!
                 }
-           
+            }else{
+                // we cannot find corrensponding user in db
+                // no need to further process
+                // TODO : inform user!!
+                is.close();
+                inputFromApplet.close();
+                is = null;
+                inputFromApplet = null;
+                return;
+            }
+            
+            
+            
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        } finally {            
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

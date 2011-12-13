@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import applet_algorithm.Map;
+import java.util.Hashtable;
 
 
 
@@ -25,17 +26,14 @@ public class mysql_UTIL {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
-           // connection = (Connection)DriverManager.getConnection(connectionURL);
-            /*_url = "jdbc:mysql://"+host+":"+port+"/";
-            _dbName = schema;
-            _userName = user; 
-            _password = password;*/
+           
         } catch (Exception e) {
             System.out.println(e.toString());
         }
         
     }
-    
+    //
+    // user related methods
     public static boolean addUser(String user, String pass){
         try{
             mysqlAddUser a = new mysqlAddUser(user, pass);
@@ -64,12 +62,31 @@ public class mysql_UTIL {
         }
         return false;
     }
+    public static boolean userExists(String user){
+        mysqlUserExists a = new mysqlUserExists(user);
+        a.run();
+        int result = a.getResult();
+        /*
+         * -1 = a database error
+         *  0 = user not found / duplicate users
+         *  1 = user found!
+         */
+        if(result == 1)
+            return true;
+        
+        
+        return false;
+    }
+    //
+    // configuration related methods
     public static boolean loadConfig(){
         return false;
     }
     public static boolean updateConfig(){
         return false;
     }
+    //
+    // map save / load / search
     public static boolean saveMap(Map map){
         mysqlSaveMap save = new mysqlSaveMap(map);
         save.run();
@@ -78,9 +95,13 @@ public class mysql_UTIL {
     public static boolean retrieveMaps(){
         return false;
     }
+    public static Hashtable<Integer, String> searchMaps(){
+        Hashtable<Integer, String> maps = new Hashtable<Integer, String>();
+        return maps;
+    }
     
     //
-    // Runnable derived functions, to do db operations in a seperate thread.
+    // Runnable derived classes, to do db operations in a seperate thread.
     //
     private static class mysqlAddUser implements Runnable{
 
@@ -165,6 +186,53 @@ public class mysql_UTIL {
             return error;
         }
     }
+    private static class mysqlUserExists implements Runnable{
+
+        
+        private String query;
+        private int result;
+
+        public mysqlUserExists(String user) {
+            query = "select count(*) from USER_LOGIN where name='" + user + "';";
+            result = 0;
+            
+        }
+        
+        
+        @Override
+        public void run() {
+            try {
+                connection = (Connection) DriverManager.getConnection(connectionURL);
+                Statement stmt = connection.createStatement();
+                ResultSet res = stmt.executeQuery(query);
+                if(res.next()){
+                    int count = res.getInt(1);
+                    if(count != 1){
+                        result = 0;
+                    }else{
+                        result = 1;
+                    }
+                }else{
+                    result = -1;
+                }
+                
+                res.close();
+                stmt.close();
+                connection.close();
+                connection = null;
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                connection = null;
+                result = -1;
+                
+            }
+            
+        }
+        public int getResult(){
+            return result;
+        }
+    }
     private static class mysqlLoadConfig implements Runnable{
 
         @Override
@@ -240,10 +308,31 @@ public class mysql_UTIL {
         }
         
     }
+    private static class mysqlSearchMaps implements Runnable{
+
+        
+        private String query;
+        private Hashtable<Integer, String> results;
+
+        public mysqlSearchMaps(String keyword) {
+            
+        }
+        
+        
+        
+        @Override
+        public void run() {
+            
+        }
+        
+    }
     
     public static void main(String args[]) throws Exception{
         //
         // for testing purposes
+        //connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
+        //System.out.println(userExists("nurettin"));
+        
         
         
         

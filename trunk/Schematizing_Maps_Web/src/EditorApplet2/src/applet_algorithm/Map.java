@@ -4,13 +4,16 @@
  */
 package applet_algorithm;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  *
  * @author px5x2
+ * Serialized class because we handle serializable faster in object sending and receiving 
+ * especially passing between applet and servlet via network
  */
-public class Map {
+public class Map implements Serializable{
     private Vector<MyPoint> points;
     private Vector<Connection> connections;
     private String map_name;                    
@@ -18,7 +21,7 @@ public class Map {
     private String map_owner;           // collected from probably session
                                         // we need this to relate maps to specific users
     private String[] keywords;
-    
+       
     /*
      * Constructor of Map
      * We are supposed to fill in the fields above.
