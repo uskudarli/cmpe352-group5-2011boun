@@ -295,6 +295,14 @@ public class Algorithm {
     }
     
     void movePoint(MyPoint p1,MyPoint p2, MyPoint p3, double _angle,double actual_angle){
+        boolean above = false;
+        if(p2.getY()<p3.getY()){
+            above = true;
+        }
+        boolean left = false;
+        if(p2.getX()<p3.getX()){
+            left = true;
+        }
         if(angleMultiple==(double)180){
             double distance_p2_p3=this.distance(p2, p3);
             append_to_first(p2,p3,distance_p2_p3);
@@ -537,6 +545,30 @@ public class Algorithm {
                 }
                 else
                     p3.setY(p2.getY()- tmp2 );*/
+            }
+            if(preserveEast_West){
+               boolean temp = false;
+                if(p2.getY()<p3.getY()){
+                    temp = true;
+                }
+                if(temp != above){
+                    int dist = 2*p2.getX()-p3.getX();
+                    p3.setX(dist);
+                    dist = 2*p2.getY()-p3.getY();
+                    p3.setY(dist);
+                } 
+            }
+            if(preserveNorth_South){
+                boolean temp = false;
+                if(p2.getY()<p3.getY()){
+                    temp = true;
+                }
+                if(temp != above){
+                    int dist = 2*p2.getX()-p3.getX();
+                    p3.setX(dist);
+                    dist = 2*p2.getY()-p3.getY();
+                    p3.setY(dist);
+                }
             }
         }
     }
