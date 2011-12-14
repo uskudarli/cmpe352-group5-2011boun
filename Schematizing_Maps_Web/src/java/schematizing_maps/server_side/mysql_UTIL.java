@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import applet_algorithm.Map;
 import java.util.Hashtable;
+import java.util.Vector;
 
 
 
@@ -92,8 +93,23 @@ public class mysql_UTIL {
         save.run();
         return save.isSuccessful();
     }
-    public static boolean retrieveMaps(){
-        return false;
+    /*
+     * we return null, if database error occurs
+     * (assuming that we give this method "correct" params
+     * 
+     * hence, handle the null case in the applet
+     */
+    public static Map loadMap(String userName, int Image_ID){
+        mysqlLoadMap a = new mysqlLoadMap(userName, Image_ID);
+        a.run();
+        return a.getMap();
+        
+    }
+    public static Vector<Map> searchMaps(String user, String keyword){
+        mysqlSearchMaps a = new mysqlSearchMaps(user, keyword);
+        a.run();
+        return a.getResultingMaps();
+        
     }
     public static Hashtable<Integer, String> searchMaps(){
         Hashtable<Integer, String> maps = new Hashtable<Integer, String>();
@@ -300,21 +316,63 @@ public class mysql_UTIL {
         }
         
     }
-    private static class mysqlRetrieveMaps implements Runnable{
+    private static class mysqlLoadMap implements Runnable{
 
+        
+        private String query;
+        private Map map;
+
+        public mysqlLoadMap(String user, int Image_ID) {
+            query = "select * from MAPS right join USER_LOGIN on USER_LOGIN.User_ID=MAPS.User_ID "
+                    + "where name='" + user + "' and Image_ID='" + Image_ID + "'";
+            map = null;
+        }
+        
         @Override
         public void run() {
-            throw new UnsupportedOperationException("Not supported yet.");
+            try {
+                map = new Map();
+                connection = (Connection) DriverManager.getConnection(connectionURL);
+                Statement stmt = connection.createStatement();
+                ResultSet result = stmt.executeQuery(query);
+                
+                if(result.next()){
+                    map.setMapOwner(result.getString("name"));
+                    map.setKeywords(result.getString("keywords"));
+                    map.setMapName(result.getString("Map_Name"));
+                    map.setVisible(result.getBoolean("Visible"));
+                    map.setPointsAndConnections(result.getString("MapXMLData"));
+                    
+                    
+                }else{
+                    map = null;
+                }
+                result.close();
+                stmt.close();
+                connection.close();
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                connection = null;
+                map = null;
+            }
+            connection = null;
         }
+        public Map getMap(){ return map; }
         
     }
     private static class mysqlSearchMaps implements Runnable{
 
         
         private String query;
-        private Hashtable<Integer, String> results;
+        private String keyword;
+        private Vector<Map> resulting_maps;
 
-        public mysqlSearchMaps(String keyword) {
+        public mysqlSearchMaps(String user, String keyword) {
+            query = "select Image_ID,keywords from MAPS join USER_LOGIN on MAPS.User_ID=USER_LOGIN.User_ID "
+                    + "where Visible='1' or  name='" + user +"';";
+            resulting_maps = new Vector<Map>();
+            this.keyword = keyword;
             
         }
         
@@ -322,16 +380,105 @@ public class mysql_UTIL {
         
         @Override
         public void run() {
+            try {
+                connection = (Connection) DriverManager.getConnection(connectionURL);
+                Statement stmt = connection.createStatement();
+                
+                ResultSet result = stmt.executeQuery(query);
+                
+                
+                Vector<Integer> ids = new Vector<Integer>();
+                
+                while(result.next()){
+                    
+                    int id =result.getInt("Image_ID");
+                    String[] keywords = result.getString("keywords").split(",");
+                    
+                    /*
+                     * we take image ids which contain the keyword, for later retrieving
+                     * ( i.e. populating maps )
+                     */
+                    if(isKeywordFound(keywords, keyword)){
+                        ids.add(id);
+                    }                   
+                    
+                }
+                
+                if(ids.isEmpty()){
+                    resulting_maps = null;
+                    result.close();
+                    stmt.close();
+                    connection.close();
+                    connection = null;
+                    return;
+                }else{
+                    result.close();
+                    stmt.close();
+                    
+                    /*
+                     * Retrieve found maps & Prepare query string
+                     */
+                    String query2 = "select * from MAPS join USER_LOGIN on MAPS.User_ID=USER_LOGIN.User_ID where ";
+                    for(int i=0;i<ids.size();i++){
+                        query2 = query2.concat("Image_ID='"+ids.get(i)+"' ");
+                        
+                        //for last element we do not place "and"
+                        //
+                        if(i != ids.size()-1){
+                            query2 = query2.concat("and ");
+                        }else{
+                            query2 = query2.concat(";");
+                        }
+                    }
+                    
+                    Statement stmt2 = connection.createStatement();
+                    ResultSet result2 = stmt2.executeQuery(query2);
+                    
+                    while(result2.next()){
+                        Map m = new Map();
+                        m.setImage_ID(result2.getInt("Image_ID"));
+                        m.setMapOwner(result2.getString("name"));
+                        m.setKeywords(result2.getString("keywords"));
+                        m.setMapName(result2.getString("Map_Name"));
+                        m.setVisible(result2.getBoolean("Visible"));
+                        m.setPointsAndConnections(result2.getNString("MapXMLData"));
+                        resulting_maps.add(m);
+                    }
+                    result2.close();
+                    stmt2.close();
+                    connection.close();
+                    
+                }
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                resulting_maps = null;
+                connection = null;
+            }
+            
             
         }
         
+        private boolean isKeywordFound(String[] keywords, String keyword){
+            
+            for( int i=0 ; i < keywords.length ; i++ ){
+                if(keywords[i].contains(keyword)){
+                    return true;
+                }
+                    
+            }
+            return false;
+        }
+        public Vector<Map> getResultingMaps(){
+            return resulting_maps;
+        }
     }
     
     public static void main(String args[]) throws Exception{
         //
         // for testing purposes
-        //connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
-        //System.out.println(userExists("nurettin"));
+        connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
+        System.out.println(userExists("nurettin"));
         
         
         
