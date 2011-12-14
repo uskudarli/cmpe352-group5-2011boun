@@ -299,9 +299,9 @@ public class Algorithm {
         if(p2.getY()<p3.getY()){
             above = true;
         }
-        boolean left = false;
+        boolean right = false;
         if(p2.getX()<p3.getX()){
-            left = true;
+            right = true;
         }
         if(angleMultiple==(double)180){
             double distance_p2_p3=this.distance(p2, p3);
@@ -548,14 +548,40 @@ public class Algorithm {
             }
             if(preserveEast_West){
                boolean temp = false;
-                if(p2.getY()<p3.getY()){
+                if(p2.getX()<p3.getX()){
                     temp = true;
                 }
-                if(temp != above){
-                    int dist = 2*p2.getX()-p3.getX();
-                    p3.setX(dist);
-                    dist = 2*p2.getY()-p3.getY();
-                    p3.setY(dist);
+                if(temp != right){
+                    double angle = 1000;
+                    if(p1.getX() != p3.getX()){
+                       angle  = (p1.getY()-p3.getY())/(p1.getX()-p3.getX());
+                    }
+                    if(angle > 1){
+                        double a = (p1.getY()-p2.getY())/(p1.getX()-p2.getX());
+                        double b = p1.getY()-(a*p1.getX());
+                        double newA = 1/a;
+                        double newB = p3.getY()-(newA*p3.getX());
+                        double t = Math.pow(a,2)-1;
+                        double newY = (((t+1)*newB)-b)/t;
+                        double newX = (newY-b)/a;
+                        int dist = (int)(2*newX-p3.getX());
+                        p3.setX(dist);
+                        dist = (int)(2*newY-p3.getY());
+                        p3.setY(dist);
+                    }
+                    else if(angle < 1){
+                        double a = (p1.getY()-p2.getY())/(p1.getX()-p2.getX());
+                        double b = p3.getY()-(a*p3.getX());
+                        double newA = 1/a;
+                        double newB = p2.getY()-(newA*p2.getX());
+                        double t = Math.pow(a,2)-1;
+                        double newY = (((t+1)*b)-newB)/t;
+                        double newX = (newY-b)/a;
+                        int dist = (int)(2*newX-p3.getX());
+                        p3.setX(dist);
+                        dist = (int)(2*newY-p3.getY());
+                        p3.setY(dist);
+                    }
                 } 
             }
             if(preserveNorth_South){
@@ -564,10 +590,36 @@ public class Algorithm {
                     temp = true;
                 }
                 if(temp != above){
-                    int dist = 2*p2.getX()-p3.getX();
-                    p3.setX(dist);
-                    dist = 2*p2.getY()-p3.getY();
-                    p3.setY(dist);
+                    double angle = 1000;
+                    if(p1.getX() != p3.getX()){
+                       angle  = (p1.getY()-p3.getY())/(p1.getX()-p3.getX());
+                    }
+                    if(angle < 1){
+                        double a = (p1.getY()-p2.getY())/(p1.getX()-p2.getX());
+                        double b = p1.getY()-(a*p1.getX());
+                        double newA = 1/a;
+                        double newB = p3.getY()-(newA*p3.getX());
+                        double t = Math.pow(a,2)-1;
+                        double newY = (((t+1)*newB)-b)/t;
+                        double newX = (newY-b)/a;
+                        int dist = (int)(2*newX-p3.getX());
+                        p3.setX(dist);
+                        dist = (int)(2*newY-p3.getY());
+                        p3.setY(dist);
+                    }
+                    else if(angle > 1){
+                        double a = (p1.getY()-p2.getY())/(p1.getX()-p2.getX());
+                        double b = p3.getY()-(a*p3.getX());
+                        double newA = 1/a;
+                        double newB = p2.getY()-(newA*p2.getX());
+                        double t = Math.pow(a,2)-1;
+                        double newY = (((t+1)*b)-newB)/t;
+                        double newX = (newY-b)/a;
+                        int dist = (int)(2*newX-p3.getX());
+                        p3.setX(dist);
+                        dist = (int)(2*newY-p3.getY());
+                        p3.setY(dist);
+                    }
                 }
             }
         }
