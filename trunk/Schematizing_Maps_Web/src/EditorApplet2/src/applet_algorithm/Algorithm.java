@@ -126,8 +126,86 @@ public class Algorithm {
        // prepare_schematization(rootPoint,startPoint);
        // schematize_180(rootPoint.outgoingPoints.get(0));
        // }
-        
+        if(preserve_distance){
+            distance_preservation(rootPoint.outgoingPoints.get(0));
+        }
         return rootPoint;    
+    }
+    void distance_preservation(MyPoint start){
+        int meanDistance=(int)(this.totalDistance/this.totalEdges);
+        recursively_distance_preservation(start,meanDistance);
+    }
+    void recursively_distance_preservation(MyPoint start, int mean){
+        for(int i=0; i< start.outgoingPoints.size();i++){
+                MyPoint next=start.outgoingPoints.get(i);
+                int old_x=next.getX();
+                int old_y=next.getY();
+                int new_x;
+                int new_y;
+                int cumulative_change_x;
+                int cumulative_change_y;
+                MyPoint helper_point= new MyPoint(next.getX(),start.getY());
+                double angle_between;
+                if(next.getX()==start.getX()){
+                    angle_between=90.0;
+                }
+                else{
+                    angle_between=this.calculateAngle(next, start, helper_point);
+                }
+                int distance_=(int)this.distance(start, next);
+                if(start.getX()<=next.getX()){
+                    if(start.getX()==next.getX()){
+                        new_x=old_x;
+                    }
+                    else{
+                        new_x=(int)(start.getX()+(Math.cos(Math.toRadians(angle_between))*mean));
+                    }   
+                    if(start.getY()<=next.getY()){
+                        if(start.getY()==next.getY()){
+                            new_y=old_y;
+                        }
+                        else{
+                            new_y=(int)(start.getY()+(Math.sin(Math.toRadians(angle_between))*mean));
+                        }
+                        
+                    }
+                    else{
+                        new_y=(int)(start.getY()-(Math.sin(Math.toRadians(angle_between))*mean));
+                    }
+                }
+                else
+                {
+                    new_x=(int)(start.getX()-(Math.cos(Math.toRadians(angle_between))*mean));
+                    if(start.getY()<=next.getY()){
+                        if(start.getY()==next.getY()){
+                           new_y=old_y;
+                        }
+                        else
+                        {
+                            new_y=(int)(start.getY()+(Math.sin(Math.toRadians(angle_between))*mean)); 
+                        }
+                    }
+                    else
+                    {
+                           new_y=(int)(start.getY()-(Math.sin(Math.toRadians(angle_between))*mean));
+                    }
+                } 
+                cumulative_change_x=new_x-old_x;
+                cumulative_change_y=new_y-old_y;
+                next.setX(new_x);
+                next.setY(new_y);
+                apply_cummulative_effect(next,cumulative_change_x,cumulative_change_y);
+                recursively_distance_preservation(next,mean);
+          
+        }
+    }
+    void apply_cummulative_effect(MyPoint start,int diff_x,int diff_y){
+        for(int i=0;i<start.outgoingPoints.size();i++){
+            MyPoint next=start.outgoingPoints.get(i);
+            next.setX(next.getX()+diff_x);
+            next.setY(next.getY()+diff_y);
+            apply_cummulative_effect(next,diff_x,diff_y);
+        }
     }
     void prepare_schematization(MyPoint p1,MyPoint p2){
         //if(! p1.outgoingPoints.isEmpty()){
@@ -217,9 +295,6 @@ public class Algorithm {
     }
     
     void movePoint(MyPoint p1,MyPoint p2, MyPoint p3, double _angle,double actual_angle){
-        int oldP3X = p3.getX();
-        int oldP3Y = p3.getY();
-        int newP3X=0, newP3Y=0;
         if(angleMultiple==(double)180){
             double distance_p2_p3=this.distance(p2, p3);
             append_to_first(p2,p3,distance_p2_p3);
@@ -264,55 +339,16 @@ public class Algorithm {
 
                 //p3.setX(p2.getX()+ tmp1 );
                 if( pnew.getX()> p2.getX()){
-                    newP3X = p2.getX() + tmp1;
-                    //p3.setX(p2.getX()+ tmp1 );
+                    p3.setX(p2.getX()+ tmp1 );
                 }
                 else{
-                    newP3X = p2.getX() - tmp1;
-                    //p3.setX(p2.getX()- tmp1 );
+                    p3.setX(p2.getX()- tmp1 );
                 }
                 if( pnew.getY()> p3.getY()){
-                    newP3Y = p2.getY() - tmp2;
-                    //p3.setY(p2.getY()- tmp2 );
+                    p3.setY(p2.getY()- tmp2 );
                 }
                 else{
-                    newP3Y = p2.getY() + tmp2;
-                    //p3.setY(p2.getY()+ tmp2 );
-                }
-                
-                if(!preserveEast_West & !preserveNorth_South){
-                    p3.setY(newP3Y);
-                    p3.setX(newP3X);
-                }
-                /*else if(preserveEast_West){
-                    p3.setX(oldP3X);
-                    int above = p3.getX()-newP3X;
-                    int below = p3.getX()-p2.getX();
-                    p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
-                }
-                else if(preserveNorth_South){
-                    p3.setY(oldP3Y);
-                    int above = p3.getY()-newP3Y;
-                    int below = p3.getY()-p2.getY();
-                    p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
-                }*/
-                else if(preserveEast_West){
-                    p3.setX(oldP3X);
-                    int above = p3.getX()-newP3X;
-                    int below = p3.getX()-p2.getX();
-                    if(below-above!=0){
-                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
-                    }
-                    else p3.setY(oldP3Y);
-                }
-                else if(preserveNorth_South){
-                    p3.setY(oldP3Y);
-                    int above = p3.getY()-newP3Y;
-                    int below = p3.getY()-p2.getY();
-                    if(below-above!=0){
-                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
-                    }
-                    else p3.setX(oldP3X);
+                    p3.setY(p2.getY()+ tmp2 );
                 }
                 /*if( pnew.getX()> p2.getX() && new_angle > 0.0){
                     p3.setX(p2.getX()+ tmp1 );
@@ -355,12 +391,10 @@ public class Algorithm {
                 int tmp2=(int)(dist_p2_p3*Math.cos(Math.toRadians(new_angle)));
                 //p3.setY(p2.getY()- tmp2 );
                 if( pnew.getY()> p2.getY()){
-                    newP3Y = p2.getY() + tmp2;
-                    //p3.setY(p2.getY()+ tmp2 );
+                    p3.setY(p2.getY()+ tmp2 );
                 }
                 else{
-                    newP3Y = p2.getY() - tmp2;
-                    //p3.setY(p2.getY()- tmp2 );
+                    p3.setY(p2.getY()- tmp2 );
                 }
                 /*if( pnew.getY()> p2.getY() && new_angle > 0.0){
                     p3.setY(p2.getY()+ tmp2 );
@@ -375,12 +409,10 @@ public class Algorithm {
                     p3.setY(p2.getY()+ tmp2 );*/
                 
                 if(pnew.getX()>p3.getX()){
-                    newP3X = p2.getX() - tmp1;
-                    //p3.setX(p2.getX()- tmp1 );
+                    p3.setX(p2.getX()- tmp1 );
                 }
                 else {
-                    newP3X = p2.getX() + tmp1;
-                    //p3.setX(p2.getX()+ tmp1 );
+                    p3.setX(p2.getX()+ tmp1 );
                 }
                 /*if(pnew.getX()>p3.getX() && new_angle >0.0){
                     p3.setX(p2.getX()- tmp1 );
@@ -395,29 +427,6 @@ public class Algorithm {
                 {
                     p3.setX(p2.getX()- tmp1 );
                 }*/
-                
-                if(!preserveEast_West & !preserveNorth_South){
-                    p3.setY(newP3Y);
-                    p3.setX(newP3X);
-                }
-                else if(preserveEast_West){
-                    p3.setX(oldP3X);
-                    int above = p3.getX()-newP3X;
-                    int below = p3.getX()-p2.getX();
-                    if(below-above!=0){
-                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
-                    }
-                    else p3.setY(oldP3Y);
-                }
-                else if(preserveNorth_South){
-                    p3.setY(oldP3Y);
-                    int above = p3.getY()-newP3Y;
-                    int below = p3.getY()-p2.getY();
-                    if(below-above!=0){
-                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
-                    }
-                    else p3.setX(oldP3X);
-                }
             }
             else if(!(y3_yukarda_kalir) && actual_angle <90){
                 MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
@@ -439,20 +448,16 @@ public class Algorithm {
                     p3.setY(p2.getY()- tmp2 );
                 */
                 if( pnew.getY()> p2.getY()){
-                    newP3Y = p2.getY() + tmp2;
-                    //p3.setY(p2.getY()+ tmp2 );
+                    p3.setY(p2.getY()+ tmp2 );
                 }
                 else{
-                    newP3Y = p2.getY() - tmp2;
-                    //p3.setY(p2.getY()- tmp2 );
+                    p3.setY(p2.getY()- tmp2 );
                 }
                 if(pnew.getX()>p3.getX()){
-                    newP3X = p2.getX() - tmp1;
-                    //p3.setX(p2.getX()- tmp1 );
+                    p3.setX(p2.getX()- tmp1 );
                 }
                 else if(pnew.getX()>p3.getX()){
-                    newP3X = p2.getX() + tmp1;
-                    //p3.setX(p2.getX()+ tmp1 );
+                    p3.setX(p2.getX()+ tmp1 );
                 }
                 
                 /*if( pnew.getY()> p2.getY() && new_angle > 0.0){
@@ -479,30 +484,7 @@ public class Algorithm {
                 else 
                 {
                     p3.setX(p2.getX()- tmp1 );
-                }*/ 
-                
-                if(!preserveEast_West & !preserveNorth_South){
-                    p3.setY(newP3Y);
-                    p3.setX(newP3X);
-                }
-                else if(preserveEast_West){
-                    p3.setX(oldP3X);
-                    int above = p3.getX()-newP3X;
-                    int below = p3.getX()-p2.getX();
-                    if(below-above!=0){
-                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
-                    }
-                    else p3.setY(oldP3Y);
-                }
-                else if(preserveNorth_South){
-                    p3.setY(oldP3Y);
-                    int above = p3.getY()-newP3Y;
-                    int below = p3.getY()-p2.getY();
-                    if(below-above!=0){
-                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
-                    }
-                    else p3.setX(oldP3X);
-                }
+                }*/       
             }
             else if(!(y3_yukarda_kalir) && actual_angle >=90)
             {
@@ -520,20 +502,16 @@ public class Algorithm {
                 int tmp2=(int)(dist_p2_p3*Math.sin(Math.toRadians(new_angle)));
                 //p3.setX(p2.getX()+ tmp1 );
                 if( pnew.getX()> p2.getX()){
-                    newP3X = p2.getX() + tmp1;
-                    //p3.setX(p2.getX()+ tmp1 );
+                    p3.setX(p2.getX()+ tmp1 );
                 }
                 else {
-                    newP3X = p2.getX() - tmp1;
-                    //p3.setX(p2.getX()- tmp1 );
+                    p3.setX(p2.getX()- tmp1 );
                 }
                 if( pnew.getY()> p3.getY()){
-                    newP3Y = p2.getY() - tmp2;
-                    //p3.setY(p2.getY()- tmp2 );
+                    p3.setY(p2.getY()- tmp2 );
                 }
                 else {
-                    newP3Y = p2.getY() + tmp2;
-                    //p3.setY(p2.getY()+ tmp2 );
+                    p3.setY(p2.getY()+ tmp2 );
                 }
                 /*
                 if( pnew.getX()> p2.getX() && new_angle > 0.0){
@@ -559,32 +537,11 @@ public class Algorithm {
                 }
                 else
                     p3.setY(p2.getY()- tmp2 );*/
-                
-                if(!preserveEast_West & !preserveNorth_South){
-                    p3.setY(newP3Y);
-                    p3.setX(newP3X);
-                }
-                else if(preserveEast_West){
-                    p3.setX(oldP3X);
-                    int above = p3.getX()-newP3X;
-                    int below = p3.getX()-p2.getX();
-                    if(below-above!=0){
-                        p3.setY(((below*newP3Y)-(above*p2.getY()))/(below-above));
-                    }
-                    else p3.setY(oldP3Y);
-                }
-                else if(preserveNorth_South){
-                    p3.setY(oldP3Y);
-                    int above = p3.getY()-newP3Y;
-                    int below = p3.getY()-p2.getY();
-                    if(below-above!=0){
-                        p3.setX(((below*newP3X)-(above*p2.getX()))/(below-above));
-                    }
-                    else p3.setX(oldP3X);
-                }
             }
         }
     }
+
+    
     double distance(MyPoint p1, MyPoint p2){
         return Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2));
     }  
@@ -621,7 +578,7 @@ public class Algorithm {
             t.printStackTrace ();
             }
     }
-    private void parseTextFile(String path) throws ParserConfigurationException, IOException, SAXException{
+     private void parseTextFile(String path) throws ParserConfigurationException, IOException, SAXException{
         File XmlFile = new File(path);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
