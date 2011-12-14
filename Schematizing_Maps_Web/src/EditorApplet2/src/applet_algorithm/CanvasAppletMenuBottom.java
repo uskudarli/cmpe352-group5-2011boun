@@ -29,9 +29,9 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     /** Creates new form CanvasAppletMenuBottom */
     public CanvasAppletMenuBottom() {
         initComponents();
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        schematize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                schematizeActionPerformed(evt);
             }
         });
         searchButton.addActionListener(new ActionListener(){
@@ -52,15 +52,15 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        schematize = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(500, 50));
 
-        jButton1.setText("Start Schematizing");
-        jButton1.setName("jButton1"); // NOI18N
+        schematize.setText("Start Schematizing");
+        schematize.setName("schematize"); // NOI18N
         searchButton.setText("Search Maps");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -69,7 +69,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButton1)
+                .addComponent(schematize)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
                 .addComponent(searchButton)
                 .addGap(23, 23, 23))
@@ -79,13 +79,13 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(schematize, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(searchButton))
                 .addContainerGap())
         );
     }// </editor-fold>
 
-    private void jButton1ActionPerformed(ActionEvent e){
+    private void schematizeActionPerformed(ActionEvent e){
         MyPoint p = new MyPoint(0,0);
         Vector<MyPoint> temp = new Vector<MyPoint>();
         Vector<MyPoint> accs = new Vector<MyPoint>();
@@ -118,6 +118,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
                 }
             }
         CanvasApplet.canvasPanel.points=temp;
+        schematize.setEnabled(false);
         CanvasApplet.canvasPanel.repaint();
         }catch(IOException f){}
     }
@@ -126,8 +127,12 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Search results.");
     }
 
+    public void enableSchematizing(){
+        schematize.setEnabled(true);
+    }
+
     // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton schematize;
     private javax.swing.JButton searchButton;
     // End of variables declaration
 

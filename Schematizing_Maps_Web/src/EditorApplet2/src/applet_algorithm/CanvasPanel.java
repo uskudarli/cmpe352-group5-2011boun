@@ -65,6 +65,7 @@ public class CanvasPanel extends JPanel{
                          if(selectedPoint1==points.get(deleteIndex))
                              selectedPoint1 = null;
                          points.remove(deleteIndex);
+                         CanvasApplet.bottomMenu.enableSchematizing();
                      }
                      repaint();
             }
@@ -110,6 +111,7 @@ public class CanvasPanel extends JPanel{
                                     selectedPoint1.outgoingPoints.add(selectedPoint2);
                                    selectedPoint2.outgoingPoints.add(selectedPoint1); //bu eklendi! deneme:Ervin
                                    connections.add(new Connection(selectedPoint1,selectedPoint2,CanvasApplet.currentColor));
+                                   CanvasApplet.bottomMenu.enableSchematizing();
 
                                    
                                 }
@@ -124,6 +126,7 @@ public class CanvasPanel extends JPanel{
                         if(selectedPoint1 == null){
                         points.add(new MyPoint(e.getX(),e.getY()));
                         selectedPoint1 = null;
+                        CanvasApplet.bottomMenu.enableSchematizing();
                         } else {
                             selectedPoint1 = null;
                         }
@@ -173,7 +176,7 @@ public class CanvasPanel extends JPanel{
             public void mouseDragged(MouseEvent e){
                 if(dragIndex !=-1){
                     points.get(dragIndex).p = e.getPoint();
-
+                    CanvasApplet.bottomMenu.enableSchematizing();
                     repaint();
                 }
             }
