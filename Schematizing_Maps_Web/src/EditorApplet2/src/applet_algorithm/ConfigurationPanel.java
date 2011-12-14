@@ -187,16 +187,12 @@ public class ConfigurationPanel extends javax.swing.JPanel {
             if(distance.isEnabled())
             {
                 CanvasApplet.dist = true;
-                eastWest.setEnabled(false);
-                northSouth.setEnabled(false);
             }
 
         } else {
             if(distance.isEnabled())
             {
                 CanvasApplet.dist = false;
-                eastWest.setEnabled(true);
-                northSouth.setEnabled(true);
             }
         }
     }
@@ -205,15 +201,11 @@ public class ConfigurationPanel extends javax.swing.JPanel {
             if(eastWest.isEnabled())
             {
                 CanvasApplet.ew = true;
-                northSouth.setEnabled(false);
-                distance.setEnabled(false);
             }
         } else {
             if(eastWest.isEnabled())
             {
             CanvasApplet.ew = false;
-            northSouth.setEnabled(true);
-            distance.setEnabled(true);
             }
         }
     }
@@ -222,15 +214,11 @@ public class ConfigurationPanel extends javax.swing.JPanel {
             if(northSouth.isEnabled())
             {
                 CanvasApplet.ns = true;
-                eastWest.setEnabled(false);
-                distance.setEnabled(false);
             }
         } else {
             if(northSouth.isEnabled())
             {
                 CanvasApplet.ns = false;
-                eastWest.setEnabled(true);
-                distance.setEnabled(true);
             }
         }
     }
