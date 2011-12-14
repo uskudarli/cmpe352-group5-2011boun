@@ -54,6 +54,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
 
         schematize = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
+        searchKeys = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -70,7 +71,9 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(schematize)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addComponent(searchKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(searchButton)
                 .addGap(23, 23, 23))
         );
@@ -80,7 +83,8 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(schematize, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(searchButton))
+                    .addComponent(searchButton)
+                    .addComponent(searchKeys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>
@@ -134,6 +138,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     // Variables declaration - do not modify
     private javax.swing.JButton schematize;
     private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchKeys;
     // End of variables declaration
 
 }
