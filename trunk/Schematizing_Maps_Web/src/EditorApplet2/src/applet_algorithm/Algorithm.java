@@ -270,7 +270,7 @@ public class Algorithm {
                         movePoint(p1, p2, p3, angle, actual_angle);
                     }
                     
-                    if(this.preserve_distance){
+                    if(!this.preserve_distance){
                         this.totalDistance=totalDistance+distance(p2,p3);
                         this.totalEdges++;
                     }
