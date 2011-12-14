@@ -8,7 +8,7 @@
 			$("#logout").submit();
 		});
 		$("#ht").click(function() {
-			alert("how to?");
+			window.open('howto.jsp','_newtab');
 		});
     });
     function toggleButtonEvent(){
