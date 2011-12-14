@@ -75,6 +75,7 @@ public class CanvasPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                      if(deleteIndex !=-1){
                          points.get(deleteIndex).description=CanvasPanel.addDescription.getText();
+                         CanvasPanel.addDescription.setText("");
                      }
                      repaint();
             }
@@ -112,23 +113,6 @@ public class CanvasPanel extends JPanel{
 
                                    
                                 }
-//                                MyPoint bigger = selectedPoint1;
-//                                MyPoint smaller = selectedPoint2;
-//                                if(Point.distance(bigger.p.x, bigger.p.y, 0, 0)<Point.distance(smaller.p.x, smaller.p.y, 0, 0)){
-//                                    smaller = selectedPoint1;
-//                                    bigger = selectedPoint2;
-//                                }
-//                                int j;
-//                                inside:for(j=0;j<smaller.outgoingPoints.size();j++){
-//                                    if(smaller.outgoingPoints.get(j)==bigger)
-//                                        break inside;
-//                                }
-//                                if(j== smaller.outgoingPoints.size())
-//                                {
-//                                    if(smaller == selectedPoint1){
-//                                        selectedPoint1.outgoingPoints.add(selectedPoint2);
-//                                    } else selectedPoint2.outgoingPoints.add(selectedPoint1);
-//                                }
                                 selectedPoint1 = points.get(i);
                                 selectedPoint2 = null;
                             }
