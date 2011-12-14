@@ -18,6 +18,8 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import java.awt.*;import java.awt.image.BufferedImage;
+ import javax.swing.*;
 
 /**
  *
@@ -46,6 +48,8 @@ public class FileuploadPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         fileChooser.setName("fileChooser"); // NOI18N
         fileChooser.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +85,17 @@ public class FileuploadPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText("jButton4");
+        jButton4.setName("jButton4"); // NOI18N
+
+        jButton5.setText("jButton5");
+        jButton5.setName("jButton5"); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,13 +107,15 @@ public class FileuploadPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
+                    .addComponent(jLabel3)
+                    .addComponent(jButton3)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel3)
-                    .addComponent(jButton3))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5)
+                            .addComponent(jButton2))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,11 +128,13 @@ public class FileuploadPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jButton2))
-                .addGap(60, 60, 60)
+                .addGap(19, 19, 19)
+                .addComponent(jButton5)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,6 +159,21 @@ public class FileuploadPanel extends javax.swing.JPanel {
         System.out.println("File access cancelled by user.");
     }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+      // TODO add your handling code here:
+    Component a = this.getComponentAt(200, 200);
+    Dimension size = a.getSize();
+    BufferedImage image = (BufferedImage) a.createImage(size.width, size.height);
+    Graphics2D g2 = image.createGraphics();
+    g2.setBackground(a.getBackground());
+    
+    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g2.clearRect(0, 0, size.width, size.height);
+    a.paint(g2);
+    
+    // Burada image objesi bizim resmimiz oluyor
+}//GEN-LAST:event_jButton5ActionPerformed
  private void getFileImage(String filePath) throws InterruptedException, IOException {
     FileInputStream in = new FileInputStream(filePath);
     byte [] b=new byte[in.available()];
@@ -156,6 +190,8 @@ public class FileuploadPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
