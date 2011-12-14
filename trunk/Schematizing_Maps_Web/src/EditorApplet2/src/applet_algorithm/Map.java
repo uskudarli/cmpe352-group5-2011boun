@@ -15,6 +15,10 @@ import java.util.Vector;
  */
 public class Map implements Serializable{
 
+    private Vector<Connection> connections;         //this fields will be initalized within the constructor 
+    private Vector<MyPoint> points;             // when an instance of Map class is crated in Save button.
+                                                //it will be used to create the string format of the data in the applet.
+
     private String XMLData;
     private String map_name;                    
     private boolean visible;
@@ -30,8 +34,12 @@ public class Map implements Serializable{
      * We are supposed to fill in the fields above.
      * In fact those are needed for database record.
      */
-    public Map(){
-        
+    public Map(String map_name, boolean visible,String[] keywords,Vector<MyPoint> ps, Vector<Connection> cs){
+        this.map_name = map_name;
+        this.visible = visible;
+        this.keywords = keywords;
+        this.points =ps;
+        this.connections = cs;
     }
     
     
@@ -84,9 +92,41 @@ public class Map implements Serializable{
     public void setImage_ID(int id){
         Image_ID = id;
     }
+
+    public void setXMLData() {    //this function creates a string representation of the map in xml format.
+        String XMLFormat="<Map>";
+        for(int i=0;i<connections.size();i++){
+            Connection c1=connections.get(0);
+            MyPoint p1=c1.p1;
+            MyPoint p2=c1.p2;
+            String color=c1.c.toString();
+            XMLFormat.concat("<Edge>");
+            XMLFormat.concat("<Point1_X>"+p1.getX()+"</Point1_X>");
+            XMLFormat.concat("<Point1_Y>"+p1.getY()+"</Point1_Y>");
+            XMLFormat.concat("<Point2_X>"+p2.getX()+"</Point2_X>");
+            XMLFormat.concat("<Point2_Y>"+p2.getY()+"</Point2_Y>");
+            XMLFormat.concat("</Edge>");
+        }
+        for(int i=0;i<points.size();i++){
+            MyPoint p = points.get(i);
+            XMLFormat.concat("<Point_X>");
+            XMLFormat.concat(Integer.toString(p.getX()));
+            XMLFormat.concat("</Point_X>");
+            XMLFormat.concat("<Point_Y>");
+            XMLFormat.concat(Integer.toString(p.getY()));
+            XMLFormat.concat("</Point_Y>");
+            XMLFormat.concat("<Description>");
+            XMLFormat.concat(p.description);
+            XMLFormat.concat("</Description>");
+        }
+        XMLFormat.concat("<Map_Description>"+map_name+"</Map_Description>");
+        XMLFormat.concat("</Map>");
+    }
     /*
      * parse XML here to load the points and connections of the map
      */
+
+
     public void setPointsAndConnections(Vector<MyPoint> points, Vector<Connection> connections){
         
     }

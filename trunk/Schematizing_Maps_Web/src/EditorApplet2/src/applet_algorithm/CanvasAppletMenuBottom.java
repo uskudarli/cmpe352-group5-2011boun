@@ -129,6 +129,9 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     private void searchButtonActionPerformed(){
         //SEARCH OLAYI BURADA OLACAK!!! @EYLUL,YEKTA,OZGUR
         JOptionPane.showMessageDialog(null, "Search results.");
+        //burada map objesi oluşturulacak.
+        //şimdilik keywords null, visibility sürekli true sonradan değiştirilecek.
+        Map map = new Map(CanvasApplet.canvasPanel.mapDescription,true,null,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
     }
 
     public void enableSchematizing(){
