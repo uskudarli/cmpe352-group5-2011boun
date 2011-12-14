@@ -18,7 +18,7 @@ import javax.swing.event.ChangeEvent;
 
 /**
  *
- * @author bibi
+ * @author Bahtiyar Kaba
  */
 public class ConfigurationPanel extends javax.swing.JPanel {
 
@@ -169,8 +169,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
             northSouth.setEnabled(true);
             distance.setEnabled(true);
             angleMultipleLabel.setEnabled(true);
-            angleMultipleComboBox.setEnabled(true);
-            
+            angleMultipleComboBox.setEnabled(true);     
             defaultconfig = false;
         }else{
             itemsPanel.setEnabled(false);
@@ -185,22 +184,55 @@ public class ConfigurationPanel extends javax.swing.JPanel {
 
     private void distanceStateChanged(ChangeEvent e){
         if(distance.isSelected()){
-            CanvasApplet.dist = true;
+            if(distance.isEnabled())
+            {
+                CanvasApplet.dist = true;
+                eastWest.setEnabled(false);
+                northSouth.setEnabled(false);
+            }
+
         } else {
-            CanvasApplet.dist = false;
+            if(distance.isEnabled())
+            {
+                CanvasApplet.dist = false;
+                eastWest.setEnabled(true);
+                northSouth.setEnabled(true);
+            }
         }
     }
     private void eastWestStateChanged(ChangeEvent e){
         if(eastWest.isSelected()){
-            CanvasApplet.ew = true;
+            if(eastWest.isEnabled())
+            {
+                CanvasApplet.ew = true;
+                northSouth.setEnabled(false);
+                distance.setEnabled(false);
+            }
         } else {
+            if(eastWest.isEnabled())
+            {
             CanvasApplet.ew = false;
+            northSouth.setEnabled(true);
+            distance.setEnabled(true);
+            }
         }
     }
     private void northSouthStateChanged(ChangeEvent e){
         if(northSouth.isSelected()){
-            CanvasApplet.ew = true;
-        } else CanvasApplet.ew = false;
+            if(northSouth.isEnabled())
+            {
+                CanvasApplet.ns = true;
+                eastWest.setEnabled(false);
+                distance.setEnabled(false);
+            }
+        } else {
+            if(northSouth.isEnabled())
+            {
+                CanvasApplet.ns = false;
+                eastWest.setEnabled(true);
+                distance.setEnabled(true);
+            }
+        }
     }
     private void angleMultipleComboBoxActionPerformed(ActionEvent e){
         CanvasApplet.angleMultiple = Double.parseDouble(angleMultipleComboBox.getSelectedItem().toString());
@@ -210,8 +242,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
             CanvasApplet.isDefault = true;
         }else {
             CanvasApplet.isDefault = false;
-            updateMe();
-            
+            updateMe();         
         }
     }
     private void updateMe(){
