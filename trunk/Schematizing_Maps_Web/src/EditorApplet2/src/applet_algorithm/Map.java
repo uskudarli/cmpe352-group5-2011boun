@@ -14,8 +14,8 @@ import java.util.Vector;
  * especially passing between applet and servlet via network
  */
 public class Map implements Serializable{
-    private Vector<MyPoint> points;
-    private Vector<Connection> connections;
+
+    private String XMLData;
     private String map_name;                    
     private boolean visible;
     private String map_owner;           // collected from probably session
@@ -38,7 +38,7 @@ public class Map implements Serializable{
     // @ TODO bahtiyar veya nuretiin yapacak
     public String getXMLFormat(){
         
-        return "";
+        return XMLData;
     }
     
     /*
@@ -87,7 +87,7 @@ public class Map implements Serializable{
     /*
      * parse XML here to load the points and connections of the map
      */
-    public void setPointsAndConnections(String XMLData){
+    public void setPointsAndConnections(Vector<MyPoint> points, Vector<Connection> connections){
         
     }
 }
