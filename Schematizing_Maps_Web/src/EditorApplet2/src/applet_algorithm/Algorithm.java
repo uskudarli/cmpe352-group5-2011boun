@@ -126,16 +126,16 @@ public class Algorithm {
        // prepare_schematization(rootPoint,startPoint);
        // schematize_180(rootPoint.outgoingPoints.get(0));
        // }
-        if(preserve_distance){
-            distance_preservation(rootPoint.outgoingPoints.get(0));
+        if(!preserve_distance){
+            mean_distance(rootPoint.outgoingPoints.get(0));
         }
         return rootPoint;    
     }
-    void distance_preservation(MyPoint start){
+    void mean_distance(MyPoint start){
         int meanDistance=(int)(this.totalDistance/this.totalEdges);
-        recursively_distance_preservation(start,meanDistance);
+        recursively_mean_distance(start,meanDistance);
     }
-    void recursively_distance_preservation(MyPoint start, int mean){
+    void recursively_mean_distance(MyPoint start, int mean){
         for(int i=0; i< start.outgoingPoints.size();i++){
                 MyPoint next=start.outgoingPoints.get(i);
                 int old_x=next.getX();
@@ -195,7 +195,7 @@ public class Algorithm {
                 next.setX(new_x);
                 next.setY(new_y);
                 apply_cummulative_effect(next,cumulative_change_x,cumulative_change_y);
-                recursively_distance_preservation(next,mean);
+                recursively_mean_distance(next,mean);
           
         }
     }
