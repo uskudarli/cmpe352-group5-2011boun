@@ -40,7 +40,8 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         colorButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        descriptionTextField = new javax.swing.JTextField();
+        descriptionLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -54,13 +55,17 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setText("jTextField1");
-        jTextField1.setName("jTextField1"); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        descriptionTextField.setText("");
+        descriptionTextField.setName("descriptionTextField"); // NOI18N
+        descriptionTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                descriptionTextFieldActionPerformed(evt);
             }
         });
+
+        descriptionLabel.setText("Give your map a name");
+        descriptionLabel.setName("descriptionLabel"); // NOI18N
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,17 +74,18 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(colorButton)
-                .addGap(33, 33, 33)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(descriptionTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(colorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(descriptionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descriptionLabel))
+            .addComponent(colorButton)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -87,14 +93,15 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
         ColorDialog c = new ColorDialog();
     }//GEN-LAST:event_colorButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        CanvasApplet.canvasPanel.mapDescription = jTextField1.getText();
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void descriptionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionTextFieldActionPerformed
+        CanvasApplet.canvasPanel.mapDescription = descriptionTextField.getText();
+    }//GEN-LAST:event_descriptionTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JTextField descriptionTextField;
     // End of variables declaration//GEN-END:variables
 
 }
