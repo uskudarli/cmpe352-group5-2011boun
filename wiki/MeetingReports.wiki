@@ -1,5 +1,20 @@
 #summary Meeting Reports
 
+=*Report of Meeting #30*=
+
+*Meeting Date:14.12.2011*
+
+*Meeting Duration:4 hours*
+
+*Meeting Location: Online*
+
+*Participants: :  Eylül Taşyürek, Ervin Domazet, Bahtiyar Kaba, Nurettin Yılmaz, Yekta Said Can, Mert Terzihan
+
+*Issues:*
+   # Algorithm review has been done.
+   # Further refined definition of Map class.
+   # XML format has been discussed, XML creation has been done.
+
 =*Report of Meeting #29*=
 
 *Meeting Date:04.12.2011*
