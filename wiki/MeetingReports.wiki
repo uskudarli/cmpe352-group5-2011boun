@@ -1,5 +1,22 @@
 #summary Meeting Reports
 
+=*Report of Meeting #31*=
+
+*Meeting Date:15.12.2011*
+
+*Meeting Duration:1.5 hours*
+
+*Meeting Location: ETA A5*
+
+*Participants: :  Eylül Taşyürek, Ervin Domazet, Bahtiyar Kaba, Nurettin Yılmaz, Yekta Said Can, Mert Terzihan
+
+*Issues:*
+   # Discussed Save/Load/Search Issues in detail.
+   # Discussed Image Sharing on social websites.
+   # Small grained working plan discussed and planned for next two weeks.
+   # Further work distribution has been done.
+   # Discussed on image uploading and handling saved images, also a default background for maps considered (after schematizing).
+
 =*Report of Meeting #30*=
 
 *Meeting Date:14.12.2011*
