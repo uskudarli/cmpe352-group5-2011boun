@@ -102,27 +102,28 @@ public class Map implements Serializable{
             MyPoint p1=c1.p1;
             MyPoint p2=c1.p2;
             String color=c1.c.toString();
-            XMLFormat.concat("<Edge>");
-            XMLFormat.concat("<Point1_X>"+p1.getX()+"</Point1_X>");
-            XMLFormat.concat("<Point1_Y>"+p1.getY()+"</Point1_Y>");
-            XMLFormat.concat("<Point2_X>"+p2.getX()+"</Point2_X>");
-            XMLFormat.concat("<Point2_Y>"+p2.getY()+"</Point2_Y>");
-            XMLFormat.concat("</Edge>");
+            XMLFormat=XMLFormat.concat("<Edge>");
+            XMLFormat=XMLFormat.concat("<Point1_X>"+p1.getX()+"</Point1_X>");
+            XMLFormat=XMLFormat.concat("<Point1_Y>"+p1.getY()+"</Point1_Y>");
+            XMLFormat=XMLFormat.concat("<Point2_X>"+p2.getX()+"</Point2_X>");
+            XMLFormat=XMLFormat.concat("<Point2_Y>"+p2.getY()+"</Point2_Y>");
+            XMLFormat=XMLFormat.concat("</Edge>");
         }
         for(int i=0;i<points.size();i++){
             MyPoint p = points.get(i);
-            XMLFormat.concat("<Point_X>");
-            XMLFormat.concat(Integer.toString(p.getX()));
-            XMLFormat.concat("</Point_X>");
-            XMLFormat.concat("<Point_Y>");
-            XMLFormat.concat(Integer.toString(p.getY()));
-            XMLFormat.concat("</Point_Y>");
-            XMLFormat.concat("<Description>");
-            XMLFormat.concat(p.description);
-            XMLFormat.concat("</Description>");
+            XMLFormat=XMLFormat.concat("<Point_X>");
+            XMLFormat=XMLFormat.concat(Integer.toString(p.getX()));
+            XMLFormat=XMLFormat.concat("</Point_X>");
+            XMLFormat=XMLFormat.concat("<Point_Y>");
+            XMLFormat=XMLFormat.concat(Integer.toString(p.getY()));
+            XMLFormat=XMLFormat.concat("</Point_Y>");
+            XMLFormat=XMLFormat.concat("<Description>");
+            XMLFormat=XMLFormat.concat(p.description);
+            XMLFormat=XMLFormat.concat("</Description>");
         }
-        XMLFormat.concat("<Map_Description>"+map_name+"</Map_Description>");
-        XMLFormat.concat("</Map>");
+        XMLFormat=XMLFormat.concat("<Map_Description>"+map_name+"</Map_Description>");
+        XMLFormat=XMLFormat.concat("</Map>");
+        XMLData = XMLFormat;
     }
     /*
      * parse XML here to load the points and connections of the map

@@ -145,10 +145,10 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     private void saveButtonActionPerformed(){
         mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
         String[] keywords = {"keyword1","keyword2"};
-        Map map = new Map(CanvasApplet.canvasPanel.mapDescription,true,keywords,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
+        Map map = new Map(CanvasApplet.topMenu.getDesc(),true,keywords,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
         map.setXMLData();
         map.setMapOwner(CanvasApplet.username);
-        mysql_UTIL.saveMap(map);
+        db.saveMap(map);
     }
 
     public void enableSchematizing(){
