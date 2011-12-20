@@ -8,6 +8,7 @@ package applet_algorithm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JApplet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,10 +24,11 @@ public class CanvasApplet extends JApplet {
                 try {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
                 public void run() {
-                    //if(getParameter("usertype").equals("Advanced")){
+                    if(getParameter("usertype").equals("Advanced")){
                         isAdvanced = true;
-                    //} else
-                    isAdvanced =false;
+                    } else
+                        isAdvanced =false;
+                    JOptionPane.showMessageDialog(null, getParameter("username"));
                     canvasPanel = new CanvasPanel();
                     canvasPanel.setVisible(true);
                     canvasPanel.setBackground(Color.WHITE);
