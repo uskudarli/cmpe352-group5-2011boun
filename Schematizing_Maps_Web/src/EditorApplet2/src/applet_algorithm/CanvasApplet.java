@@ -28,7 +28,7 @@ public class CanvasApplet extends JApplet {
                         isAdvanced = true;
                     } else
                         isAdvanced =false;
-                    JOptionPane.showMessageDialog(null, getParameter("username"));
+                    username = getParameter("username");
                     canvasPanel = new CanvasPanel();
                     canvasPanel.setVisible(true);
                     canvasPanel.setBackground(Color.WHITE);
@@ -63,6 +63,7 @@ public class CanvasApplet extends JApplet {
     public static boolean dist;
     public static boolean isDefault;
     public static boolean isAdvanced;
+    public static String username ;
 
     public static Color currentColor = null;
 
