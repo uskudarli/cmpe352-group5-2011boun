@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import schematizing_maps.server_side.mysql_UTIL;
+import applet_algorithm.mysql_UTIL;
 
 /**
  *
