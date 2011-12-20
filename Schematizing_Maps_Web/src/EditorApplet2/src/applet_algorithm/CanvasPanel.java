@@ -214,7 +214,7 @@ public class CanvasPanel extends JPanel{
         return min;
     }
     public static Image backgroundImage = null;
-
+    
 }
 
 class Connection{

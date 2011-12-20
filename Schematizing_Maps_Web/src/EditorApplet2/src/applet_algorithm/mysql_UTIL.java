@@ -291,7 +291,7 @@ public class mysql_UTIL {
             keywords = keywords.concat(_keywords[_keywords.length-1]);
             
             
-            query_to_map = "insert into MAPS (User_ID,Visible,Map_Name,MapXMLData,keywords) values ((select from USER_LOGIN where name='"
+            query_to_map = "insert into MAPS (User_ID,Visible,Map_Name,MapXMLData,keywords) values ((select User_ID from USER_LOGIN where name='"
                     + map.getMapOwner() +"' ),'" 
                     + isVisible + "','" 
                     + map.getMapName() +"','"
@@ -487,8 +487,10 @@ public class mysql_UTIL {
     public static void main(String args[]) throws Exception{
         //
         // for testing purposes
-        //connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
-        //System.out.println(userExists("nurettin"));
+        
+        String as = "sdf";
+        as = as.concat("fkjgdlfgkdlşfg");
+        System.out.println(as);
         //Map m = new Map();
         
         

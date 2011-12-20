@@ -97,7 +97,9 @@ public class CanvasPanelMenu extends javax.swing.JPanel {
         CanvasApplet.canvasPanel.mapDescription = descriptionTextField.getText();
     }//GEN-LAST:event_descriptionTextFieldActionPerformed
 
-
+    public String getDesc(){
+        return descriptionTextField.getText();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton colorButton;
     private javax.swing.JLabel descriptionLabel;
