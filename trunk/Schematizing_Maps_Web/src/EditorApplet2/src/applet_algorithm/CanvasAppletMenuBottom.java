@@ -61,6 +61,8 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         searchKeys = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
 
+        db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
+
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(500, 50));
@@ -136,14 +138,15 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     }
     private void searchButtonActionPerformed(){
         //SEARCH OLAYI BURADA OLACAK!!! @EYLUL,YEKTA,OZGUR
-        JOptionPane.showMessageDialog(null, "Search results.");
-        //burada map objesi oluşturulacak.
-        //şimdilik keywords null, visibility sürekli true sonradan değiştirilecek.
-        Map map = new Map(CanvasApplet.canvasPanel.mapDescription,true,null,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
+        Vector<Map> searchResults = mysql_UTIL.searchMaps(CanvasApplet.username, searchKeys.getText());
+        if(searchResults == null){
+                    JOptionPane.showMessageDialog(null, "No results found.");
+        } else{
+                 new SearchResultPanel(searchResults);
+        }
     }
 
     private void saveButtonActionPerformed(){
-        mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
         String[] keywords = {"keyword1","keyword2"};
         Map map = new Map(CanvasApplet.topMenu.getDesc(),true,keywords,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
         map.setXMLData();
@@ -161,6 +164,8 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchKeys;
     // End of variables declaration
+
+    mysql_UTIL db;
 
 }
 
