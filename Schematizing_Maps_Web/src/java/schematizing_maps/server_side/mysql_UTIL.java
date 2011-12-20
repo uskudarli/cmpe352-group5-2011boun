@@ -351,7 +351,7 @@ public class mysql_UTIL {
                     map.setKeywords(result.getString("keywords"));
                     map.setMapName(result.getString("Map_Name"));
                     map.setVisible(result.getBoolean("Visible"));
-                    map.setXMLData(result.getString("MapXMLData"));
+                    map.setPointsAndConnections(result.getString("MapXMLData"));
                     
                     
                 }else{
@@ -451,7 +451,7 @@ public class mysql_UTIL {
                         m.setKeywords(result2.getString("keywords"));
                         m.setMapName(result2.getString("Map_Name"));
                         m.setVisible(result2.getBoolean("Visible"));
-                        m.setXMLData(result2.getNString("MapXMLData"));
+                        m.setPointsAndConnections(result2.getNString("MapXMLData"));
                         resulting_maps.add(m);
                     }
                     result2.close();
