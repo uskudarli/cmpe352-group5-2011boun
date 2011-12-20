@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import applet_algorithm.Map;
+import java.sql.PreparedStatement;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -115,16 +116,22 @@ public class mysql_UTIL {
         Hashtable<Integer, String> maps = new Hashtable<Integer, String>();
         return maps;
     }
-    
+        
     //
     // Runnable derived classes, to do db operations in a seperate thread.
     //
     private static class mysqlAddUser implements Runnable{
 
         String query;
+        String user;
+        String pass;
         boolean result;
 
         public mysqlAddUser(String user, String pass) {
+            
+            this.user = user;
+            this.pass = pass;
+            
             query = "insert into USER_LOGIN (name, password) values ('"+user+"','"+pass+"');";
             result = false;
         }
@@ -133,7 +140,10 @@ public class mysql_UTIL {
         @Override
         public void run() {
             try {
-               connection = (Connection)DriverManager.getConnection(connectionURL);          
+               connection = (Connection)DriverManager.getConnection(connectionURL);
+               PreparedStatement ps = connection.prepareStatement("insert into USER_LOGIN (name, password) values (?,?);");
+               ps.setString(1, user);
+               ps.setString(2, pass);
                Statement stmt = connection.createStatement();
                stmt.executeUpdate(query);
                result = true;
@@ -341,7 +351,7 @@ public class mysql_UTIL {
                     map.setKeywords(result.getString("keywords"));
                     map.setMapName(result.getString("Map_Name"));
                     map.setVisible(result.getBoolean("Visible"));
-                    map.setPointsAndConnections(result.getString("MapXMLData"));
+                    map.setXMLData(result.getString("MapXMLData"));
                     
                     
                 }else{
@@ -425,7 +435,7 @@ public class mysql_UTIL {
                         //for last element we do not place "and"
                         //
                         if(i != ids.size()-1){
-                            query2 = query2.concat("and ");
+                            query2 = query2.concat("or ");
                         }else{
                             query2 = query2.concat(";");
                         }
@@ -441,7 +451,7 @@ public class mysql_UTIL {
                         m.setKeywords(result2.getString("keywords"));
                         m.setMapName(result2.getString("Map_Name"));
                         m.setVisible(result2.getBoolean("Visible"));
-                        m.setPointsAndConnections(result2.getNString("MapXMLData"));
+                        m.setXMLData(result2.getNString("MapXMLData"));
                         resulting_maps.add(m);
                     }
                     result2.close();
@@ -477,8 +487,12 @@ public class mysql_UTIL {
     public static void main(String args[]) throws Exception{
         //
         // for testing purposes
-        connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
-        System.out.println(userExists("nurettin"));
+        //connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
+        //System.out.println(userExists("nurettin"));
+        //Map m = new Map();
+        
+        
+        
         
         
         
