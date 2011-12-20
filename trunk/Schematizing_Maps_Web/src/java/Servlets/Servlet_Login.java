@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Cookie;
-import schematizing_maps.server_side.mysql_UTIL;
+import applet_algorithm.mysql_UTIL;
 
 /**
  *

@@ -1,4 +1,4 @@
-package schematizing_maps.server_side;
+package applet_algorithm;
 
 import java.sql.Statement;
 import java.sql.Connection;
