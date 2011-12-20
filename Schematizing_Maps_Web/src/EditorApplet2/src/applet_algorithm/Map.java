@@ -42,7 +42,9 @@ public class Map implements Serializable{
         this.connections = cs;
     }
     
-    
+    public Map(){
+        
+    }
     // @ TODO bahtiyar veya nuretiin yapacak
     public String getXMLFormat(){
         
@@ -127,7 +129,9 @@ public class Map implements Serializable{
      */
 
 
-    public void setPointsAndConnections(Vector<MyPoint> points, Vector<Connection> connections){
+    public void setPointsAndConnections(String XMLData){
+        this.XMLData = XMLData;
+        
         
     }
 }
