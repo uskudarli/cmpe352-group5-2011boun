@@ -59,7 +59,7 @@
                 <div id ="canvasArea">
                     <applet height="525" width="800"  code="applet_algorithm.CanvasApplet" archive="EditorApplet2.jar">
                     <param name="usertype" value="<%= advanced_simple%>">
-                    <param name ="username" value="<%= xxx%>">
+                    <param name="username" value="<%= xxx%>">
                     </applet>
                 </div>
             </div>
