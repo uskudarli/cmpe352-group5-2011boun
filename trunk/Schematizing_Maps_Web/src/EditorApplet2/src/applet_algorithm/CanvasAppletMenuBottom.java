@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author bibi
@@ -41,6 +40,11 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
             }
 
         });
+        saveButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                saveButtonActionPerformed();
+            }
+        });
     }
 
     /** This method is called from within the constructor to
@@ -55,6 +59,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         schematize = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         searchKeys = new javax.swing.JTextField();
+        saveButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -63,15 +68,17 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         schematize.setText("Start Schematizing");
         schematize.setName("schematize"); // NOI18N
         searchButton.setText("Search Maps");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        saveButton.setText("Save Map");
+       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(schematize)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(saveButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(searchKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(searchButton)
@@ -84,7 +91,8 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(schematize, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(searchButton)
-                    .addComponent(searchKeys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchKeys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton))
                 .addContainerGap())
         );
     }// </editor-fold>
@@ -134,12 +142,20 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         Map map = new Map(CanvasApplet.canvasPanel.mapDescription,true,null,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
     }
 
+    private void saveButtonActionPerformed(){
+        mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
+        Map map = new Map(CanvasApplet.canvasPanel.mapDescription,true,null,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
+        map.setXMLData();
+        mysql_UTIL.saveMap(map);
+    }
+
     public void enableSchematizing(){
         schematize.setEnabled(true);
     }
 
     // Variables declaration - do not modify
     private javax.swing.JButton schematize;
+    private javax.swing.JButton saveButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchKeys;
     // End of variables declaration
