@@ -132,7 +132,7 @@ public class mysql_UTIL {
             this.user = user;
             this.pass = pass;
             
-            query = "insert into USER_LOGIN (name, password) values ('"+user+"','"+pass+"');";
+            query = "insert into USER_LOGIN (name, password) values (?,?);";
             result = false;
         }
         
@@ -141,11 +141,11 @@ public class mysql_UTIL {
         public void run() {
             try {
                connection = (Connection)DriverManager.getConnection(connectionURL);
-               PreparedStatement ps = connection.prepareStatement("insert into USER_LOGIN (name, password) values (?,?);");
+               PreparedStatement ps = connection.prepareStatement(query);
                ps.setString(1, user);
                ps.setString(2, pass);
-               Statement stmt = connection.createStatement();
-               stmt.executeUpdate(query);
+               ps.execute();
+               
                result = true;
                connection.close();
                
@@ -165,11 +165,15 @@ public class mysql_UTIL {
     private static class mysqlCheckUser implements Runnable{
 
         private String query;
+        private String user;
+        private String pass;
         private boolean isSuccessful;
         private Exception error;
 
         public mysqlCheckUser(String user, String pass) {
-            query = "select * from USER_LOGIN where (name='"+user+"') and (password='"+pass+"');";
+            query = "select * from USER_LOGIN where (name=?) and (password=?);";
+            this.user = user;
+            this.pass = pass;            
             isSuccessful = false;
             error = null;
         }
@@ -178,19 +182,22 @@ public class mysql_UTIL {
         public void run(){
             try{
                 
-                connection = (Connection)DriverManager.getConnection(connectionURL); 
-                Statement stmt = connection.createStatement();
-                ResultSet result = stmt.executeQuery(query);
+                connection = (Connection)DriverManager.getConnection(connectionURL);
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, user);
+                ps.setString(2, pass);
+                ResultSet result = ps.executeQuery();
+                
                 
                 if(result.first()){
                     isSuccessful = true;
                 }
                 
                 result.close();
-                stmt.close();
+                ps.close();
                 connection.close();
                 result = null;
-                stmt = null;
+                ps = null;
             }catch(Exception e){
                 error = e;
             
@@ -216,10 +223,12 @@ public class mysql_UTIL {
 
         
         private String query;
+        private String user;
         private int result;
 
         public mysqlUserExists(String user) {
-            query = "select count(*) from USER_LOGIN where name='" + user + "';";
+            query = "select count(*) from USER_LOGIN where name=?;";
+            this.user = user;
             result = 0;
             
         }
@@ -229,8 +238,10 @@ public class mysql_UTIL {
         public void run() {
             try {
                 connection = (Connection) DriverManager.getConnection(connectionURL);
-                Statement stmt = connection.createStatement();
-                ResultSet res = stmt.executeQuery(query);
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, user);                
+                ResultSet res = ps.executeQuery();
+                
                 if(res.next()){
                     int count = res.getInt(1);
                     if(count != 1){
@@ -243,7 +254,7 @@ public class mysql_UTIL {
                 }
                 
                 res.close();
-                stmt.close();
+                ps.close();
                 connection.close();
                 connection = null;
                 
@@ -278,12 +289,16 @@ public class mysql_UTIL {
     private static class mysqlSaveMap implements Runnable{
         
         String query_to_map;
+        Map map;
+        String keywords;
+        int isVisible;
         boolean isSuccessful;
         
 
         public mysqlSaveMap(Map map) {
-            int isVisible = map.getVisible() ? 1 : 0;
-            String keywords = "";
+            this.map = map;
+            isVisible = map.getVisible() ? 1 : 0;
+            keywords = "";
             String[] _keywords = map.getKeywords();
             for(int i=0 ; i < _keywords.length-1 ; i++){
                 keywords = keywords.concat(_keywords[i]+",");
@@ -291,12 +306,11 @@ public class mysql_UTIL {
             keywords = keywords.concat(_keywords[_keywords.length-1]);
             
             
-            query_to_map = "insert into MAPS (User_ID,Visible,Map_Name,MapXMLData,keywords) values ((select User_ID from USER_LOGIN where name='"
-                    + map.getMapOwner() +"' ),'" 
-                    + isVisible + "','" 
-                    + map.getMapName() +"','"
-                    + map.getXMLFormat() +"','"
-                    + keywords + "');";
+            query_to_map = "insert into MAPS (User_ID,Visible,Map_Name,MapXMLData,keywords) values ((select User_ID from USER_LOGIN where name=?"
+                    +" ),?" 
+                    + ",?" 
+                    + ",?"
+                    + ",? );";
             isSuccessful = false;
             
         }
@@ -305,8 +319,14 @@ public class mysql_UTIL {
         public void run() {
             try {
                 connection = (Connection)DriverManager.getConnection(connectionURL);
-                Statement stmt = connection.createStatement();
-                stmt.executeUpdate(query_to_map);
+                PreparedStatement ps = connection.prepareStatement(query_to_map);
+                ps.setString(1, map.getMapOwner());
+                ps.setInt(2, isVisible);
+                ps.setString(3, map.getMapName());
+                ps.setString(4, map.getXMLFormat());
+                ps.setString(5, keywords);
+                ps.executeUpdate();
+                
                 connection.close();
                 
                 
@@ -330,11 +350,15 @@ public class mysql_UTIL {
 
         
         private String query;
+        private String user;
+        private int Image_ID;
         private Map map;
 
         public mysqlLoadMap(String user, int Image_ID) {
             query = "select * from MAPS right join USER_LOGIN on USER_LOGIN.User_ID=MAPS.User_ID "
-                    + "where name='" + user + "' and Image_ID='" + Image_ID + "'";
+                    + "where name=? and Image_ID=?";
+            this.user = user;
+            this.Image_ID = Image_ID;
             map = null;
         }
         
@@ -343,8 +367,10 @@ public class mysql_UTIL {
             try {
                 map = new Map();
                 connection = (Connection) DriverManager.getConnection(connectionURL);
-                Statement stmt = connection.createStatement();
-                ResultSet result = stmt.executeQuery(query);
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setString(1, user);
+                ps.setInt(2, Image_ID);
+                ResultSet result = ps.executeQuery(query);
                 
                 if(result.next()){
                     map.setMapOwner(result.getString("name"));
@@ -358,7 +384,7 @@ public class mysql_UTIL {
                     map = null;
                 }
                 result.close();
-                stmt.close();
+                ps.close();
                 connection.close();
                 
             } catch (Exception e) {
@@ -375,12 +401,14 @@ public class mysql_UTIL {
 
         
         private String query;
+        private String user;
         private String keyword;
         private Vector<Map> resulting_maps;
 
         public mysqlSearchMaps(String user, String keyword) {
             query = "select Image_ID,keywords from MAPS join USER_LOGIN on MAPS.User_ID=USER_LOGIN.User_ID "
-                    + "where Visible='1' or  name='" + user +"';";
+                    + "where Visible='1' or  name=?;";
+            this.user = user;
             resulting_maps = new Vector<Map>();
             this.keyword = keyword;
             
@@ -392,9 +420,10 @@ public class mysql_UTIL {
         public void run() {
             try {
                 connection = (Connection) DriverManager.getConnection(connectionURL);
-                Statement stmt = connection.createStatement();
+                PreparedStatement ps = connection.prepareStatement(query);
                 
-                ResultSet result = stmt.executeQuery(query);
+                ps.setString(1, user);
+                ResultSet result = ps.executeQuery(query);
                 
                 
                 Vector<Integer> ids = new Vector<Integer>();
@@ -417,13 +446,13 @@ public class mysql_UTIL {
                 if(ids.isEmpty()){
                     resulting_maps = null;
                     result.close();
-                    stmt.close();
+                    ps.close();
                     connection.close();
                     connection = null;
                     return;
                 }else{
                     result.close();
-                    stmt.close();
+                    ps.close();
                     
                     /*
                      * Retrieve found maps & Prepare query string
@@ -451,7 +480,7 @@ public class mysql_UTIL {
                         m.setKeywords(result2.getString("keywords"));
                         m.setMapName(result2.getString("Map_Name"));
                         m.setVisible(result2.getBoolean("Visible"));
-                        m.setPointsAndConnections(result2.getNString("MapXMLData"));
+                        m.setPointsAndConnections(result2.getString("MapXMLData"));
                         resulting_maps.add(m);
                     }
                     result2.close();
@@ -488,10 +517,11 @@ public class mysql_UTIL {
         //
         // for testing purposes
         
-        String as = "sdf";
-        as = as.concat("fkjgdlfgkdlşfg");
-        System.out.println(as);
-        //Map m = new Map();
+        Class.forName("com.mysql.jdbc.Driver");
+        connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
+        
+        System.out.println(userExists("nurettin2"));
+        
         
         
         
