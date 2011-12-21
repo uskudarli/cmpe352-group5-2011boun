@@ -98,7 +98,7 @@ public class Map implements Serializable{
     public void setXMLData() {    //this function creates a string representation of the map in xml format.
         String XMLFormat="<Map>";
         for(int i=0;i<connections.size();i++){
-            Connection c1=connections.get(0);
+            Connection c1=connections.get(i);
             MyPoint p1=c1.p1;
             MyPoint p2=c1.p2;
             String color=c1.c.toString();
@@ -107,10 +107,12 @@ public class Map implements Serializable{
             XMLFormat=XMLFormat.concat("<Point1_Y>"+p1.getY()+"</Point1_Y>");
             XMLFormat=XMLFormat.concat("<Point2_X>"+p2.getX()+"</Point2_X>");
             XMLFormat=XMLFormat.concat("<Point2_Y>"+p2.getY()+"</Point2_Y>");
+            XMLFormat = XMLFormat.concat("<Color>"+color+"</Color>");
             XMLFormat=XMLFormat.concat("</Edge>");
         }
         for(int i=0;i<points.size();i++){
             MyPoint p = points.get(i);
+            XMLFormat = XMLFormat.concat("<Point>");
             XMLFormat=XMLFormat.concat("<Point_X>");
             XMLFormat=XMLFormat.concat(Integer.toString(p.getX()));
             XMLFormat=XMLFormat.concat("</Point_X>");
@@ -120,6 +122,7 @@ public class Map implements Serializable{
             XMLFormat=XMLFormat.concat("<Description>");
             XMLFormat=XMLFormat.concat(p.description);
             XMLFormat=XMLFormat.concat("</Description>");
+            XMLFormat = XMLFormat.concat("</Point>");
         }
         XMLFormat=XMLFormat.concat("<Map_Description>"+map_name+"</Map_Description>");
         XMLFormat=XMLFormat.concat("</Map>");
