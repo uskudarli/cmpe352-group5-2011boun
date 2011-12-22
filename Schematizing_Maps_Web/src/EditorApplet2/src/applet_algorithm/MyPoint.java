@@ -92,4 +92,7 @@ public class MyPoint {
     public void setY(int _y){
         p.y=_y;
     }
+    public void setDescription(String desc){
+        description = desc;
+    }
 }

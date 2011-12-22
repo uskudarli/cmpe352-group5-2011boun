@@ -1,11 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package applet_algorithm;
 
+import java.awt.Color;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Vector;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -43,9 +46,10 @@ public class Map implements Serializable{
     }
     
     public Map(){
-        
+        connections = new Vector<Connection>();
+        points = new Vector<MyPoint>();
     }
-    // @ TODO bahtiyar veya nuretiin yapacak
+    
     public String getXMLFormat(){
         
         return XMLData;
@@ -53,8 +57,7 @@ public class Map implements Serializable{
     
     /*
      * Return array, itll be handled just before it is written to db
-     */
-    
+     */    
     public String[] getKeywords(){
         return keywords;
     }
@@ -70,14 +73,14 @@ public class Map implements Serializable{
     public int getImage_ID(){
         return Image_ID;
     }
+    
+    
     /*
      * setter are used to initialize the map which is wanted to be loaded
      * in the applet
      * 
      * setters are used in mysql_UTIL.mysqlLoadMap class
-     */
-    
-    
+     */    
     public void setKeywords(String keywords){
         this.keywords = keywords.split(",");
         
@@ -101,7 +104,7 @@ public class Map implements Serializable{
             Connection c1=connections.get(i);
             MyPoint p1=c1.p1;
             MyPoint p2=c1.p2;
-            String color=c1.c.toString();
+            String color=Integer.toString(c1.c.getRGB());
             XMLFormat=XMLFormat.concat("<Edge>");
             XMLFormat=XMLFormat.concat("<Point1_X>"+p1.getX()+"</Point1_X>");
             XMLFormat=XMLFormat.concat("<Point1_Y>"+p1.getY()+"</Point1_Y>");
@@ -128,14 +131,125 @@ public class Map implements Serializable{
         XMLFormat=XMLFormat.concat("</Map>");
         XMLData = XMLFormat;
     }
+    
+
     /*
      * parse XML here to load the points and connections of the map
+     * !!call this function when user clicks "load" button!!
+     * !! It is not called when maps taken from db (not to slow down mysql_UTIL class)
      */
-
-
     public void setPointsAndConnections(String XMLData){
         this.XMLData = XMLData;
         
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            
+            InputStream is = new ByteArrayInputStream(XMLData.getBytes());
+            org.w3c.dom.Document doc = db.parse(is);
+            
+            
+            ///////////////////////////////
+            //////////Edge Parsing////////
+            ///////////////////////////////
+            NodeList edgeNodes = doc.getElementsByTagName("Edge");
+            if(edgeNodes != null){
+                /*
+                 * Traverse all "Edge" nodes
+                 */
+                for(int i=0;i<edgeNodes.getLength();i++){                    
+                    
+                    Element elem = (Element)edgeNodes.item(i);
+                    NodeList nodes = elem.getChildNodes();
+                    
+                    Connection conn = new Connection();                    
+                    
+                    if(nodes != null){
+                        /*
+                         * Get "Edge" Properties
+                         * item(0) - Point1_X
+                         * item(1) - Point1_Y
+                         * item(2) - Point2_X
+                         * item(3) - Point2_Y
+                         * item(4) - Color (RGB)
+                         */                        
+                            
+                        conn.setP1(new MyPoint(Integer.parseInt(nodes.item(2).getFirstChild().getNodeValue()),
+                            Integer.parseInt(nodes.item(3).getFirstChild().getNodeValue()) ));
+
+                        conn.setP2(new MyPoint(Integer.parseInt(nodes.item(0).getFirstChild().getNodeValue()),
+                            Integer.parseInt(nodes.item(1).getFirstChild().getNodeValue()) ));                        
+
+                        conn.setColor(new Color(Integer.parseInt(nodes.item(4).getFirstChild().getNodeValue())));
+                        
+                        connections.add(conn);
+                        
+                    }    
+                }         
+                    
+            }
+            
+            ///////////////////////////////
+            //////////Point Parsing////////
+            ///////////////////////////////
+            NodeList pointNodes = doc.getElementsByTagName("Point");                
+
+            if(pointNodes != null){
+                /*
+                 * Traverse all "Point" nodes
+                 */
+                for(int i =0;i<pointNodes.getLength();i++){
+
+                    Element elem = (Element)pointNodes.item(i);
+                    NodeList nodes = elem.getChildNodes();
+
+                    if(nodes != null){
+                        /*
+                         * Get "Point" Properties
+                         * item(0) - Point_X
+                         * item(1) - Point_Y
+                         * item(2) - Description
+                         */
+
+                        MyPoint point = new MyPoint(Integer.parseInt(nodes.item(0).getFirstChild().getNodeValue()),
+                                 Integer.parseInt(nodes.item(1).getFirstChild().getNodeValue()));
+
+                        point.setDescription(nodes.item(2).getFirstChild().getNodeValue());
+
+                        points.add(point);
+                    }                        
+
+                }                                
+
+            }
+            
+            
+            /////////////////////////////////////
+            /////Finally we parse Map Name///////
+            /////////////////////////////////////
+            NodeList mapNameNode = doc.getElementsByTagName("Map_Description");
+            if(mapNameNode != null){
+                /*
+                 * in fact we can take map_name also from corresponding database column
+                 * 
+                 */
+                map_name = mapNameNode.item(0).getFirstChild().getNodeValue();
+            }
+            
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         
     }
+    
+    /*
+     * for testing purposes
+     */
+    public static void main(String args[]){
+        //String XMLData = "<Map><Edge><Point1_X>62</Point1_X><Point1_Y>109</Point1_Y><Point2_X>190</Point2_X><Point2_Y>230</Point2_Y><Color>-65536</Color></Edge><Edge><Point1_X>190</Point1_X><Point1_Y>230</Point1_Y><Point2_X>311</Point2_X><Point2_Y>107</Point2_Y><Color>-65536</Color></Edge><Edge><Point1_X>311</Point1_X><Point1_Y>107</Point1_Y><Point2_X>452</Point2_X><Point2_Y>231</Point2_Y><Color>-65536</Color></Edge><Point><Point_X>62</Point_X><Point_Y>109</Point_Y><Description>No description</Description></Point><Point><Point_X>190</Point_X><Point_Y>230</Point_Y><Description>No description</Description></Point><Point><Point_X>311</Point_X><Point_Y>107</Point_Y><Description>No description</Description></Point><Point><Point_X>452</Point_X><Point_Y>231</Point_Y><Description>No description</Description></Point><Map_Description>deneme2</Map_Description></Map>";
+        //setPointsAndConnections(XMLData);
+        }
 }
