@@ -268,4 +268,19 @@ class Connection{
         }
         return startingPoints;
     }
+    
+    /*
+     * Setters of Connection class
+     * ( needed/used creating connections after XML data parsed ) 
+     * - look at Map class -
+     */
+    public void setP1(MyPoint pt){
+        p1 = pt;
+    }
+    public void setP2(MyPoint pt){
+        p2 = pt;
+    }
+    public void setColor(Color color){
+        c = color;
+    }
 }
