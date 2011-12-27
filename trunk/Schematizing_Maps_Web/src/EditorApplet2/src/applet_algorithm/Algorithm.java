@@ -574,8 +574,20 @@ public class Algorithm {
                         }
                         double newX = (newY-b)/a;
                         int dist = (int)(2*newX-p3.getX());
+                        if(dist >= 500){
+                            dist = 499;
+                        }
+                        else if(dist <= 0){
+                            dist = 6;
+                        }
                         p3.setX(dist);
                         dist = (int)(2*newY-p3.getY());
+                        if(dist >= 500){
+                            dist = 499;
+                        }
+                        else if(dist <= 0){
+                            dist = 6;
+                        }
                         p3.setY(dist);
                     }
                     else if(angle < 1){
@@ -596,8 +608,20 @@ public class Algorithm {
                         }
                         double newX = (newY-b)/a;
                         int dist = (int)(2*newX-p3.getX());
+                        if(dist >= 500){
+                            dist = 499;
+                        }
+                        else if(dist <= 0){
+                            dist = 6;
+                        }
                         p3.setX(dist);
                         dist = (int)(2*newY-p3.getY());
+                        if(dist >= 500){
+                            dist = 499;
+                        }
+                        else if(dist <= 0){
+                            dist = 6;
+                        }
                         p3.setY(dist);
                     }
                 } 
@@ -655,8 +679,20 @@ public class Algorithm {
                         }
                         double newX = (newY-b)/a;
                         int dist = (int)(2*newX-p3.getX());
+                        if(dist >= 500){
+                            dist = 499;
+                        }
+                        else if(dist <= 0){
+                            dist = 6;
+                        }
                         p3.setX(dist);
                         dist = (int)(2*newY-p3.getY());
+                        if(dist >= 500){
+                            dist = 499;
+                        }
+                        else if(dist <= 0){
+                            dist = 6;
+                        }
                         p3.setY(dist);
                     }
                 }
