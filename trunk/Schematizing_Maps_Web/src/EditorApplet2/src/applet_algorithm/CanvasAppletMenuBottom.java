@@ -231,6 +231,7 @@ BufferedImage exportImage =objRobot.createScreenCapture(new Rectangle(CanvasAppl
 String pathToFile = path;
 File outputDirectory = new File(pathToFile);
 File outputFile = new File(pathToFile+".png");
+
 //Here we make sure the directory exists.
 /*
  * Returns TRUE if:
@@ -247,6 +248,16 @@ try { //Attempt the write
 } catch (IOException e) { //For some reason it failed so...
     e.printStackTrace(); //... why did it fail?
 }
+SimpleFTP ftp = new SimpleFTP();
+        try {
+            ftp.connect("titan.cmpe.boun.edu.tr", 8092, "project5", "s8u4p");
+            ftp.cwd("/home/project5/tomcat/webapps/Images");
+            ftp.stor(outputFile);
+            ftp.disconnect();
+        } catch (IOException ex) {
+            Logger.getLogger(CanvasAppletMenuBottom.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
 
 
 
