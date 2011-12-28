@@ -61,7 +61,6 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         searchKeys = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
 
-        db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -147,11 +146,12 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     }
 
     private void saveButtonActionPerformed(){
-        String[] keywords = {"keyword1","keyword2"};
-        Map map = new Map(CanvasApplet.topMenu.getDesc(),true,keywords,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
+        
+        Map map = new Map(CanvasApplet.topMenu.getDesc(),true,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
         map.setXMLData();
+        map.setKeywords();
         map.setMapOwner(CanvasApplet.username);
-        db.saveMap(map);
+        mysql_UTIL.saveMap(map);
     }
 
     public void enableSchematizing(){
@@ -165,7 +165,8 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     private javax.swing.JTextField searchKeys;
     // End of variables declaration
 
-    mysql_UTIL db;
+    //private static mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
+
 
 }
 

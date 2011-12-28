@@ -4,7 +4,6 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import applet_algorithm.Map;
 import java.sql.PreparedStatement;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -17,7 +16,7 @@ import java.util.Vector;
  */
 public class mysql_UTIL {
 
-    private static String connectionURL;
+    private static String connectionURL="jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
     private static Connection connection;
     
     
@@ -27,7 +26,8 @@ public class mysql_UTIL {
     public mysql_UTIL(String host, String port, String user, String password, String schema) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
+            //connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
+            connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
            
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -318,6 +318,7 @@ public class mysql_UTIL {
         @Override
         public void run() {
             try {
+                Class.forName("com.mysql.jdbc.Driver");
                 connection = (Connection)DriverManager.getConnection(connectionURL);
                 PreparedStatement ps = connection.prepareStatement(query_to_map);
                 ps.setString(1, map.getMapOwner());
@@ -407,7 +408,7 @@ public class mysql_UTIL {
 
         public mysqlSearchMaps(String user, String keyword) {
             query = "select Image_ID,keywords from MAPS join USER_LOGIN on MAPS.User_ID=USER_LOGIN.User_ID "
-                    + "where Visible='1' or  name=?;";
+                    + "where Visible='1' or name = ? ;";
             this.user = user;
             resulting_maps = new Vector<Map>();
             this.keyword = keyword;
@@ -423,7 +424,7 @@ public class mysql_UTIL {
                 PreparedStatement ps = connection.prepareStatement(query);
                 
                 ps.setString(1, user);
-                ResultSet result = ps.executeQuery(query);
+                ResultSet result = ps.executeQuery();
                 
                 
                 Vector<Integer> ids = new Vector<Integer>();

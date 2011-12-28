@@ -20,13 +20,19 @@ public class CanvasApplet extends JApplet {
      * Initialization method that will be called after the applet is loaded
      * into the browser.
      */
+    public static void setMap(Map map){
+        canvasPanel.setMap(map);
+    }
     public void init() {
                 try {
+                    
+                    
+                    
             java.awt.EventQueue.invokeAndWait(new Runnable() {
                 public void run() {
-                    /*if(getParameter("usertype").equals("Advanced")){
+                    //if(getParameter("usertype").equals("Advanced")){
                         isAdvanced = true;
-                    } else*/
+                    //} else
                         isAdvanced =false;
                     //username = getParameter("username");
                     username = "nurettin";
