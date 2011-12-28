@@ -86,6 +86,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         searchKeys = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         exportButton = new javax.swing.JButton();
+        visibleCheckBox = new javax.swing.JCheckBox();
 
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -97,18 +98,23 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         searchButton.setText("Search Maps");
         saveButton.setText("Save Map");
         exportButton.setText("Export");
-       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+       visibleCheckBox.setText("Make my map visible");
+        visibleCheckBox.setName("visibleCheckBox"); // NOI18N
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(schematize)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(visibleCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addGap(18, 18, 18)
                 .addComponent(exportButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(searchKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(searchButton)
@@ -119,11 +125,12 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(schematize, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(searchButton)
                     .addComponent(searchKeys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportButton)
                     .addComponent(saveButton)
-                    .addComponent(exportButton))
+                    .addComponent(schematize, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(visibleCheckBox))
                 .addContainerGap())
         );
     }// </editor-fold>
@@ -176,8 +183,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     }
 
     private void saveButtonActionPerformed(){
-        
-        Map map = new Map(CanvasApplet.topMenu.getDesc(),true,CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
+        Map map = new Map(CanvasApplet.topMenu.getDesc(),visibleCheckBox.isSelected(),CanvasApplet.canvasPanel.points,CanvasApplet.canvasPanel.connections);
         map.setXMLData();
         map.setKeywords();
         map.setMapOwner(CanvasApplet.username);
@@ -274,6 +280,7 @@ SimpleFTP ftp = new SimpleFTP();
     private javax.swing.JButton saveButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchKeys;
+    private javax.swing.JCheckBox visibleCheckBox;
     // End of variables declaration
 
     
