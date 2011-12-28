@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.Hashtable;
-import java.util.Properties;
 import java.util.Vector;
 
 
@@ -17,7 +16,7 @@ import java.util.Vector;
  */
 public class mysql_UTIL {
 
-    private static String connectionURL="jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
+    private static String connectionURL="jdbc:mysql://85.153.22.90:3306/project5?"+"user=project5&password=662512";
     private static Connection connection;
     
     
@@ -28,7 +27,7 @@ public class mysql_UTIL {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //connectionURL = "jdbc:mysql://"+host+":"+port+"/"+schema+"?"+"user="+user+"&password="+password;
-            connectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database5?"+"user=project5&password=s8u4p";
+            connectionURL = "jdbc:mysql://85.153.22.90:3306/project5?"+"user=project5&password=662512";
            
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -331,7 +330,7 @@ public class mysql_UTIL {
                 
                 connection.close();
                 
-                
+                                
             } catch (Exception e) {
                 e.printStackTrace();
                 connection = null;

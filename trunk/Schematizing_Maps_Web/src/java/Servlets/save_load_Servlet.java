@@ -24,7 +24,7 @@ import applet_algorithm.mysql_UTIL;
 @WebServlet(name = "save_load_Servlet", urlPatterns = {"/save_load_Servlet"})
 public class save_load_Servlet extends HttpServlet {
     
-    private static mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
+    private static mysql_UTIL db = new mysql_UTIL("85.153.22.90", "3306", "project5", "662512", "project5");
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
