@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -197,10 +196,10 @@ public class CanvasPanel extends JPanel{
             g.drawImage(backgroundImage,0,0,this);
         }
         for(int i=0;i<points.size();i++){
-            points.get(i).drawMe(g);
+            points.get(i).drawMe(g);            
             if(points.get(i) == selectedPoint1 || points.get(i) == selectedPoint2){
                 points.get(i).drawSelectedHandle(g);
-            }
+            }            
         }
     }
 
@@ -214,7 +213,14 @@ public class CanvasPanel extends JPanel{
         return min;
     }
     public static Image backgroundImage = null;
-    
+    public void setMap(Map map){
+        map.setPointsAndConnections(map.getXMLFormat());
+        mapDescription = map.getMapName();
+        addDescription.setText(mapDescription);
+        connections = map.getConnections();
+        points = map.getPoints();
+        
+    }
 }
 
 class Connection{

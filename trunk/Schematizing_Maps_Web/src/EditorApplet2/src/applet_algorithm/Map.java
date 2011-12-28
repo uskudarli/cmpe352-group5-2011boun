@@ -23,7 +23,7 @@ public class Map implements Serializable{
                                                 //it will be used to create the string format of the data in the applet.
 
     private String XMLData;
-    private String map_name;                    
+    private String map_name;
     private boolean visible;
     private String map_owner;           // collected from probably session
                                         // we need this to relate maps to specific users
@@ -37,10 +37,14 @@ public class Map implements Serializable{
      * We are supposed to fill in the fields above.
      * In fact those are needed for database record.
      */
-    public Map(String map_name, boolean visible,String[] keywords,Vector<MyPoint> ps, Vector<Connection> cs){
-        this.map_name = map_name;
+    public Map(String map_name, boolean visible,Vector<MyPoint> ps, Vector<Connection> cs){
+        if(map_name.isEmpty())
+            this.map_name = "Default";
+        else
+            this.map_name = map_name;
+        
         this.visible = visible;
-        this.keywords = keywords;
+        keywords = new String[ps.size()];
         this.points =ps;
         this.connections = cs;
     }
@@ -73,6 +77,12 @@ public class Map implements Serializable{
     public int getImage_ID(){
         return Image_ID;
     }
+    public Vector<Connection> getConnections(){
+        return connections;
+    }
+    public Vector<MyPoint> getPoints(){
+        return points;
+    }
     
     
     /*
@@ -84,6 +94,16 @@ public class Map implements Serializable{
     public void setKeywords(String keywords){
         this.keywords = keywords.split(",");
         
+    }
+    /*
+     * This overloaded function used in save process, it extracts point description
+     * and set those to keywords
+     */
+    public void setKeywords(){
+        
+        for(int i=0;i<points.size();i++){
+            keywords[i] = points.get(i).getDescription();
+        }
     }
     public void setMapName(String mapName){
         map_name = mapName;
@@ -236,7 +256,11 @@ public class Map implements Serializable{
                 map_name = mapNameNode.item(0).getFirstChild().getNodeValue();
             }
             
-            
+        for(int i=0;i<connections.size();i++){
+            connections.get(i).p1.outgoingPoints.add(connections.get(i).p2);
+            connections.get(i).p2.outgoingPoints.add(connections.get(i).p1);
+            connections.get(i).startingPoints = connections.get(i).findStartingPoints();
+        }  
             
         } catch (Exception e) {
             e.printStackTrace();

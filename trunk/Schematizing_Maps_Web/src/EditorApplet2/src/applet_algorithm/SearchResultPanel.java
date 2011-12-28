@@ -8,6 +8,7 @@ package applet_algorithm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class SearchResultPanel extends JDialog{
 
     public SearchResultPanel(Vector<Map> res){
         searchResults = res;
-        Vector<String> str = null;
+        Vector<String> str = new Vector<String>();
         for(int i=0;i<res.size();i++){
             str.add(res.get(i).getMapName()+" - "+res.get(i).getMapOwner());
         }
@@ -42,40 +43,21 @@ public class SearchResultPanel extends JDialog{
         loadButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 Map map = searchResults.get(listView.getSelectedIndex());
-                Vector<Connection> connections = new Vector<Connection>();
-                Vector<MyPoint> points = new Vector<MyPoint>();
-                String xmldata = map.getXMLFormat();
-                String[] edgeArray = (String[]) getTagValues(xmldata,Pattern.compile("<Edge>(.+?)</Edge>")).toArray();
-                String[] pointArray = (String[]) getTagValues(xmldata,Pattern.compile("<Point>(.+?)</Point>")).toArray();
-                for(int i=0;i<edgeArray.length;i++){
-                    String[] x1Points = (String[]) getTagValues(edgeArray[i],Pattern.compile("<Point1_X>(.+?)</Point1_X>")).toArray();
-                    String[] y1Points = (String[]) getTagValues(edgeArray[i],Pattern.compile("<Point1_Y>(.+?)</Point1_Y>")).toArray();
-                    String[] x2Points = (String[]) getTagValues(edgeArray[i],Pattern.compile("<Point2_X>(.+?)</Point2_X>")).toArray();
-                    String[] y2Points = (String[]) getTagValues(edgeArray[i],Pattern.compile("<Point2_Y>(.+?)</Point2_Y>")).toArray();
-                    //Color
-                    connections.add(new Connection(new MyPoint(Integer.parseInt(x1Points[0]),Integer.parseInt(y1Points[0])),new MyPoint(Integer.parseInt(x2Points[0]),Integer.parseInt(y2Points[0])),Color.BLUE));
-                }
-                for(int j=0;j<pointArray.length;j++){
-                    String[] xPoints = (String[]) getTagValues(pointArray[j],Pattern.compile("<Point_X>(.+?)</Point_X>")).toArray();
-                    String[] yPoints = (String[]) getTagValues(pointArray[j],Pattern.compile("<Point_X>(.+?)</Point_X>")).toArray();
-                    MyPoint myp = new MyPoint(Integer.parseInt(xPoints[0]),Integer.parseInt(yPoints[0]));
-                    String[] desc = (String[]) getTagValues(pointArray[j],Pattern.compile("<Description>(.+?)</Description>")).toArray();
-                    myp.description =desc[0];
-                    points.add(myp);
-                }
-
-                CanvasApplet.canvasPanel.connections = connections;
-                CanvasApplet.canvasPanel.points = points;
+                CanvasApplet.setMap(map);
+                
                 CanvasApplet.canvasPanel.repaint();
+                //dispose();
             }
 
         });
 
 
 
-        setLayout(new BorderLayout());
+        setLayout(new FlowLayout());
         setTitle("Search results");
+        setLocation(new Point(200, 200));
         add(listView);
+        add(loadButton);
         pack();
         setVisible(true);
     }
