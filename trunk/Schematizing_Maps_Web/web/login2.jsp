@@ -340,7 +340,7 @@
                                     <label>Login As:</label>
                                     <input type="radio"	id="adv" name="userType" value="Advanced"/>Advanced User
                                     <input type="radio"	id="smpl" name="userType" value="Simple" style="margin-left: 15px;" checked="CHECKED" />Simple User		
-                                 	LOGIN FAILED! 
+                                
 								 
 								 </div>
 				<input type="button" value="Register" id="rg" style="margin-top: 10px; display: block; float: left; width: 150px;" />
