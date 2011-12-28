@@ -162,13 +162,13 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         CanvasApplet.canvasPanel.points=temp;
         schematize.setEnabled(false);
 
-        //FileInputStream in = new FileInputStream("C:\\Users\\bibi\\Desktop\\451project\\Schematizing_Maps_Web\\src\\EditorApplet2default_background.gif");
-        //byte [] b=new byte[in.available()];
-        ImageIcon ic = createImageIcon("default_background.gif","desc");
-        //CanvasApplet.canvasPanel.backgroundImage = Toolkit.getDefaultToolkit().createImage(b).getScaledInstance(600, 800,0);
+        ImageIcon ic = createImageIcon("../background_image.gif","desc");
+        
         CanvasApplet.canvasPanel.backgroundImage = ic.getImage();
         CanvasApplet.canvasPanel.repaint();
-        }catch(IOException f){}
+        }catch(IOException f){
+            f.printStackTrace();
+        }
     }
     private void searchButtonActionPerformed(){
         //SEARCH OLAYI BURADA OLACAK!!! @EYLUL,YEKTA,OZGUR
