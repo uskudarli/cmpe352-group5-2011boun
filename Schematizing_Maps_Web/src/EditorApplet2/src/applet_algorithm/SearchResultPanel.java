@@ -5,8 +5,6 @@
 
 package applet_algorithm;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -46,7 +44,7 @@ public class SearchResultPanel extends JDialog{
                 CanvasApplet.setMap(map);
                 
                 CanvasApplet.canvasPanel.repaint();
-                //dispose();
+                dispose();
             }
 
         });

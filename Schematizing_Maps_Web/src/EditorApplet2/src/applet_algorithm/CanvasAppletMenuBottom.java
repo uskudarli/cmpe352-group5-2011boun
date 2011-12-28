@@ -165,7 +165,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     private javax.swing.JTextField searchKeys;
     // End of variables declaration
 
-    //private static mysql_UTIL db = new mysql_UTIL("titan.cmpe.boun.edu.tr", "3306", "project5", "s8u4p", "database5");
+    
 
 
 }
