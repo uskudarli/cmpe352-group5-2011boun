@@ -256,11 +256,34 @@ public class Map implements Serializable{
                 map_name = mapNameNode.item(0).getFirstChild().getNodeValue();
             }
             
-        for(int i=0;i<connections.size();i++){
-            connections.get(i).p1.outgoingPoints.add(connections.get(i).p2);
-            connections.get(i).p2.outgoingPoints.add(connections.get(i).p1);
-            connections.get(i).startingPoints = connections.get(i).findStartingPoints();
-        }  
+        for(int i=0;i<points.size();i++){
+            int found = -1;
+            for(int j=0;j<connections.size();j++){
+                if(points.get(i).p.x == connections.get(j).p1.p.x && points.get(i).p.y == connections.get(j).p1.p.y){
+                    found = j;
+                    break;
+                }
+            }
+            if(found != -1){
+                int found2 = -1;
+                for(int k=0;k<points.size();k++){
+                    if(points.get(k).p.x == connections.get(found).p2.p.x && points.get(k).p.y == connections.get(found).p2.p.y){
+                        found2 = k;
+                        break;
+                    }
+                }
+                if(found2!=-1){
+                    points.get(i).outgoingPoints.add(points.get(found2));
+                    points.get(found2).outgoingPoints.add(points.get(i));
+                    connections.add(new Connection(points.get(i),points.get(found2),connections.get(found).c));
+                    connections.remove(found);
+                
+                }
+                
+            }
+            
+        }
+        
             
         } catch (Exception e) {
             e.printStackTrace();

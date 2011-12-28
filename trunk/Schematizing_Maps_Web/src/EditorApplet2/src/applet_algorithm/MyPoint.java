@@ -52,17 +52,22 @@ public class MyPoint {
         g2.fillOval(p.x-7, p.y-7, 14, 14);
         g2.setStroke(new BasicStroke(3)); // set thickness to 4
         int j;
+        boolean found = false;
         for(int i=0;i<outgoingPoints.size();i++){
             inner:for(j=0;j<CanvasPanel.connections.size();j++){
                 if((CanvasPanel.connections.get(j).p1 == this )&& (CanvasPanel.connections.get(j).p2==outgoingPoints.get(i))){
+                    found = true;
                     break inner;
                 }
                 if((CanvasPanel.connections.get(j).p1 == outgoingPoints.get(i)) && (CanvasPanel.connections.get(j).p2==this)){
+                    found = true;
                     break inner;
                 }
             }
-            g2.setColor(CanvasPanel.connections.get(j).c);
-            g2.drawLine(p.x, p.y, outgoingPoints.get(i).p.x, outgoingPoints.get(i).p.y);
+            if(found){
+                g2.setColor(CanvasPanel.connections.get(j).c);
+                g2.drawLine(p.x, p.y, outgoingPoints.get(i).p.x, outgoingPoints.get(i).p.y);
+            }
         }
         if(description!=null && description.length()!=0){
             g2.drawString(description, p.x-3*description.length(), p.y+15);

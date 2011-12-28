@@ -8,7 +8,7 @@ package applet_algorithm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JApplet;
-import javax.swing.JOptionPane;
+
 
 /**
  *

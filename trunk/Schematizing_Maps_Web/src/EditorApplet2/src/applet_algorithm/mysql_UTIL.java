@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.Hashtable;
+import java.util.Properties;
 import java.util.Vector;
 
 
