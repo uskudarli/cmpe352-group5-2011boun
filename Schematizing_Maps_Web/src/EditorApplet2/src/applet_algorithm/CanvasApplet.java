@@ -30,11 +30,11 @@ public class CanvasApplet extends JApplet {
                     
             java.awt.EventQueue.invokeAndWait(new Runnable() {
                 public void run() {
-                    //if(getParameter("usertype").equals("Advanced")){
+                    if(getParameter("usertype").equals("Advanced")){
                         isAdvanced = true;
-                    //} else
+                    } else
                         isAdvanced =false;
-                    //username = getParameter("username");
+                    username = getParameter("username");
                     username = "nurettin";
                     canvasPanel = new CanvasPanel();
                     canvasPanel.setVisible(true);
