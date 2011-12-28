@@ -14,18 +14,27 @@
         <div id="main">
 		
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet augue leo, sit amet venenatis quam. Etiam suscipit molestie ante eget ullamcorper. Sed nec auctor ligula. Vestibulum erat diam, iaculis eget dictum blandit, consequat vel nisl. Proin enim dolor, bibendum bibendum luctus sed, venenatis non purus. Donec sem orci, adipiscing id hendrerit ac, gravida quis urna. Fusce ornare, nulla in tincidunt lobortis, ligula quam tristique nisl, ac sagittis erat turpis ut augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam tellus eros, dapibus sed mollis sit amet, rutrum vitae ante.
+ User Manual 
 
-Suspendisse at enim ut massa pretium auctor ut sed nisi. Cras quis orci magna. Mauris molestie aliquet convallis. Mauris erat urna, suscipit at mattis eu, tempor nec leo. Nam sit amet urna nisi. Vivamus mattis sagittis lacus, et convallis nunc placerat vitae. Proin at magna eget nibh semper auctor ac id dui. Nulla scelerisque tincidunt tellus, ut vulputate orci pretium nec. In hac habitasse platea dictumst. Donec porta viverra leo non imperdiet. Nulla ornare sagittis orci sed rhoncus. Nam lobortis faucibus tellus.
+1. You have to register to our web site by clicking register button.
+2. You have to enter user name and password(twice) and choose user type(simple or advanced)
 
-Aenean lobortis turpis eu sapien luctus at vulputate tellus dignissim. Morbi vitae mollis leo. Sed sed ultricies arcu. In hac habitasse platea dictumst. Quisque porttitor consequat tincidunt. Nunc in turpis turpis. Praesent non dolor est, eget aliquet nisi. Aenean eros tortor, convallis ac lacinia vitae, sagittis ac diam. Cras pulvinar mauris et tortor vulputate et faucibus purus imperdiet. Phasellus cursus dui ullamcorper ipsum vehicula iaculis. Fusce sit amet erat felis. Aenean sit amet leo id sapien suscipit venenatis id sed purus. Nulla facilisi. Integer congue laoreet enim, sed molestie velit bibendum in. Nulla venenatis dapibus eros vel elementum. Quisque malesuada ultrices convallis.
+3. The main schematizer screen will come out.
 
-Vestibulum congue tellus sit amet nulla posuere pharetra. Duis tempor lacinia tellus, ac tempus ligula fermentum vel. Cras vel nunc lorem, vestibulum bibendum elit. Integer ac neque velit. Nam vehicula arcu a libero consectetur quis luctus enim pharetra. In velit justo, eleifend in gravida vitae, semper sed magna. Cras commodo sapien nec libero rhoncus tincidunt. Aenean urna lorem, consequat at tempor at, dignissim in felis.
+3.1 Configuration properties can be chosen. Direction of preservation(north-south,east-west) and distance preservation can be chosen. Also, you can choose angle multiple. You can use default configuration if nothing will be chosen. 
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Praesent porta, elit vel sagittis tempor, mi libero commodo diam, ut auctor dui sapien fermentum massa. Suspendisse ac eros at orci dapibus volutpat. In bibendum rutrum magna at ultrices. Nam id neque vel augue sollicitudin viverra et quis augue. Etiam placerat nulla at mauris bibendum cursus. Nullam justo nulla, dictum ac vehicula sit amet, aliquam ac diam. Nulla ornare mauris ligula, et mattis nunc. Vivamus tristique molestie ante commodo luctus.	 
-		
+3.2 You can upload an image to work on or you can give the coordinates by kml or text file. By Clicking Browse,
 
 
+3.3  In the main schematizer screen points can be created simply by clicking. Descriptions can be added and for each point the text field that come out after pressing right mouse on any point. Description for the map can be added the text field at the top of the page. Points can be deleted by clicking right mouse then pressing delete. 
+
+3.4  After you create points you should connect them. Points that will be connected must be clicked. Then edges will be created. 
+
+3.5 The new route can be created by clicking the new route button and you can select a new color.
+
+
+
+3.6 When you are done, press Start Schematizing Button to finish the process.
        
 
 
