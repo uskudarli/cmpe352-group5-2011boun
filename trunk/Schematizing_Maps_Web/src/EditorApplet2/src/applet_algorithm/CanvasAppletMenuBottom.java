@@ -16,6 +16,7 @@ package applet_algorithm;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Robot;
@@ -26,12 +27,14 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.tomcat.util.http.fileupload.FileItem;
@@ -169,6 +172,12 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
             }
         CanvasApplet.canvasPanel.points=temp;
         schematize.setEnabled(false);
+
+        //FileInputStream in = new FileInputStream("C:\\Users\\bibi\\Desktop\\451project\\Schematizing_Maps_Web\\src\\EditorApplet2default_background.gif");
+        //byte [] b=new byte[in.available()];
+        ImageIcon ic = createImageIcon("default_background.gif","desc");
+        //CanvasApplet.canvasPanel.backgroundImage = Toolkit.getDefaultToolkit().createImage(b).getScaledInstance(600, 800,0);
+        CanvasApplet.canvasPanel.backgroundImage = ic.getImage();
         CanvasApplet.canvasPanel.repaint();
         }catch(IOException f){}
     }
@@ -267,13 +276,20 @@ SimpleFTP ftp = new SimpleFTP();
 
 
 
+
+
         }
 
-
-
-
-
-
+      protected ImageIcon createImageIcon(String path,
+                                           String description) {
+    java.net.URL imgURL = getClass().getResource(path);
+    if (imgURL != null) {
+        return new ImageIcon(imgURL, description);
+    } else {
+        System.err.println("Couldn't find file: " + path);
+        return null;
+    }
+}
     // Variables declaration - do not modify
     private javax.swing.JButton exportButton;
     private javax.swing.JButton schematize;
