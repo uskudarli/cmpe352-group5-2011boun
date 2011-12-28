@@ -13,21 +13,14 @@
 
 package applet_algorithm;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
+
+
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -37,10 +30,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.jibble.simpleftp.SimpleFTP;
 /**
  *
@@ -203,7 +192,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         schematize.setEnabled(true);
     }
 
-      private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {
           //JOptionPane.showMessageDialog(null, "png mi jpg mi");
           String path="";
           JFileChooser fc = new JFileChooser();
@@ -225,45 +214,41 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
                     e.printStackTrace();
                 }
             }
-              
+            Robot objRobot = null;
+             try
+             {
+                objRobot = new Robot();
+             } catch(Exception ex)
+             {
+                 ex.printStackTrace();
+             }
+
+        //Create the image
+        BufferedImage exportImage =objRobot.createScreenCapture(new Rectangle(CanvasApplet.canvasPanel.getLocationOnScreen().x,CanvasApplet.canvasPanel.getLocationOnScreen().y, CanvasApplet.canvasPanel.getLocationOnScreen().x+CanvasApplet.canvasPanel.getSize().width, CanvasApplet.canvasPanel.getLocationOnScreen().y+CanvasApplet.canvasPanel.getSize().height-80));
 
 
+        //Setup to write the BufferedImage to a file
+        String pathToFile = path;
+        File outputDirectory = new File(pathToFile);
+        File outputFile = new File(pathToFile+".png");
 
-                      Robot objRobot = null;
-                 try
-                 {
-                    objRobot = new Robot();
-                 } catch(Exception ex)
-                 {
+        //Here we make sure the directory exists.
+        /*
+         * Returns TRUE if:
+         *  The directory is MISSING
+         *  and/or the directory IS NOT a directory
+         */
+        if(!outputDirectory.exists() || !outputDirectory.isDirectory()){
+            outputDirectory.mkdirs(); //Make the directory
+        } // Else do nothing
 
-         }
-
-//Create the image
-BufferedImage exportImage =objRobot.createScreenCapture(new Rectangle(CanvasApplet.canvasPanel.getLocationOnScreen().x,CanvasApplet.canvasPanel.getLocationOnScreen().y, CanvasApplet.canvasPanel.getLocationOnScreen().x+CanvasApplet.canvasPanel.getSize().width, CanvasApplet.canvasPanel.getLocationOnScreen().y+CanvasApplet.canvasPanel.getSize().height-80));
-
-
-//Setup to write the BufferedImage to a file
-String pathToFile = path;
-File outputDirectory = new File(pathToFile);
-File outputFile = new File(pathToFile+".png");
-
-//Here we make sure the directory exists.
-/*
- * Returns TRUE if:
- *  The directory is MISSING
- *  and/or the directory IS NOT a directory
- */
-if(!outputDirectory.exists() || !outputDirectory.isDirectory()){
-    outputDirectory.mkdirs(); //Make the directory
-} // Else do nothing
-
-//Write the file
-try { //Attempt the write
-    ImageIO.write(exportImage, "png", outputFile);
-} catch (IOException e) { //For some reason it failed so...
-    e.printStackTrace(); //... why did it fail?
-}
-SimpleFTP ftp = new SimpleFTP();
+        //Write the file
+        try { //Attempt the write
+            ImageIO.write(exportImage, "png", outputFile);
+        } catch (IOException e) { //For some reason it failed so...
+            e.printStackTrace(); //... why did it fail?
+        }
+        SimpleFTP ftp = new SimpleFTP();
         try {
             ftp.connect("titan.cmpe.boun.edu.tr", 8092, "project5", "s8u4p");
             ftp.cwd("/home/project5/tomcat/webapps/Images");
