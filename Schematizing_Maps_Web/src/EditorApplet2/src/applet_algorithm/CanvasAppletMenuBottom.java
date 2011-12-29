@@ -177,7 +177,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
     private void searchButtonActionPerformed(){
         Vector<Map> results = null;
         try {
-            URL url = new URL("http://localhost:8080/Schematizing_Maps_Web/save_load_Servlet2");
+            URL url = new URL("http://titan.cmpe.boun.edu.tr:8084/Schematizing_Maps_Web2/save_load_Servlet2");
             String[] params = {CanvasApplet.username, searchKeys.getText()};
             URLConnection conn = url.openConnection();
             conn.setDoInput(true);
@@ -222,7 +222,7 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         map.setMapOwner(CanvasApplet.username);
         //mysql_UTIL.saveMap(map);
         try {
-            URL url = new URL("http://localhost:8080/Schematizing_Maps_Web/save_load_Servlet");
+            URL url = new URL("http://titan.cmpe.boun.edu.tr:8084/Schematizing_Maps_Web2/save_load_Servlet");
             URLConnection conn = url.openConnection();
             conn.setDoInput(true);
             conn.setDoOutput(true);
