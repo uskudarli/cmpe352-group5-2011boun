@@ -22,6 +22,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -171,12 +175,43 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         }
     }
     private void searchButtonActionPerformed(){
-        //SEARCH OLAYI BURADA OLACAK!!! @EYLUL,YEKTA,OZGUR
-        Vector<Map> searchResults = mysql_UTIL.searchMaps(CanvasApplet.username, searchKeys.getText());
-        if(searchResults == null){
+        Vector<Map> results = null;
+        try {
+            URL url = new URL("http://localhost:8080/Schematizing_Maps_Web/save_load_Servlet2");
+            String[] params = {CanvasApplet.username, searchKeys.getText()};
+            URLConnection conn = url.openConnection();
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            
+            conn.setDefaultUseCaches(false);
+            conn.setUseCaches(false);
+            
+            conn.setRequestProperty("Content-Type","application/octet-stream");
+            ObjectOutputStream oos = new ObjectOutputStream(conn.getOutputStream());
+            oos.writeObject(params);
+            oos.flush();
+            oos.close();
+            
+            ObjectInputStream ois = new ObjectInputStream(conn.getInputStream());
+            
+            
+            
+            
+            //Thread.sleep(3000);
+            
+            results = (Vector<Map>)ois.readObject();
+            
+            
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Vector<Map> searchResults = mysql_UTIL.searchMaps(CanvasApplet.username, searchKeys.getText());
+        if(results == null){
                     JOptionPane.showMessageDialog(null, "No results found.");
         } else{
-                 new SearchResultPanel(searchResults);
+                 new SearchResultPanel(results);
         }
     }
 
@@ -185,7 +220,30 @@ public class CanvasAppletMenuBottom extends javax.swing.JPanel {
         map.setXMLData();
         map.setKeywords();
         map.setMapOwner(CanvasApplet.username);
-        mysql_UTIL.saveMap(map);
+        //mysql_UTIL.saveMap(map);
+        try {
+            URL url = new URL("http://localhost:8080/Schematizing_Maps_Web/save_load_Servlet");
+            URLConnection conn = url.openConnection();
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            
+            conn.setDefaultUseCaches(false);
+            conn.setUseCaches(false);
+            
+            conn.setRequestProperty("Content-Type","application/octet-stream");
+            ObjectOutputStream oos = new ObjectOutputStream(conn.getOutputStream());
+            oos.writeObject(map);
+            oos.flush();
+            oos.close();
+            ObjectInputStream ois = new ObjectInputStream(conn.getInputStream());
+            System.out.println("Deneme1........");
+            String str = (String)ois.readObject();
+            System.out.println("###########"+str);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 
     public void enableSchematizing(){

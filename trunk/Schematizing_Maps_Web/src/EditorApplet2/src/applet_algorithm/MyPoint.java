@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -17,7 +18,7 @@ import java.util.Vector;
  *
  * @author Bahtiyar Kaba
  */
-public class MyPoint {
+public class MyPoint implements Serializable{
     public Point p;
     public ArrayList<MyPoint> outgoingPoints;
     public int point_id;

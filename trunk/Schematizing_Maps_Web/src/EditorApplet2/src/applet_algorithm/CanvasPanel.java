@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.BorderFactory;
@@ -223,7 +224,7 @@ public class CanvasPanel extends JPanel{
     }
 }
 
-class Connection{
+class Connection implements Serializable{
     public MyPoint p1;
     public MyPoint p2;
     public Color c;

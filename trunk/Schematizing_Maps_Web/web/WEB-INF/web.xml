@@ -4,9 +4,17 @@
         <servlet-name>SM_Servlet_Temp</servlet-name>
         <servlet-class>Servlets.Servlet_Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>save_load_Servlet2</servlet-name>
+        <servlet-class>Servlets.save_load_Servlet2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SM_Servlet_Temp</servlet-name>
         <url-pattern>/SM_Servlet_Temp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>save_load_Servlet2</servlet-name>
+        <url-pattern>/save_load_Servlet2</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
