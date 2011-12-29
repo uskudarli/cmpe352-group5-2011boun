@@ -5,26 +5,22 @@
 package Servlets;
 
 import applet_algorithm.Map;
+import applet_algorithm.mysql_UTIL;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.Vector;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import applet_algorithm.mysql_UTIL;
 
 /**
  *
  * @author px5x2
  */
-@WebServlet(name = "save_load_Servlet", urlPatterns = {"/save_load_Servlet"})
-public class save_load_Servlet extends HttpServlet {
-    
-    private static mysql_UTIL db = new mysql_UTIL("85.153.22.90", "3306", "project5", "662512", "project5");
+public class save_load_Servlet2 extends HttpServlet {
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,33 +31,23 @@ public class save_load_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/octet-stream");
         //PrintWriter out = response.getWriter();
-        
-        ObjectOutputStream outputToApplet = null;       // for writing output to the applet
-        ObjectInputStream inputFromApplet = null;       // for reading input coming from applet
-        Map map = null;
-        
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
         try {
-            InputStream is = request.getInputStream();
-            inputFromApplet = new ObjectInputStream(is);
-            map = (Map) inputFromApplet.readObject();
-            boolean successful = mysql_UTIL.saveMap(map);
-            
-            outputToApplet = new ObjectOutputStream(response.getOutputStream());
-            if(successful)
-                outputToApplet.writeObject("SAVED");
-            else
-                outputToApplet.writeObject("FAILED");
-            
-            outputToApplet.flush();
-            outputToApplet.close();
-            
            
-            
-            
-            
-        }catch(ClassNotFoundException e){
+           ois = new ObjectInputStream(request.getInputStream());
+           String[] params = (String[])ois.readObject();
+           //ois.close();
+           
+           Vector<Map> results = mysql_UTIL.searchMaps(params[0], params[1]);
+           oos = new ObjectOutputStream(response.getOutputStream());
+           oos.writeObject(results);
+           oos.flush();
+           oos.close();
+           
+        }catch(Exception e){
             e.printStackTrace();
         } finally {            
             //out.close();
@@ -79,7 +65,7 @@ public class save_load_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /** 

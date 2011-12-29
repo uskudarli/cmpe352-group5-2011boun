@@ -420,6 +420,7 @@ public class mysql_UTIL {
         @Override
         public void run() {
             try {
+                Class.forName("com.mysql.jdbc.Driver");
                 connection = (Connection) DriverManager.getConnection(connectionURL);
                 PreparedStatement ps = connection.prepareStatement(query);
                 

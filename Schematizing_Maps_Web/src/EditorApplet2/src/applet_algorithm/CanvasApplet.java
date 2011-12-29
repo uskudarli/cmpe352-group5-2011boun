@@ -35,7 +35,7 @@ public class CanvasApplet extends JApplet {
                     } else
                         isAdvanced =false;
                     username = getParameter("username");
-                    username = "nurettin";
+                    //username = "px5x2";
                     canvasPanel = new CanvasPanel();
                     canvasPanel.setVisible(true);
                     canvasPanel.setBackground(Color.WHITE);
