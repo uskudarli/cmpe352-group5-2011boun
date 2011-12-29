@@ -345,21 +345,11 @@
 				
 		     <div id="about" class="form" style="display: block;">
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris molestie eleifend nunc, vel egestas sapien cursus ac. Nunc in enim at ante tincidunt pharetra eu quis neque. Quisque vel auctor enim. Nullam porta, tortor vel vehicula laoreet, felis erat molestie libero, vitae aliquam augue ipsum vitae odio. Maecenas et velit mi, sit amet auctor nunc. In eros diam, molestie vel varius id, vulputate ut purus. Pellentesque eu viverra erat. Duis ut elit quam. Vestibulum gravida, nisl dapibus volutpat placerat, dui lectus feugiat est, iaculis pharetra risus dui et tortor. Sed dictum suscipit nisi eu aliquet. Donec in odio nec eros iaculis scelerisque at vitae mauris. Vestibulum egestas rutrum dolor, at adipiscing nunc scelerisque scelerisque. Sed eget sapien a dolor luctus commodo.	
-			</p>
-			<p>
-				Etiam fermentum iaculis aliquet. Maecenas dignissim est consectetur magna tincidunt nec egestas metus volutpat. Praesent suscipit, lacus ac placerat cursus, turpis quam sagittis sapien, non pellentesque purus mauris id mauris. Etiam et venenatis risus. Aenean cursus eleifend quam, quis porttitor lacus faucibus faucibus. Mauris suscipit metus quis dolor blandit non molestie urna dignissim. Nunc vel eros nec justo dignissim vestibulum eu sit amet justo. Pellentesque nibh quam, viverra cursus fringilla eu, consectetur sit amet sapien. Fusce congue accumsan velit sed hendrerit. Aliquam pellentesque diam eget tellus faucibus aliquet.	
+				In some situations like subway systems, people does not care about the geographical distributions of our travel locations. They don't mind the subway making a huge zig-zag, as long as the transportation is done.. Here we are gathered to create a solution to make the production of schematized maps possible with no effort at all. We are a bunch of solution-oriented crazy people, who try to make some business simpler( And to do that we use SWE paradigms naturally, as we are all computer engineering students).
 			</p>
 		     </div>		
 		
-		     <div id="history" class="form">
-			<p>
-				Integer eleifend luctus pulvinar. Maecenas posuere ipsum quis nisl sollicitudin dignissim. Morbi congue adipiscing metus, id ultrices eros ultrices tempus. Pellentesque ut enim ut urna lacinia lacinia non sed nunc. Integer quis nibh eget turpis interdum tempus eu ac nisl. Mauris blandit eleifend diam sagittis tristique. Phasellus nec enim quis velit consequat porttitor id ut massa.
-			</p>
-			<p>
-				Donec facilisis fermentum nulla, ut porta erat egestas in. Proin tellus mi, condimentum ac euismod id, imperdiet eu erat. Duis interdum ipsum ac diam pellentesque in tincidunt turpis tempor. Cras et mi sapien. Aenean pharetra condimentum lacus, vitae feugiat elit ullamcorper quis. In tellus turpis, tristique a sagittis in, pulvinar tincidunt nunc. Nullam id metus vel urna congue lobortis pharetra laoreet arcu. Nullam hendrerit magna gravida quam pulvinar eget accumsan massa pharetra. Nulla sed ligula tortor. Sed pulvinar egestas egestas. Cras quis commodo lectus. Mauris at aliquam leo. Maecenas accumsan dapibus purus non pretium. Nulla mollis, neque viverra molestie ullamcorper, nisl diam condimentum risus, adipiscing dictum diam magna in justo.
-			</p>
-		     </div>	
+		   
 
 		     <div id="contact" class="form">
 			<p>
@@ -371,12 +361,15 @@
 
 		     <div id="social" class="form">
 			<p>
-				Follow us on Facebook and Twitter!
+				Follow us on Facebook!
+				<a href="https://www.facebook.com/pages/Schematizing-Maps/313563398677944">Facebook</a>
+				
 			</p>
 			
 		     </div>		
 
 		    </div>
+	
 	
 		  	
 

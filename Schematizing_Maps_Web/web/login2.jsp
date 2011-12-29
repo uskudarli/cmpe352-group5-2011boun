@@ -366,7 +366,9 @@
 
 		     <div id="social" class="form">
 			<p>
-				Follow us on Facebook and Twitter!
+				Follow us on Facebook!
+				<a href="https://www.facebook.com/pages/Schematizing-Maps/313563398677944">Facebook</a>
+				
 			</p>
 			
 		     </div>		

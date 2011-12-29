@@ -345,9 +345,10 @@
 								 </div>
 				<input type="button" value="Register" id="rg" style="margin-top: 10px; display: block; float: left; width: 150px;" />
 	
-			  </form>
+		  </form>
 		     </div>
-			   <div id="about" class="form" style="display: block;">
+				
+		     <div id="about" class="form" style="display: block;">
 			<p>
 				In some situations like subway systems, people does not care about the geographical distributions of our travel locations. They don't mind the subway making a huge zig-zag, as long as the transportation is done.. Here we are gathered to create a solution to make the production of schematized maps possible with no effort at all. We are a bunch of solution-oriented crazy people, who try to make some business simpler( And to do that we use SWE paradigms naturally, as we are all computer engineering students).
 			</p>
@@ -365,12 +366,15 @@
 
 		     <div id="social" class="form">
 			<p>
-				Follow us on Facebook and Twitter!
+				Follow us on Facebook!
+				<a href="https://www.facebook.com/pages/Schematizing-Maps/313563398677944">Facebook</a>
+				
 			</p>
 			
 		     </div>		
 
 		    </div>
+	
 	
 		  	
 
