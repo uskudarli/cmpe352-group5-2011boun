@@ -31,7 +31,7 @@ public class MyPoint implements Serializable{
         point_id = MyPoint.lastPoint;
         lastPoint++;
         outgoingPoints = new ArrayList<MyPoint>();
-        description = "No description";
+        description = "No Name";
     }
 
     public Vector<MyPoint> returnaccesiblepoints(){
