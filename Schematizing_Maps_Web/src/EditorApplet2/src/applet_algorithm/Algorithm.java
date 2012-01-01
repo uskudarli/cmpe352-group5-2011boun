@@ -113,27 +113,10 @@ public class Algorithm {
     
     // this function is called if the user pushes the schematize button
     MyPoint Schematize(){
-        
         MyPoint startPoint=rootPoint.outgoingPoints.get(0); // setting the starting point of the algorithm
-        /*if(this.preserve_distance){
-               this.totalDistance=totalDistance+distance(rootPoint,startPoint);
-               this.totalEdges++;
-        }*/
-        //for(int i=0;i<startPoint.outgoingPoints.size();i++){
-        //if (angleMultiple!=180.0){
-                
-            rootPoint.setY(rootPoint.outgoingPoints.get(0).getY());
-            recursively_schematize(rootPoint, rootPoint.outgoingPoints.get(0)); // calling the schematization function that runs recursively
-            /*for(int i=0; i<rootPoint.outgoingPoints.size(); i++){
-                recursively_schematize(rootPoint.outgoingPoints.get(i), rootPoint.outgoingPoints.get(i).outgoingPoints.get(0));
-            }*/
-            rootPoint.setY(0);
-        //}
-        //else
-       // {
-       // prepare_schematization(rootPoint,startPoint);
-       // schematize_180(rootPoint.outgoingPoints.get(0));
-       // }
+        rootPoint.setY(rootPoint.outgoingPoints.get(0).getY());
+        recursively_schematize(rootPoint, rootPoint.outgoingPoints.get(0)); // calling the schematization function that runs recursively
+        rootPoint.setY(0);
         if(!preserve_distance){
             mean_distance(rootPoint.outgoingPoints.get(0)); // if an advanced user selects distance preservation, then the distances between every two neighbor points will be assigned to mean distance between all neighbor points
         }
@@ -146,7 +129,9 @@ public class Algorithm {
     
     // recursive function that assignes magnitudes of all edges to the mean distance
     void recursively_mean_distance(MyPoint start, int mean){
+        
         for(int i=0; i< start.outgoingPoints.size();i++){
+                // get the next point that is connected with current point
                 MyPoint next=start.outgoingPoints.get(i);
                 int old_x=next.getX();
                 int old_y=next.getY();
@@ -154,15 +139,23 @@ public class Algorithm {
                 int new_y;
                 int cumulative_change_x;
                 int cumulative_change_y;
+                // constuct a helper point , which is shadowed version next point, to x axis 
                 MyPoint helper_point= new MyPoint(next.getX(),start.getY());
+                
                 double angle_between;
+                //check for some specific conditions
                 if(next.getX()==start.getX()){
                     angle_between=90.0;
                 }
                 else{
+                    //calculate the angle between three points
                     angle_between=this.calculateAngle(next, start, helper_point);
                 }
+                // find the distance of the connection
                 int distance_=(int)this.distance(start, next);
+                /*check for different conditions, and find the new value of x and y,
+                 so that the distance between this point and next point
+                 equates to MEAN */
                 if(start.getX()<=next.getX()){
                     if(start.getX()==next.getX()){
                         new_x=old_x;
@@ -200,15 +193,28 @@ public class Algorithm {
                            new_y=(int)(start.getY()-(Math.sin(Math.toRadians(angle_between))*mean));
                     }
                 } 
+                /* find the cumulative change(new-old),
+                 *  which will be applied to all of the remaining 
+                 * points that are directly or indirectly connected to the
+                 * current point
+                 */
                 cumulative_change_x=new_x-old_x;
                 cumulative_change_y=new_y-old_y;
                 next.setX(new_x);
                 next.setY(new_y);
+                //reqursivelly apply the change
                 apply_cummulative_effect(next,cumulative_change_x,cumulative_change_y);
+                // reqursivelly continue the same iteration
                 recursively_mean_distance(next,mean);
           
         }
     }
+    /* This function applies a recursive cumulative change to all the points that 
+     * are connected directly or independently to the start point
+     * 
+     * So a change in x and y axis will be reflected to all the "remaining" points connected
+     * to that point
+     */
     void apply_cummulative_effect(MyPoint start,int diff_x,int diff_y){
         for(int i=0;i<start.outgoingPoints.size();i++){
             MyPoint next=start.outgoingPoints.get(i);
@@ -217,35 +223,7 @@ public class Algorithm {
             apply_cummulative_effect(next,diff_x,diff_y);
         }
     }
-    void prepare_schematization(MyPoint p1,MyPoint p2){
-        //if(! p1.outgoingPoints.isEmpty()){
-         for(int i=0;i<p2.outgoingPoints.size();i++){
-                MyPoint p3=p2.outgoingPoints.get(i);
-                if(p3.point_id==p1.point_id){   
-                    p2.outgoingPoints.remove(i);
-                        i--; 
-                }
-                else{
-                    prepare_schematization(p2,p3);
-                }
-       }
-        
-        
-        
-    }
-    void schematize_180(MyPoint p1){
-        if(!p1.outgoingPoints.isEmpty()){
-            for(int i=0;i<p1.outgoingPoints.size();i++){
-                    MyPoint p2=p1.outgoingPoints.get(i);
-                    if(p2.point_id!=p1.point_id){
-                        double distance_p1_p2=this.distance(p1, p2);
-                        append_to_first(p1,p2,distance_p1_p2);
-                        schematize_180(p2);
-                    }
-                    
-           }
-        }
-    }
+    
     void append_to_first(MyPoint p1,MyPoint p2,double distance)
     {
         p2.setY(p1.getY());
@@ -343,6 +321,9 @@ public class Algorithm {
             double dist_p2_p3 = Math.sqrt(Math.pow((p2.getX()-p3.getX()), 2) + Math.pow((p2.getY()-p3.getY()), 2)); // the distance between point 2 and 3
 
             if(y3_yukarda_kalir && actual_angle >=90){ // if the y3_prime is greater than p3's y and original angle is greater than 90
+                /* calculate the new coordinates of the Point 3, so that it
+                 * suits the given angle multiple restriction
+                 */
                 MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
                 double angle=calculateAngle(pnew,p2,p3);
                 double new_angle;
@@ -395,7 +376,10 @@ public class Algorithm {
                 else
                     p3.setY(p2.getY()- tmp2 );*/
             }
-            else if((y3_yukarda_kalir) && actual_angle <90){
+            else if((y3_yukarda_kalir) && actual_angle <90){ // if the y3_prime is greater than p3's y and original angle is smaller than 90
+                /* calculate the new coordinates of the Point 3, so that it
+                 * suits the given angle multiple restriction
+                 */
                 MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
                 double angle=calculateAngle(pnew,p2,p3);
                 double new_angle;
@@ -449,7 +433,10 @@ public class Algorithm {
                     p3.setX(p2.getX()- tmp1 );
                 }*/
             }
-            else if(!(y3_yukarda_kalir) && actual_angle <90){
+            else if(!(y3_yukarda_kalir) && actual_angle <90){ // if the y3_prime is smaller than p3's y and original angle is smaller than 90
+                /* calculate the new coordinates of the Point 3, so that it
+                 * suits the given angle multiple restriction
+                 */
                 MyPoint pnew=new MyPoint(p2.getX(),p3.getY());
                 double angle=calculateAngle(pnew,p2,p3);
                 double new_angle;
@@ -507,8 +494,10 @@ public class Algorithm {
                     p3.setX(p2.getX()- tmp1 );
                 }*/       
             }
-            else if(!(y3_yukarda_kalir) && actual_angle >=90)
-            {
+            else if(!(y3_yukarda_kalir) && actual_angle >=90) // if the y3_prime is smaller than p3's y and original angle is greater than 90
+            {   /* calculate the new coordinates of the Point 3, so that it
+                 * suits the given angle multiple restriction
+                 */
                 MyPoint pnew=new MyPoint(p3.getX(),p2.getY());
                 double angle=calculateAngle(pnew,p2,p3);
                 double new_angle;
