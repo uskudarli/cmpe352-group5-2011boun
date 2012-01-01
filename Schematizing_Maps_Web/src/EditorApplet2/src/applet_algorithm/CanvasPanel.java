@@ -50,7 +50,7 @@ public class CanvasPanel extends JPanel{
         popMenu = new JPopupMenu();
         deleteItem = new JMenuItem("Delete");
         addDescription = new JTextField("");
-        addDescription.setToolTipText("Add a description");
+        addDescription.setToolTipText("Add a name to the point");
         deleteItem.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent e) {
