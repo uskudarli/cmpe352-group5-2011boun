@@ -1,5 +1,20 @@
 #summary Meeting Reports
 
+=*Report of Meeting #32*=
+
+*Meeting Date:27.12.2011*
+
+*Meeting Duration:6 hours*
+
+*Meeting Location: Boğaziçi University North Campus*
+
+*Participants: :  Mert Terzihan, Ervin Domazet, Bahtiyar Kaba, Nurettin Yılmaz, Özgür Akçalı
+
+*Issues:*
+   # Finish the integration process of different parts of the project.
+   # Handle the remaining problems and issues in the project to work it flawless.
+   # Write the final documentation.
+
 =*Report of Meeting #31*=
 
 *Meeting Date:15.12.2011*
@@ -8,7 +23,7 @@
 
 *Meeting Location: ETA A5*
 
-*Participants: :  Eylül Taşyürek, Ervin Domazet, Bahtiyar Kaba, Nurettin Yılmaz, Yekta Said Can, Mert Terzihan
+*Participants: :  Eylül Taşyürek, Mert Terzihan, Ervin Domazet, Bahtiyar Kaba, Nurettin Yılmaz, Yekta Said Can
 
 *Issues:*
    # Discussed Save/Load/Search Issues in detail.
