@@ -350,10 +350,16 @@
 				
 		     <div id="about" class="form" style="display: block;">
 			<p>
-				In some situations like subway systems, people does not care about the geographical distributions of our travel locations. They don't mind the subway making a huge zig-zag, as long as the transportation is done.. Here we are gathered to create a solution to make the production of schematized maps possible with no effort at all. We are a bunch of solution-oriented crazy people, who try to make some business simpler( And to do that we use SWE paradigms naturally, as we are all computer engineering students).
+				Most geographic maps we use are designed to be fairly accurate with respect to distances and line or path orientation; they are drawn ”to scale”, with a uniform scale used throughout. However, there is another important class of (geographic) maps in which uniform scale is sacriﬁced for readability. The most famous of these is the ”tube map” of the London underground rail system, whose “schematic” style was introduced by Harry Beck in 1931. Today the schematic style is widely used, but not well-supported by map-making tools. The purpose of this project is to aid others in producing schematic maps.
 			</p>
 		     </div>		
 		
+		 <div id="history" class="form" style="display: block;">
+			<p>
+				
+The most famous of schematized map is the ”tube map” of the London underground rail system, whose “schematic” style was introduced by Harry Beck in 1931. Our schematizer project is started as a school project in February 2011 and completed in January 2012.
+			</p>
+		     </div>	
 		   
 
 		     <div id="contact" class="form">
